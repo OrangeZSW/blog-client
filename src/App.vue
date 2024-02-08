@@ -1,28 +1,38 @@
 <template>
-  <div id="app">
-<!--    <router-view/>-->
+  <div id="app" style="height: 100%" >
+    <router-view/>
   </div>
 </template>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+::selection {
+  background-color: #00C4B6;
+  color: #ffffff;
+}
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+html,body{
+
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+/* 隐藏 Chrome、Safari 和 Opera 的滚动条 */
+body::-webkit-scrollbar {
+  display: none;
 }
 
-nav {
-  padding: 30px;
+/* 隐藏 IE、Edge 和 Firefox 的滚动条 */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
