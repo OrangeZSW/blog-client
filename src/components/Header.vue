@@ -1,12 +1,17 @@
 <script >
-  export default {
+
+export default {
     name: "Header",
     mounted() {
       window.addEventListener('scroll', this.handleScroll);
       const Header = document.querySelector('.Header')
       Header.style.transform = 'translateY(+60px)'
     },
+    computed:{
+
+    },
     methods: {
+
       handleScroll() {
         const Header = document.querySelector('.Header')
         // console.log(window.scrollY)
@@ -18,13 +23,31 @@
           Header.style.backgroundColor = 'white'
         }
       },
+      moveLogin(){
+        const Login = document.querySelector('.login')
+        // 没有登录过
+        if(!this.login){
+        //   判断是否为手机端
+          if(window.innerWidth<768){
+            // 手机端
+            //移动手机屏幕中间
+            let length= (window.innerWidth-350)/2+350
+            Login.style.transform = `translateX(-${length}px)`
+          }else{
+            // pc端
+            Login.style.transform = 'translateX(-450px)'
+          }
+        }else{
+        }
+      }
     },
       data() {
         return {
           site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
           site_name: 'Orange_Blog',
           username: '登录',
-          avatar: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/orange.jpg'
+          avatar: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/orange.jpg',
+          login: false
         }
       },
     }
@@ -49,7 +72,7 @@
             <v-icon class="header-icon">mdi-book-account</v-icon>
             <span >博客</span>
           </div>
-          <div class="item" style="display: flex;align-items: center">
+          <div class="item" style="display: flex;align-items: center" @click="moveLogin">
             <v-icon class="header-icon"  >mdi-heart</v-icon>
             <span  >{{ username }}</span>
             <el-avatar icon="el-icon-user-solid " class="avatar" :src="avatar"  />

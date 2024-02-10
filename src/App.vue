@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
 
@@ -23,7 +22,7 @@ export default {
   color: #ffffff;
 }
 *{
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -46,6 +45,7 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  overflow-x: hidden;
 }
 
 </style>

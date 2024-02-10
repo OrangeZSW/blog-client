@@ -1,11 +1,10 @@
 
 <template>
   <div>
-    <div class="wrapper">
-      <Login/>
-      <Header/>
+    <Header />
+    <div class="wrapper" @click="backLoginWindow">
+      <Login />
       <Center/>
-
     </div>
     <div class="main">wd</div>
   </div>
@@ -31,7 +30,13 @@ export default {
     }
   },
   methods: {
-
+    backLoginWindow(){
+      const Login = document.querySelector('.login')
+      console.log("dwa")
+      if(!Login.contains(event.target)){
+        Login.style.transform = 'translateX(0px)'
+      }
+    }
   },
 }
 </script>
