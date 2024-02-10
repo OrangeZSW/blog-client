@@ -15,15 +15,15 @@ export default {
   methods: {
     getHitokoto() {
       axios.get('https://v1.hitokoto.cn')
-        .then(res => {
-          this.content.push(res.data.hitokoto)
-          this.content.push('— '+res.data.from)
-          this.content.push(...this.self)
-          // console.log(this.hitokoto)
-        }).catch(err => {
-          console.log(err)
-          this.content.push(...this.self)
-        })
+          .then(res => {
+            this.content.push(res.data.hitokoto)
+            this.content.push('— '+res.data.from)
+            this.content.push(...this.self)
+            // console.log(this.hitokoto)
+          }).catch(err => {
+        console.log(err)
+        this.content.push(...this.self)
+      })
     },
     runContent() {
       let k=0
@@ -58,7 +58,7 @@ export default {
       }, 3000)
     },
     lookBlog(){
-    //   窗口下拉
+      //   窗口下拉
       window.scrollTo({
         // 顶部
         top: window.innerHeight,
@@ -68,7 +68,7 @@ export default {
     }
   },
 //   闪烁
-mounted() {
+  mounted() {
     setInterval(() => {
       const site_name = document.querySelector('.guangBiao')
       site_name.style.color = 'white'
@@ -76,9 +76,9 @@ mounted() {
         site_name.style.color = 'transparent'
       }, 1000)
     }, 2000)
-  this.getHitokoto()
-  this.runContent()
-  this.runIcon()
+    this.getHitokoto()
+    this.runContent()
+    this.runIcon()
   }
 }
 </script>
@@ -100,10 +100,12 @@ mounted() {
   font-size: 1.72em;
 }
 .site_center{
+  position: absolute;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   text-align: center;
   align-items: center;
+
 }
 .site_name {
   font-weight: bold;
@@ -118,7 +120,7 @@ mounted() {
   transition: transform 1.5s ease,opacity 1.5s ease;
   font-size: 40px;
   position: absolute;
-  bottom: 25px;
+  bottom: 20px;
 }
 
 </style>

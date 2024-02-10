@@ -8,6 +8,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import axios from "axios";
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 
@@ -17,5 +18,6 @@ new Vue({
   router,
   store,
   axios,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')

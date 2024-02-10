@@ -1,7 +1,9 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   // 将依赖包提前编译
-  transpileDependencies: true,
+  transpileDependencies: [
+    'vuetify'
+  ],
     // 配置webpack
   chainWebpack: config => {
     config

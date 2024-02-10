@@ -31,22 +31,26 @@
 </script>
 
 <template>
-  <div class="Header" >
+  <div class="Header not-top-img" >
     <router-link to="/" style="display: flex;text-decoration: none;color: #ffffff">
       <img class="site_img" :src="site_img"  :title="site_name" />
       <div class="site_name" :title="site_name">{{site_name}}</div>
     </router-link>
         <div class="menu">
           <div class="item" >
-            <i style="margin-right: 5px;" class="el-icon-s-home" />
+            <v-icon class="header-icon">mdi-home</v-icon>
             <span >首页</span>
           </div>
           <div class="item">
-            <i style="margin-right: 5px;" class="el-icon-s-order"/>
+            <v-icon class="header-icon">mdi-card-bulleted</v-icon>
+            <span>文章</span>
+          </div>
+          <div class="item">
+            <v-icon class="header-icon">mdi-book-account</v-icon>
             <span >博客</span>
           </div>
           <div class="item" style="display: flex;align-items: center">
-            <i style="margin-right: 5px;" class="el-icon-star-on"/>
+            <v-icon class="header-icon"  >mdi-heart</v-icon>
             <span  >{{ username }}</span>
             <el-avatar icon="el-icon-user-solid " class="avatar" :src="avatar"  />
           </div>
@@ -58,13 +62,17 @@
 </template>
 
 <style scoped>
-
+.header-icon{
+  margin-right: 5px;
+  color: white;
+  font-size: 16px;
+}
 .item {
   position: relative;
-  margin: auto auto auto 16px;
+  margin: auto auto auto 14px;
   height: auto;
   transition: filter 0.5s;
-  filter:brightness(0.9);
+  filter:brightness(1);
 }
 .item::after {
   content: '';
@@ -92,6 +100,7 @@
   transform: scale(0.9);
 }
 .Header{
+  z-index: 1;
   position: absolute;
   top:-60px;
   width: 100%;
@@ -118,6 +127,7 @@
   flex-direction: row;
   margin: 5px 20px auto auto;
   color: #fff;
+  font-size: 14px;
 }
 
 /*
