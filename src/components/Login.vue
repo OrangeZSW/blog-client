@@ -25,18 +25,18 @@ export default {
   display: flex;
   color: white;
   z-index: 1;
-  filter: brightness(1.5);
 }
 .login{
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
   width: 350px;
   height: 400px;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.3);
   z-index: 1;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+
   position: absolute;
   border-radius: 10px;
-  opacity: 0.5;
   right: 100px;
   top: 200px;
+  filter: contrast(1.2);
 }
 </style>

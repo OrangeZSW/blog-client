@@ -23,7 +23,7 @@ export default {
   color: #ffffff;
 }
 *{
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -31,7 +31,6 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 html,body{
-
   height: 100%;
   margin: 0;
   padding: 0;
