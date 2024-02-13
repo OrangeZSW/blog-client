@@ -24,19 +24,12 @@ export default {
         }
       },
       moveLogin(){
-        const Login = document.querySelector('.login')
         // 没有登录过
+        const login = document.querySelector('.login')
+        login.style.zIndex = '2'
+        login.style.opacity = '1'
         if(!this.login){
-        //   判断是否为手机端
-          if(window.innerWidth<768){
-            // 手机端
-            //移动手机屏幕中间
-            let length= (window.innerWidth-350)/2+350
-            Login.style.transform = `translateX(-${length}px)`
-          }else{
-            // pc端
-            Login.style.transform = 'translateX(-450px)'
-          }
+          login.style.right='200px'
         }else{
         }
       }

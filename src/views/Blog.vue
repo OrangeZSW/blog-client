@@ -38,17 +38,12 @@ export default {
   },
   methods: {
     backLoginWindow(e){
-      // console.log(e)
-      console.log(e.target._prevClass)
-      if(e.target._prevClass==='icon el-icon-arrow-down'){
-        console.log("1111")
-        window.screenY = 100
-        return
-      }
       const Login = document.querySelector('.login')
-      console.log("dwa")
+
       if(!Login.contains(event.target)){
-        Login.style.transform = 'translateX(0px)'
+        Login.style.zIndex = '0'
+        Login.style.opacity = '0'
+        Login.style.right = '500px'
       }
     },
     lookBlog(){

@@ -51,12 +51,23 @@ export default {
   width: 350px;
   height: 400px;
   background: rgba(255, 255, 255, 0.1);
-  z-index: 2;
+  z-index: 0;
   position: absolute;
   border-radius: 10px;
-  right: -350px;
-  top: 200px;
+  right: 500px;
+
+  opacity: 0;
   filter: contrast(1.2);
   transition: all 1s ease;
+}
+@media (min-width: 768px) {
+  .login{
+    top: 200px;
+  }
+}
+@media (max-width: 768px) {
+  .login{
+    top: 107px;
+  }
 }
 </style>
