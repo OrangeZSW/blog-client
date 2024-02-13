@@ -30,7 +30,7 @@ export default {
         login.style.opacity = '1'
         if(!this.login){
          if(window.innerWidth>768) {
-           login.style.right = '200'
+           login.style.right = '200px'
          }else{
            login.style.right = window.innerWidth/2-175+'px'
          }
