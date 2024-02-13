@@ -94,6 +94,12 @@ export default {
   transition: filter 0.5s;
   filter:brightness(1);
 }
+.item:hover{
+  color: #67B8EF;
+}
+.item:hover .header-icon{
+  color: #67B8EF;
+}
 .item::after {
   content: '';
   position: absolute;
@@ -129,6 +135,7 @@ export default {
   display: flex;
   transition: transform 0.5s ease, background-color 1.5s ease;
 }
+
 .site_img{
   height: 36px;
   vertical-align: middle;

@@ -6,10 +6,7 @@
       <Login ref="login"/>
       <Center />
     </div>
-    <div class="main">wd
-    dwada
-    <h1>dawd</h1>
-    </div>
+    <Display/>
   </div>
 
 </template>
@@ -18,8 +15,10 @@
 import Header from "@/components/Header.vue";
 import Center from "@/components/Center.vue";
 import Login from "@/components/Login.vue";
+import Display from "@/components/Dispaly.vue";
 export default {
   components: {
+    Display,
     Login,
     Header,
     Center
@@ -77,7 +76,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0,0,0,0.3);
   z-index: -0;
   border-radius: 10px;
