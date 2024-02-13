@@ -29,7 +29,11 @@ export default {
         login.style.zIndex = '2'
         login.style.opacity = '1'
         if(!this.login){
-          login.style.right='200px'
+         if(window.innerWidth>768) {
+           login.style.right = '200'
+         }else{
+           login.style.right = window.innerWidth/2-175+'px'
+         }
         }else{
         }
       }

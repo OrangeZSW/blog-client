@@ -1,18 +1,15 @@
 
 <template>
   <div>
-
     <Header />
     <div class="wrapper" @click="backLoginWindow" >
       <Login ref="login"/>
       <Center />
     </div>
-
     <div class="main">wd
     dwada
     <h1>dawd</h1>
     </div>
-
   </div>
 
 </template>
