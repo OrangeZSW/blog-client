@@ -1,13 +1,20 @@
 
 <template>
   <div>
+
     <Header />
-    <div class="wrapper" @click="backLoginWindow">
-      <Login />
-      <Center/>
+    <div class="wrapper" @click="backLoginWindow" >
+      <Login ref="login"/>
+      <Center />
     </div>
-    <div class="main">wd</div>
+
+    <div class="main">wd
+    dwada
+    <h1>dawd</h1>
+    </div>
+
   </div>
+
 </template>
 
 <script>
@@ -30,12 +37,23 @@ export default {
     }
   },
   methods: {
-    backLoginWindow(){
+    backLoginWindow(e){
+      // console.log(e)
+      console.log(e.target._prevClass)
+      if(e.target._prevClass==='icon el-icon-arrow-down'){
+        console.log("1111")
+        window.screenY = 100
+        return
+      }
       const Login = document.querySelector('.login')
       console.log("dwa")
       if(!Login.contains(event.target)){
         Login.style.transform = 'translateX(0px)'
       }
+    },
+    lookBlog(){
+      //   窗口下拉
+      window.screenY = 100
     }
   },
 }

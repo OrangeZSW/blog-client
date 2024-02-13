@@ -1,9 +1,6 @@
 <script>
 export default {
   name: "Center",
-  created() {
-
-  },
   data() {
     return {
       site_name: 'Orange_Blog',
@@ -30,7 +27,9 @@ export default {
       let flag = true
       let i = 0
       setInterval(() => {
-        this.subTitle = this.content[k].substring(0, i)
+        if(this.content[k]!==undefined){
+          this.subTitle = this.content[k].substring(0, i)
+        }
         if (flag) {
           i++
         } else if (i > 0) {
@@ -58,13 +57,16 @@ export default {
       }, 3000)
     },
     lookBlog(){
-      //   窗口下拉
-      window.scrollTo({
-        // 顶部
-        top: window.innerHeight,
-        // 滚动行为
-        behavior: "smooth"
-      })
+      console.log("dwad")
+      let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+      // 如果当前滚动位置小于100vh，向下滚动100vh
+      if (scrollPosition < window.innerHeight) {
+        window.scrollTo({
+          top: window.innerHeight, // 滚动目标位置
+          behavior: 'smooth' // 平滑滚动
+        });
+      }
     }
   },
 //   闪烁
@@ -89,7 +91,7 @@ export default {
     <div><span style="color: white;font-size: 20px;margin-top: 20px;height: 20px; " v-if="content" >{{subTitle}}</span>
       <span aria-hidden="true" style="color: white;transition: color 1s ease" class="guangBiao">  |  </span>
     </div>
-    <i class="icon el-icon-arrow-down" @click="lookBlog" ></i>
+    <i ref="icon" class="icon el-icon-arrow-down"  @click="lookBlog" ></i>
   </div>
 </template>
 
@@ -116,6 +118,7 @@ export default {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
 }
 .icon{
+  z-index: 2;
   color: #ffffff;
   transition: transform 1.5s ease,opacity 1.5s ease;
   font-size: 40px;
