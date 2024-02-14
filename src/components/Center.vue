@@ -57,7 +57,6 @@ export default {
       }, 3000)
     },
     lookBlog(){
-      console.log("dwad")
       let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
       // 如果当前滚动位置小于100vh，向下滚动100vh

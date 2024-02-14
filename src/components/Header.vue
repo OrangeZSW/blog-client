@@ -3,26 +3,57 @@
 export default {
     name: "Header",
     mounted() {
-      window.addEventListener('scroll', this.handleScroll);
       const Header = document.querySelector('.Header')
       Header.style.transform = 'translateY(+60px)'
+      let lastScrollTop = 0;
+      window.addEventListener("scroll", function() {
+        let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        const site_name = document.querySelector('.site_name')
+        const items = document.querySelectorAll('.item')
+        const header_icon = document.querySelectorAll('.header-icon')
+        if (currentScrollTop > lastScrollTop) {
+          // 向下滚动
+          console.log("向下滚动");
+          Header.style.top='-120px'
+          Header.style.backgroundColor = 'transparent'
+        } else if(currentScrollTop!==0){
+          // 向上滚动并且没有到顶
+          site_name.style.color = '#4C4948'
+          for (let i = 0; i < items.length; i++) {
+            items[i].style.color = '#4C4948'
+          }
+          for (let i = 0; i < header_icon.length; i++) {
+            header_icon[i].style.color = '#4C4948'
+          }
+          Header.style.top='-60px'
+          Header.style.background='rgba(255,255,255,0.7)'
+          Header.style.filters='constant(1.5)'
+          Header.style.boxShadow='0px 4px 8px rgba(0, 0, 0, 0.2)'
+          console.log("向上滚动并且没有到顶");
+        }else{
+          // 到顶
+          site_name.style.color = '#ffffff'
+          for (let i = 0; i < items.length; i++) {
+            items[i].style.color = '#ffffff'
+          }
+          for (let i = 0; i < header_icon.length; i++) {
+            header_icon[i].style.color = '#ffffff'
+          }
+          Header.style.boxShadow='none'
+          Header.style.top='-60px'
+          Header.style.backgroundColor = 'transparent'
+          console.log("到顶");
+        }
+
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+      });
+
     },
     computed:{
 
     },
     methods: {
-
-      handleScroll() {
-        const Header = document.querySelector('.Header')
-        // console.log(window.scrollY)
-        if (window.scrollY === 0) {
-          Header.style.transform = 'translateY(+60px)'
-          Header.style.backgroundColor = 'transparent'
-        } else {
-          Header.style.transform = 'translateY(0px)'
-          Header.style.backgroundColor = 'white'
-        }
-      },
       moveLogin(){
         // 没有登录过
         const login = document.querySelector('.login')
@@ -51,7 +82,7 @@ export default {
 </script>
 
 <template>
-  <div class="Header not-top-img" >
+  <div class="Header" >
     <router-link to="/" style="display: flex;text-decoration: none;color: #ffffff">
       <img class="site_img" :src="site_img"  :title="site_name" />
       <div class="site_name" :title="site_name">{{site_name}}</div>
@@ -86,19 +117,20 @@ export default {
   margin-right: 5px;
   color: white;
   font-size: 16px;
+  transition: all 0.5s ease;
 }
 .item {
   position: relative;
   margin: auto auto auto 14px;
   height: auto;
-  transition: filter 0.5s;
   filter:brightness(1);
+  transition: all 0.5s ease;
 }
 .item:hover{
-  color: #67B8EF;
+  color: #67B8EF !important;
 }
 .item:hover .header-icon{
-  color: #67B8EF;
+  color: #67B8EF !important;
 }
 .item::after {
   content: '';
@@ -127,13 +159,13 @@ export default {
 }
 .Header{
   z-index: 1;
-  position: absolute;
+  position: fixed;
   top:-60px;
   width: 100%;
   height: 60px;
   padding: 5px;
   display: flex;
-  transition: transform 0.5s ease, background-color 1.5s ease;
+  transition: all 1s ease, background-color 1.5s ease;
 }
 
 .site_img{
@@ -141,6 +173,7 @@ export default {
   vertical-align: middle;
   margin: auto 6px auto 30px;
   overflow-clip-margin: Content-box;
+  transition: all 1s ease;
 }
 .site_name{
   font-size: 20px;
@@ -148,6 +181,7 @@ export default {
   margin: auto auto auto 0;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+  transition: all 1s ease;
 }
 .menu{
   display: flex;
@@ -155,6 +189,7 @@ export default {
   margin: 5px 20px auto auto;
   color: #fff;
   font-size: 14px;
+  transition: all 1s ease;
 }
 
 /*
