@@ -27,21 +27,25 @@ export default {
       let flag = true
       let i = 0
       setInterval(() => {
-        if(this.content[k]!==undefined){
-          this.subTitle = this.content[k].substring(0, i)
-        }
-        if (flag) {
-          i++
-        } else if (i > 0) {
-          i -= 3
-        } else {
-          flag = true
-          //下一个
-          k++
-          k=k%this.content.length
-        }
-        if (i > this.content[k].length) {
-          flag = false
+        try {
+          if(this.content[k]!==undefined){
+            this.subTitle = this.content[k].substring(0, i)
+          }
+          if (flag) {
+            i++
+          } else if (i > 0) {
+            i -= 3
+          } else {
+            flag = true
+            //下一个
+            k++
+            k=k%this.content.length
+          }
+          if (i > this.content[k].length) {
+            flag = false
+          }
+        }catch (e) {
+          console.log(e)
         }
       }, 200)
     },
@@ -99,6 +103,7 @@ export default {
   color: white;
   transition: color 1s ease;
   font-size: 1.72em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 .site_center{
   position: absolute;
@@ -109,6 +114,7 @@ export default {
 
 }
 .site_name {
+
   font-weight: bold;
   width: 100%;
   color: #ffffff;

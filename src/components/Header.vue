@@ -1,5 +1,7 @@
 <script >
 
+import Login from "@/components/Login.vue";
+
 export default {
     name: "Header",
     mounted() {
@@ -14,9 +16,10 @@ export default {
         const header_icon = document.querySelectorAll('.header-icon')
         if (currentScrollTop > lastScrollTop) {
           // 向下滚动
-          console.log("向下滚动");
+          // console.log("向下滚动");
           Header.style.top='-120px'
           Header.style.backgroundColor = 'transparent'
+          Header.style.boxShadow='none'
         } else if(currentScrollTop!==0){
           // 向上滚动并且没有到顶
           site_name.style.color = '#4C4948'
@@ -27,10 +30,10 @@ export default {
             header_icon[i].style.color = '#4C4948'
           }
           Header.style.top='-60px'
-          Header.style.background='rgba(255,255,255,0.7)'
+          Header.style.background='rgba(255,255,255,0.8)'
           Header.style.filters='constant(1.5)'
           Header.style.boxShadow='0px 4px 8px rgba(0, 0, 0, 0.2)'
-          console.log("向上滚动并且没有到顶");
+          // console.log("向上滚动并且没有到顶");
         }else{
           // 到顶
           site_name.style.color = '#ffffff'
@@ -43,7 +46,7 @@ export default {
           Header.style.boxShadow='none'
           Header.style.top='-60px'
           Header.style.backgroundColor = 'transparent'
-          console.log("到顶");
+          // console.log("到顶");
         }
 
         lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
@@ -56,17 +59,25 @@ export default {
     methods: {
       moveLogin(){
         // 没有登录过
-        const login = document.querySelector('.login')
-        login.style.zIndex = '2'
-        login.style.opacity = '1'
-        if(!this.login){
-         if(window.innerWidth>768) {
-           login.style.right = '200px'
-         }else{
-           login.style.right = window.innerWidth/2-175+'px'
-         }
-        }else{
-        }
+
+          this.$store.commit('setLoginWindowStatus', true)
+          setTimeout(() => {
+            try {
+              const login = document.querySelector('.login');
+              login.style.zIndex = '2';
+              login.style.opacity = '1';
+              if (!this.$store.state.isLogin) {
+                if (window.innerWidth  > 768) {
+                  login.style.right = '100px';
+
+                } else {
+                  login.style.right = window.innerWidth / 2 - 175 + 'px';
+                }
+              }
+            }catch (e) {
+              console.log(e)
+            }
+          }, 100)
       }
     },
       data() {
@@ -75,7 +86,6 @@ export default {
           site_name: 'Orange_Blog',
           username: '登录',
           avatar: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/orange.jpg',
-          login: false
         }
       },
     }
@@ -166,9 +176,11 @@ export default {
   padding: 5px;
   display: flex;
   transition: all 1s ease, background-color 1.5s ease;
+  overflow-x: hidden;
 }
 
 .site_img{
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   height: 36px;
   vertical-align: middle;
   margin: auto 6px auto 30px;
@@ -190,12 +202,17 @@ export default {
   color: #fff;
   font-size: 14px;
   transition: all 1s ease;
+  position: fixed;
+  right: 0;
 }
 
 /*
 手机端
  */
 @media (max-width: 768px) {
+  .Header {
+    max-width: 1000px;
+  }
   .item {
     display: none;
   }

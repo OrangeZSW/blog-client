@@ -50,15 +50,14 @@ export default {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
   width: 350px;
   height: 400px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba( 0, 0, 0, 0.3);
   z-index: 0;
-  position: absolute;
+  position: fixed;
   border-radius: 10px;
-  right: 500px;
-
+  right: -400px;
   opacity: 0;
   filter: contrast(1.2);
-  transition: all 1s ease;
+  transition: all 1s ease ;
 }
 @media (min-width: 768px) {
   .login{

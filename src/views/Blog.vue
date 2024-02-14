@@ -3,7 +3,7 @@
   <div>
     <Header />
     <div class="wrapper" @click="backLoginWindow" >
-      <Login ref="login"/>
+      <Login ref="login" v-if="$store.state.loginWindow"/>
       <Center />
     </div>
     <Display/>
@@ -34,13 +34,24 @@ export default {
   },
   methods: {
     backLoginWindow(e){
-      const Login = document.querySelector('.login')
+      if(this.$store.state.loginWindow){
+        try {
+          const Login = document.querySelector('.login')
+          if(!Login.contains(event.target)){
+            Login.style.zIndex = '0'
+            Login.style.opacity = '0'
+            Login.style.right = '-400px'
+            setTimeout(() => {
+              this.$store.commit('setLoginWindowStatus', false)
+            }, 500)
+          }
 
-      if(!Login.contains(event.target)){
-        Login.style.zIndex = '0'
-        Login.style.opacity = '0'
-        Login.style.right = '500px'
+        }catch (e) {
+          console.log(e)
+        }
       }
+
+
     },
     lookBlog(){
       //   窗口下拉
@@ -65,7 +76,7 @@ export default {
   /*设置背景大小*/
   height: 100vh;
   /*超过的隐藏*/
-  overflow: hidden;
+  overflow-x: hidden;
   border-radius: 10px;
   /*滤镜*/
 
@@ -80,11 +91,5 @@ export default {
   background-color: rgba(0,0,0,0.3);
   z-index: -0;
   border-radius: 10px;
-}
-
-
-.main{
-  height: 100vh;
-  background-color: #f5f5f5;
 }
 </style>
