@@ -6,7 +6,9 @@
       <Login ref="login" v-if="$store.state.loginWindow"/>
       <Center />
     </div>
-    <Display/>
+    <div @click="backLoginWindow">
+      <Display />
+    </div>
   </div>
 
 </template>
@@ -34,6 +36,7 @@ export default {
   },
   methods: {
     backLoginWindow(e){
+      console.log(e)
       if(this.$store.state.loginWindow){
         try {
           const Login = document.querySelector('.login')

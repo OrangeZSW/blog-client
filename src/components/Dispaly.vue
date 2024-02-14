@@ -19,7 +19,10 @@ export default {
         <div class="article-item"></div>
         <div class="article-item"></div>
       </div>
-      <div class="sidebar" style="margin-top: 20px">
+      <div class="sidebar" >
+        <el-card class="card">
+
+        </el-card>
         <el-card class="card">
 
         </el-card>
@@ -34,6 +37,7 @@ export default {
 
 .card{
   padding: 20px 24px;
+  margin: 20px 0 0;
 }
 
 @media (min-width: 768px) {
