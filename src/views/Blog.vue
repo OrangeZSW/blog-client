@@ -81,7 +81,7 @@ export default {
   /*超过的隐藏*/
   overflow-x: hidden;
   border-radius: 10px;
-  /*滤镜*/
+  background-attachment: fixed; /* 让背景图像固定 */
 
 }
 .wrapper:before{
