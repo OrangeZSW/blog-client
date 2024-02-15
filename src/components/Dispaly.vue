@@ -21,8 +21,16 @@ export default {
   <div class="display">
 
     <div class="content" >
-      <div class="post-content" v-model="article">
-        <div class="article-item"></div>
+      <div class="articles-content" v-model="article">
+        <div class="article-item">
+          <router-link to="" class="article-bg">
+            <img src="https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/swagger.png" style="object-fit: cover">
+          </router-link>
+          <div class="article-info">
+            <h2>Swagger</h2>
+            <p>Swagger是一款RESTful接口的文档在线自动生成+功能测试功能软件</p>
+          </div>
+        </div>
         <div class="article-item"></div>
         <div class="article-item"></div>
         <div class="article-item"></div>
@@ -59,6 +67,14 @@ export default {
 </template>
 
 <style scoped>
+.article-bg{
+  height: auto; /* 让高度自适应 */
+  object-fit: cover; /* 填充整个容器并保持宽高比例 */
+}
+.article-info{
+  width:58%;
+  padding: 0 40px;
+}
 .user-info-button{
   width: 100%;
   line-height: 2.4;
@@ -115,12 +131,13 @@ export default {
     position: relative;
   }
 }
-.post-content{
+.articles-content{
   width: 74%;
   height: 100%;
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
 }
 .display{
   display: flex;
@@ -146,9 +163,11 @@ export default {
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   margin-top: 20px ;
+  display: flex;
+  overflow: hidden;
 }
 @media (max-width: 768px) {
-  .post-content{
+  .articles-content{
     width: 100%;
   }
   .content{
@@ -159,6 +178,7 @@ export default {
     height: 414px;
     width: 100%;
     margin: 20px 5px 5px 5px;
+    overflow: hidden;
   }
 }
 

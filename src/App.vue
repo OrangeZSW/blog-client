@@ -17,6 +17,10 @@ export default {
 </script>
 
 <style>
+a{
+  text-decoration: none;
+  color: white;
+}
 ::selection {
   background-color: #00C4B6;
   color: #ffffff;
@@ -34,6 +38,7 @@ html,body{
   padding: 0;
   box-sizing: border-box;
   font-size: 20px;
+  line-height: 2;
 }
 /* 隐藏 Chrome、Safari 和 Opera 的滚动条 */
 body::-webkit-scrollbar {
