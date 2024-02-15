@@ -23,15 +23,13 @@ export default {
     <div class="content" >
       <div class="articles-content" v-model="article">
         <div class="article-item">
-          <router-link to="" class="article-bg">
-            <img src="https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/swagger.png" style="object-fit: cover">
+          <router-link to="" >
+            <img class="article-bg" src="https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/swagger.png" >
           </router-link>
           <div class="article-info">
-            <h2>Swagger</h2>
-            <p>Swagger是一款RESTful接口的文档在线自动生成+功能测试功能软件</p>
+
           </div>
         </div>
-        <div class="article-item"></div>
         <div class="article-item"></div>
         <div class="article-item"></div>
       </div>
@@ -68,11 +66,16 @@ export default {
 
 <style scoped>
 .article-bg{
-  height: auto; /* 让高度自适应 */
-  object-fit: cover; /* 填充整个容器并保持宽高比例 */
+  width: 25.9em;
+  height: 16.8em;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+.article-bg:hover{
+  transform: scale(1.1);
 }
 .article-info{
-  width:58%;
+  width: 58%;
   padding: 0 40px;
 }
 .user-info-button{
@@ -137,7 +140,6 @@ export default {
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
-  overflow: hidden;
 }
 .display{
   display: flex;
@@ -158,13 +160,22 @@ export default {
   padding: 40px 15px;
 }
 .article-item{
-  width: 866px;
-  height: 235px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 20px ;
   display: flex;
-  overflow: hidden;
+  overflow: hidden !important;
+  width: 61.8em;
+  height: 16.8em;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px 6px rgba(7,17,27,0.05);
+  margin-top: 20px ;
+
+}
+.articles-content .article-item:hover{
+  box-shadow: 0 3px 8px 6px rgba(7,17,27,0.09);
+  transition: all 0.5s ease;
+}
+.card:hover{
+  box-shadow: 0 3px 8px 6px rgba(7,17,27,0.09);
+  transition: all 0.5s ease;
 }
 @media (max-width: 768px) {
   .articles-content{
