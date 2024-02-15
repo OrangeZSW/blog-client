@@ -25,7 +25,7 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 15px;
+  font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 html,body{

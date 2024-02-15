@@ -36,7 +36,7 @@ export default {
           // console.log("向上滚动并且没有到顶");
         }else{
           // 到顶
-          site_name.style.color = '#ffffff'
+            site_name.style.color = '#ffffff'
           for (let i = 0; i < items.length; i++) {
             items[i].style.color = '#ffffff'
           }

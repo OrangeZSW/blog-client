@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     backLoginWindow(e){
-      console.log(e)
       if(this.$store.state.loginWindow){
         try {
           const Login = document.querySelector('.login')
