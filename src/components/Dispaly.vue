@@ -68,6 +68,12 @@ export default {
             </div>
           </slot>
         </div>
+        <el-pagination
+            class="pagination"
+            background
+            layout=" pager, next"
+            :total="1000">
+        </el-pagination>
       </div>
       <div class="sidebar" >
         <el-card class="card is-center">
@@ -101,6 +107,9 @@ export default {
 </template>
 
 <style scoped>
+.pagination{
+  margin: 20px auto;
+}
 .article-meta{
   margin: 6px 0;
   color: #858585;
