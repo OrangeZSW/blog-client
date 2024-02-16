@@ -1,16 +1,32 @@
 <script>
 
+import {mapMutations, mapState} from "vuex";
+
 export default {
   name: "login",
+  computed:{
+  },
   data() {
     return {
       user: {
-        username: "",
+        nickname: "",
         password: "",
       },
     }
   },
   methods: {
+    ...mapMutations(['setUserDto','setLoginStatus','setLoginWindowStatus']),
+    login(){
+      axios.post('/user/login',this.user)
+          .then(res => {
+            this.setUserDto(res.data)
+            this.setLoginStatus(true)
+            this.setLoginWindowStatus(false)
+            this.$message.success('登录成功')
+          }).catch(err => {
+        console.log(err)
+      })
+    }
   },
 
 }
@@ -21,13 +37,13 @@ export default {
     <span class="title">登录</span>
     <el-form :model="user" >
       <el-form-item>
-        <el-input ref="username"  prefix-icon="el-icon-user" placeholder="请输入用户名" v-model="user.username"></el-input>
+        <el-input ref="username"  prefix-icon="el-icon-user" placeholder="请输入用户名" v-model="user.nickname"></el-input>
       </el-form-item>
       <el-form-item prop="username">
         <el-input prefix-icon="el-icon-lock" placeholder="请输入密码"  v-model="user.password" show-password></el-input>
       </el-form-item>
       <div>
-        <el-button style="margin-top: 20px" >登录</el-button>
+        <el-button style="margin-top: 20px" @click="login">登录</el-button>
         <el-button style="float: right;margin-top: 20px" >注册</el-button>
       </div>
     </el-form>

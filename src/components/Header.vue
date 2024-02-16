@@ -1,6 +1,7 @@
 <script >
 
 import Login from "@/components/Login.vue";
+import {mapState} from "vuex";
 
 export default {
     name: "Header",
@@ -54,7 +55,8 @@ export default {
 
     },
     computed:{
-
+      ...mapState(['userDto']),
+      ...mapState(['isLogin']),
     },
     methods: {
       moveLogin(){
@@ -85,7 +87,6 @@ export default {
           site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
           site_name: 'Orange_Blog',
           username: '登录',
-          avatar: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/orange.jpg',
         }
       },
     }
@@ -94,8 +95,8 @@ export default {
 <template>
   <div class="Header" >
     <router-link to="/" style="display: flex;text-decoration: none;color: #ffffff">
-      <img class="site_img" :src="site_img"  :title="site_name" />
-      <div class="site_name" :title="site_name">{{site_name}}</div>
+      <img class="site_img" :src="site_img"  :title=" isLogin ? userDto.nickname+'_Blog' : 'Orange_Blog'" />
+      <div class="site_name" :title="isLogin ? userDto.nickname+'_Blog' : 'Orange_Blog'">{{isLogin ? userDto.nickname : 'Orange'}}_Blog</div>
     </router-link>
         <div class="menu">
           <div class="item" >
@@ -112,8 +113,8 @@ export default {
           </div>
           <div class="item" style="display: flex;align-items: center" @click="moveLogin">
             <v-icon class="header-icon"  >mdi-heart</v-icon>
-            <span  >{{ username }}</span>
-            <el-avatar icon="el-icon-user-solid " class="avatar" :src="avatar"  />
+            <span  >{{ isLogin ? userDto.nickname : '登录' }}</span>
+            <el-avatar icon="el-icon-user-solid " class="avatar" :src=" isLogin ? userDto.avatar : site_img"  />
           </div>
           <div class="item phone">
             <i class="el-icon-s-unfold"></i>

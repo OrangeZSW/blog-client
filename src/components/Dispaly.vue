@@ -20,6 +20,11 @@ export default {
             created_at: '2023-11-01',
             content:'如何使用swaggdd'
           },
+          {
+            title: 'vue3',
+            bg: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/vue3.png',
+            created_at: '2023-11-01',
+          }
         ],
         articleNumber:10,
         blogNumber:1,
