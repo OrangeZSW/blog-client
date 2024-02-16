@@ -17,10 +17,6 @@ export default {
 </script>
 
 <style>
-a{
-  text-decoration: none;
-  color: white;
-}
 ::selection {
   background-color: #00C4B6;
   color: #ffffff;
