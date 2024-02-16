@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div >
     <Header />
     <div class="wrapper" @click="backLoginWindow" >
       <Login ref="login" v-if="$store.state.loginWindow"/>
