@@ -4,8 +4,7 @@ import {mapMutations, mapState} from "vuex";
 
 export default {
   name: "login",
-  computed:{
-  },
+  computed: {},
   data() {
     return {
       user: {
@@ -15,17 +14,27 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setUserDto','setLoginStatus','setLoginWindowStatus']),
-    login(){
-      axios.post('/user/login',this.user)
+    ...mapMutations(['setUserDto', 'setLoginStatus', 'setLoginWindowStatus']),
+    login() {
+      axios.post('/user/login', this.user)
           .then(res => {
             this.setUserDto(res.data)
             this.setLoginStatus(true)
-            this.setLoginWindowStatus(false)
+
             this.$message.success('登录成功')
+            this.backLoginWindow()
           }).catch(err => {
         console.log(err)
       })
+    },
+    backLoginWindow(e) {
+      const Login = this.$refs.loginWindow
+      Login.style.zIndex = '0'
+      Login.style.opacity = '0'
+      Login.style.right = '-400px'
+      setTimeout(() => {
+        this.setLoginWindowStatus(false)
+      }, 500)
     }
   },
 
@@ -33,25 +42,26 @@ export default {
 </script>
 
 <template>
-  <div ref="loginWindow" class="login"  >
+  <div ref="loginWindow" class="login">
     <span class="title">登录</span>
-    <el-form :model="user" >
+    <el-form :model="user">
       <el-form-item>
-        <el-input ref="username"  prefix-icon="el-icon-user" placeholder="请输入用户名" v-model="user.nickname"></el-input>
+        <el-input ref="username" prefix-icon="el-icon-user" placeholder="请输入用户名"
+                  v-model="user.nickname"></el-input>
       </el-form-item>
       <el-form-item prop="username">
-        <el-input prefix-icon="el-icon-lock" placeholder="请输入密码"  v-model="user.password" show-password></el-input>
+        <el-input prefix-icon="el-icon-lock" placeholder="请输入密码" v-model="user.password" show-password></el-input>
       </el-form-item>
       <div>
         <el-button style="margin-top: 20px" @click="login">登录</el-button>
-        <el-button style="float: right;margin-top: 20px" >注册</el-button>
+        <el-button style="float: right;margin-top: 20px">注册</el-button>
       </div>
     </el-form>
   </div>
 </template>
 
 <style scoped>
-.title{
+.title {
   font-size: 30px;
   font-weight: bold;
   margin: 40px auto 50px 30px;
@@ -59,29 +69,32 @@ export default {
   color: white;
   z-index: 0;
 }
-.login{
+
+.login {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
   width: 350px;
   height: 400px;
-  background: rgba( 0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 0;
   position: fixed;
   border-radius: 10px;
   right: -400px;
   opacity: 0;
   filter: contrast(1.2);
-  transition: all 1s ease ;
+  transition: all 1s ease;
 }
+
 @media (min-width: 768px) {
-  .login{
+  .login {
     top: 200px;
   }
 }
+
 @media (max-width: 768px) {
-  .login{
+  .login {
     top: 107px;
   }
 }

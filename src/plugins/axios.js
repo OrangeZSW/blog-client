@@ -32,7 +32,13 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function(response) {
     // Do something with response data
-    return response.data.data;
+    // console.log(response)
+    if(response.data.data!==undefined){
+      return response.data.data;
+    }else{
+      return response.data;
+    }
+
   },
   function(error) {
     // Do something with response error

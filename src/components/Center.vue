@@ -13,8 +13,8 @@ export default {
     getHitokoto() {
       axios.get('https://v1.hitokoto.cn')
           .then(res => {
-            this.content.push(res.data.hitokoto)
-            this.content.push('— '+res.data.from)
+            this.content.push(res.hitokoto)
+            this.content.push('— '+res.from)
             this.content.push(...this.self)
             // console.log(this.hitokoto)
           }).catch(err => {

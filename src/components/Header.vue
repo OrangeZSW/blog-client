@@ -1,6 +1,5 @@
 <script >
 
-import Login from "@/components/Login.vue";
 import {mapState} from "vuex";
 
 export default {

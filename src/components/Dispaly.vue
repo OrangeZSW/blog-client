@@ -1,11 +1,18 @@
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "Display",
+  computed:{
+    ...mapState(['userDto']),
+    ...mapState(['isLogin'])
+  },
   data(){
     return{
+      site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
       user:{
         username:'Orange',
-        avatar:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/orange.jpg',
+
         description:'一个前端小白',
         articles:[
           {
@@ -82,9 +89,9 @@ export default {
       </div>
       <div class="sidebar" >
         <el-card class="card is-center">
-            <el-avatar class="user-avatar" :src="user.avatar" :size="110" shape="circle" fit="fill"></el-avatar>
-            <h2 style="font-size: 20px">{{ user.username }}</h2>
-            <p style="font-size: 14px;margin-top: 10px">{{ user.description }}</p>
+            <el-avatar class="user-avatar" :src="isLogin ? userDto.avatar : site_img" :size="110" shape="circle" fit="fill"></el-avatar>
+            <h2 style="font-size: 20px">{{ isLogin ? userDto.nickname : 'Orange'}}</h2>
+            <p style="font-size: 14px;margin-top: 10px">{{ isLogin ? userDto.description : '一个前端小白' }}</p>
             <div class="site-data">
               <router-link to="/article" class="site-data-router" >
                 <div>文章</div>
