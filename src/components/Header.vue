@@ -133,6 +133,7 @@ export default {
     </div>
     <div class="userInfo-leave" ref="userInfo" v-if="isLogin" @mouseleave="userInfoLeave">
       <div class="userInfo-item" style="margin-top:10px">个人信息</div>
+
       <div class="userInfo-item" style="margin-bottom: 10px">退出登录</div>
     </div>
   </div>
