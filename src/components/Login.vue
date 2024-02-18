@@ -19,8 +19,10 @@ export default {
       axios.post('/user/login', this.user)
           .then(res => {
             this.setUserDto(res.data)
+            if (res.data.avatar === null) {
+              res.data.avatar = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png'
+            }
             this.setLoginStatus(true)
-
             this.$message.success('登录成功')
             this.backLoginWindow()
           }).catch(err => {

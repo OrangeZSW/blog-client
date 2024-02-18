@@ -1,6 +1,6 @@
 <script>
 
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   name: "Header",
@@ -58,9 +58,9 @@ export default {
     ...mapState(['isLogin']),
   },
   methods: {
+    ...mapMutations(['setLoginWindowStatus','setLoginStatus',"setLoginWindowStatus","setUserDto"]),
     moveLogin() {
       // 没有登录过
-
       this.$store.commit('setLoginWindowStatus', true)
       setTimeout(() => {
         try {
@@ -81,13 +81,22 @@ export default {
       }, 100)
     },
     userInfoOver() {
-      const userInfo = document.querySelector('.userInfo-leave')
-      userInfo.style.height = '4.8em'
+      if(this.isLogin){
+        const userInfo = document.querySelector('.userInfo-leave')
+        userInfo.style.height = '4.8em'
+      }
     },
     userInfoLeave() {
       console.log('leave')
       const userInfo = document.querySelector('.userInfo-leave')
       userInfo.style.height = '0%'
+    },
+    logOut() {
+      this.setLoginWindowStatus(true)
+      this.setLoginStatus(false)
+      this.$message.success('退出登录成功')
+      this.setUserDto({})
+      this.$router.push('/')
     }
   },
   data() {
@@ -133,8 +142,7 @@ export default {
     </div>
     <div class="userInfo-leave" ref="userInfo" v-if="isLogin" @mouseleave="userInfoLeave">
       <div class="userInfo-item" style="margin-top:10px">个人信息</div>
-
-      <div class="userInfo-item" style="margin-bottom: 10px">退出登录</div>
+      <div class="userInfo-item" style="margin-bottom: 10px" @click="logOut">退出登录</div>
     </div>
   </div>
 </template>
