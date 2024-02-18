@@ -1,6 +1,11 @@
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "Center",
+  computed:{
+    ...mapState(['userDto','isLogin']),
+  },
   data() {
     return {
       site_name: 'Orange_Blog',
@@ -90,7 +95,7 @@ export default {
 
 <template>
   <div class="site_center" >
-    <div class="site_name" style="font-size: 40px; margin-top: 37vh" >{{site_name}}</div>
+    <div class="site_name" style="font-size: 40px; margin-top: 37vh" >{{isLogin ? userDto.nickname+"'s_Blog" : "Oranges"+"'_Blog"}}</div>
     <div><span style="color: white;font-size: 20px;margin-top: 20px;height: 20px; " v-if="content" >{{subTitle}}</span>
       <span aria-hidden="true" style="color: white;transition: color 1s ease" class="guangBiao">  |  </span>
     </div>

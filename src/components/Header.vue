@@ -104,6 +104,8 @@ export default {
       site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
       site_name: 'Orange_Blog',
       username: '登录',
+      // 后缀
+      suffix: "'s_Blog",
     }
   },
 }
@@ -112,9 +114,9 @@ export default {
 <template>
   <div class="Header">
     <router-link to="/" style="display: flex;text-decoration: none;color: #ffffff">
-      <img class="site_img" :src="site_img" :title=" isLogin ? userDto.nickname+'_Blog' : 'Orange_Blog'"/>
-      <div class="site_name" :title="isLogin ? userDto.nickname+'_Blog' : 'Orange_Blog'">
-        {{ isLogin ? userDto.nickname : 'Orange' }}_Blog
+      <img class="site_img" :src="site_img" :title="isLogin ? userDto.nickname +this.suffix: 'Orange'+this.suffix"/>
+      <div class="site_name" :title="isLogin ? userDto.nickname+this.suffix : 'Orange'+this.suffix">
+        {{ isLogin ? userDto.nickname : 'Orange' }}{{ suffix }}
       </div>
     </router-link>
     <div class="menu">
@@ -239,6 +241,7 @@ export default {
 }
 
 .site_img {
+  font-size: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   height: 36px;
   vertical-align: middle;
