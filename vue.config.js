@@ -13,6 +13,15 @@ module.exports = defineConfig({
           args[0].title = 'Orange';
           return args;
         })
-  }
+  },
+    // 配置打包后去掉console.log
+    terser:{
+        terserOptions:{
+            compress:{
+                drop_console:true,
+                drop_debugger:true
+            }
+        }
+    }
 })
 
