@@ -47,13 +47,15 @@ export default {
 
     <div class="content" >
       <div class="articles-content" >
-        <div v-for="(article,index) in user.articles" :key="index">
+        <div v-for="(article,index) in user.articles" :key="index" style="width: 100%">
           <slot v-if="index<user.articles.length&&index%2===0">
             <div class="article-item"  >
+
               <router-link to="" >
                 <img class="article-bg" :title="user.articles[index].title" :src="user.articles[index].bg" >
               </router-link>
-              <div class="article-info">
+
+              <div class="article-info" >
                 <a class="article-title" :title="user.articles[index].title">{{ user.articles[index].title }}</a>
                 <div class="article-meta">
                   <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
@@ -62,7 +64,10 @@ export default {
                 </div>
                 <div>{{user.articles[index].content}}</div>
               </div>
+
             </div>
+
+
             <div class="article-item"  v-if="index<user.articles.length-1">
               <div class="article-info">
                 <a class="article-title" :title="user.articles[index+1].title">{{ user.articles[index+1].title }}</a>
@@ -88,7 +93,7 @@ export default {
         </el-pagination>
       </div>
       <div class="sidebar" >
-        <el-card class="card is-center">
+        <el-card class="card is-center" >
             <el-avatar class="user-avatar" :src="isLogin ? userDto.avatar : site_img" :size="110" shape="circle" fit="fill"></el-avatar>
             <h2 style="font-size: 20px">{{ isLogin ? userDto.nickname : 'Orange'}}</h2>
             <p style="font-size: 14px;margin-top: 10px">{{ isLogin ? userDto.description : '一个前端小白' }}</p>
@@ -198,11 +203,8 @@ export default {
     width: 26%;
     padding-left: 15px;
     position: relative;
-}
-@media (max-width:768px) {
-  .sidebar{
-    display: none;
-  }
+  flex-shrink: 0;
+
 }
 .articles-content{
   width: 74%;
@@ -216,7 +218,7 @@ export default {
   width: 100%;
   background-color: #fff;
   flex-direction: column;
-
+  flex-wrap: wrap;
 }
 .content{
   max-width: 1200px;
@@ -228,11 +230,11 @@ export default {
   flex-wrap: wrap;
   overflow-x: hidden;
   padding: 40px 15px;
+  flex: 1;
 }
 .article-item{
   display: flex;
   overflow: hidden ;
-  width: 61.8em;
   height: 16.8em;
   border-radius: 8px;
   box-shadow: 0 3px 8px 6px rgba(7,17,27,0.05);
@@ -260,6 +262,12 @@ export default {
     width: 100%;
     margin: 20px 5px 5px 5px;
     overflow: hidden;
+  }
+  .sidebar{
+    display: none;
+  }
+  .article-info, .bg{
+    width: 100%;
   }
 }
 
