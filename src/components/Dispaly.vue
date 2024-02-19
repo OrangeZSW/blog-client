@@ -143,7 +143,7 @@ export default {
   object-fit: cover;
   transition: all 0.5s ease;
 }
-.article-bg:hover{
+.article-item:hover .article-bg{
   transform: scale(1.1);
 }
 .article-info{
