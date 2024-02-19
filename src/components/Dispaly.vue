@@ -51,7 +51,7 @@ export default {
           <slot v-if="index<user.articles.length&&index%2===0">
             <div class="article-item"  >
 
-              <router-link to="" >
+              <router-link to="" class="a-bg">
                 <img class="article-bg" :title="user.articles[index].title" :src="user.articles[index].bg" >
               </router-link>
 
@@ -68,8 +68,9 @@ export default {
             </div>
 
 
-            <div class="article-item"  v-if="index<user.articles.length-1">
-              <div class="article-info">
+            <div class="article-item phone-item"  v-if="index<user.articles.length-1" >
+
+              <div class="article-info"  >
                 <a class="article-title" :title="user.articles[index+1].title">{{ user.articles[index+1].title }}</a>
                 <div class="article-meta">
                   <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
@@ -79,9 +80,12 @@ export default {
                 <div>{{user.articles[index+1].content}}</div>
               </div>
 
-              <router-link to="" >
+              <router-link to="" class="a-bg" style=" @media (max-width: 768px) {
+                display: none;
+              }">
                 <img class="article-bg" :title="user.articles[index+1].title" :src="user.articles[index+1].bg" >
               </router-link>
+
             </div>
           </slot>
         </div>
@@ -262,12 +266,27 @@ export default {
     width: 100%;
     margin: 20px 5px 5px 5px;
     overflow: hidden;
+    flex-direction: column;
   }
   .sidebar{
     display: none;
   }
-  .article-info, .bg{
+  .article-bg{
     width: 100%;
+    height: 100%;
+  }
+  .a-bg{
+    object-fit: cover;
+    width: 100%;
+    height: 50%;
+  }
+  .article-info{
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px 30px;
+  }
+  .phone-item{
+    flex-direction: column-reverse;
   }
 }
 
