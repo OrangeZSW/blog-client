@@ -70,7 +70,6 @@ export default {
           if (!this.$store.state.isLogin) {
             if (window.innerWidth > 768) {
               login.style.right = '100px';
-
             } else {
               login.style.right = window.innerWidth / 2 - 175 + 'px';
             }
@@ -87,7 +86,6 @@ export default {
       }
     },
     userInfoLeave() {
-      console.log('leave')
       const userInfo = document.querySelector('.userInfo-leave')
       userInfo.style.height = '0%'
     },
@@ -168,7 +166,7 @@ export default {
   justify-content: center;
   border: none;
   width: 7.5em;
-  height: 5em;
+  height: 0%;
   transition: all 0.2s ease;
   border-radius: 5px;
   display: flex;
