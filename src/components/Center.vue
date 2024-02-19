@@ -116,7 +116,6 @@ export default {
   height: 100vh;
   text-align: center;
   justify-content: center;
-
 }
 .site_name {
   font-weight: bold;

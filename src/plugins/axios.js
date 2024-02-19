@@ -10,8 +10,8 @@ import axios from "axios";
 
 let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
-  baseURL: 'http://localhost:8181',
-  // baseURL: 'https//server.blog.zorange.online',
+  // baseURL: 'http://localhost:8181',
+      baseURL: 'https://server.blog.zorange.online',
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };
@@ -34,12 +34,7 @@ _axios.interceptors.response.use(
   function(response) {
     // Do something with response data
     // console.log(response)
-    if(response.data.data!==undefined){
-      return response.data.data;
-    }else{
-      return response.data;
-    }
-
+    return response.data;
   },
   function(error) {
     // Do something with response error
