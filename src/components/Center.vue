@@ -96,7 +96,7 @@ export default {
 <template>
   <div class="site_center" >
     <div class="site_name" style="font-size: 40px; margin-top: 37vh" >{{isLogin ? userDto.nickname+"'s_Blog" : "Oranges"+"'_Blog"}}</div>
-    <div><span style="color: white;font-size: 20px;margin-top: 20px;height: 20px; " v-if="content" >{{subTitle}}</span>
+    <div ><span style="color: white;font-size: 20px;margin-top: 20px;height: 20px;" v-if="content" >{{subTitle}}</span>
       <span aria-hidden="true" style="color: white;transition: color 1s ease" class="guangBiao">  |  </span>
     </div>
     <i ref="icon" class="icon el-icon-arrow-down"  @click="lookBlog" ></i>
@@ -115,11 +115,10 @@ export default {
   width: 100%;
   height: 100vh;
   text-align: center;
-  align-items: center;
+  justify-content: center;
 
 }
 .site_name {
-
   font-weight: bold;
   width: 100%;
   color: #ffffff;
