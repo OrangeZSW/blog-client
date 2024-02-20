@@ -11,9 +11,14 @@ const routes = [
   }
     ,
     {
-        path: '/Blog',
-        name: 'Blog',
-        component: () => import('../views/Blog.vue')
+        path: '/All-Blogs',
+        name: '所有分类',
+        component: () => import('../views/All-Blogs.vue')
+    }
+    ,{
+        path: '/All-Articles',
+        name: '所有文章',
+        component: () => import('../views/All-Articles.vue')
     }
 ]
 

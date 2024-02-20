@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header/>
-    <div class="wrapper" @click="backLoginWindow">
+    <div class="wrapper" @click="backLoginWindow" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
       <Login ref="login" v-if="$store.state.loginWindow"/>
       <Center/>
     </div>
@@ -17,6 +17,7 @@ import Header from "@/components/Header.vue";
 import Center from "@/components/Center.vue";
 import Login from "@/components/Login.vue";
 import Display from "@/components/Dispaly.vue";
+import {mapState} from "vuex";
 
 export default {
   components: {
@@ -26,10 +27,12 @@ export default {
     Center
   },
   name: "Home",
-  computed: {},
+  computed: {
+    ...mapState(['userDto', 'isLogin']),
+  },
   data() {
     return {
-      background_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
+      site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
       login: false
     }
   },
@@ -72,7 +75,6 @@ export default {
   background-position: center;
   /*图片将被拉伸或缩小以覆盖整个容器，可能会有部分裁剪*/
   background-size: cover;
-  background-image: url("https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png");
   background-color: rgba(0, 0, 0, 0.6);
   /*设置背景大小*/
   height: 100vh;

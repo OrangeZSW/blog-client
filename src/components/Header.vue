@@ -58,7 +58,7 @@ export default {
     ...mapState(['isLogin']),
   },
   methods: {
-    ...mapMutations(['setLoginWindowStatus','setLoginStatus',"setLoginWindowStatus","setUserDto"]),
+    ...mapMutations(['setLoginWindowStatus', 'setLoginStatus', "setLoginWindowStatus", "setUserDto"]),
     moveLogin() {
       // 没有登录过
       this.$store.commit('setLoginWindowStatus', true)
@@ -80,7 +80,7 @@ export default {
       }, 100)
     },
     userInfoOver() {
-      if(this.isLogin){
+      if (this.isLogin) {
         const userInfo = document.querySelector('.userInfo-leave')
         userInfo.style.height = '4.8em'
       }
@@ -118,19 +118,18 @@ export default {
       </div>
     </router-link>
     <div class="menu">
-      <div class="item">
-        <v-icon class="header-icon">mdi-home</v-icon>
-        <span>首页</span>
-      </div>
-      <div class="item">
-        <v-icon class="header-icon">mdi-card-bulleted</v-icon>
-        <span>文章</span>
-      </div>
-
-        <router-link to="/Blog" class="item">
-          <v-icon class="header-icon">mdi-book-account</v-icon>
-          <span>分类</span>
+        <router-link to="/" class="item">
+          <v-icon class="header-icon">mdi-home</v-icon>
+          <span>首页</span>
         </router-link>
+        <router-link to="/all-articles" class="item">
+          <v-icon class="header-icon">mdi-card-bulleted</v-icon>
+          <span>文章</span>
+        </router-link>
+      <router-link to="/all-Blogs" class="item">
+        <v-icon class="header-icon">mdi-book-account</v-icon>
+        <span>分类</span>
+      </router-link>
       <div class="item user-avatar" style="display: flex;align-items: center" @click="moveLogin"
            @mouseover="userInfoOver">
         <v-icon class="header-icon">mdi-heart</v-icon>
@@ -149,15 +148,17 @@ export default {
 </template>
 
 <style scoped>
-.userInfo-item{
+.userInfo-item {
   cursor: pointer;
   width: 100%;
   height: 100%;
 }
-.userInfo-item:hover{
+
+.userInfo-item:hover {
   background-color: #ECF5FF;
   overflow: hidden;
 }
+
 .userInfo-leave {
   position: fixed;
   right: 20px;
@@ -275,9 +276,10 @@ export default {
 手机端
  */
 @media (max-width: 768px) {
-  .userInfo-leave{
+  .userInfo-leave {
     right: 4.2em;
   }
+
   .Header {
     max-width: 1000px;
   }
