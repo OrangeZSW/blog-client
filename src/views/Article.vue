@@ -1,13 +1,14 @@
 <script>
-import Header from "@/components/Header.vue";
 import PageHeader from "@/components/Page-Header.vue";
 import ArticlesContent from "@/components/Articles-Content.vue";
+import Display from "@/components/Dispaly.vue";
+import Header from "@/components/Header.vue";
 import Login from "@/components/Login.vue";
 import {mapMutations} from "vuex";
 
 export default {
   name: "Article",
-  components: {Login, ArticlesContent, PageHeader, Header},
+  components: {Login, Header, Display, ArticlesContent, PageHeader},
   methods:{
     ...mapMutations(['backLoginWindow']),
   }
@@ -15,19 +16,16 @@ export default {
 </script>
 
 <template>
-  <div>
+ <div>
     <Header/>
-    <div @click="backLoginWindow">
-      <Login/>
-      <PageHeader/>
-      <ArticlesContent class="onlyArticle"/>
-    </div>
-  </div>
+   <div @click="backLoginWindow">
+     <Login/>
+     <PageHeader/>
+     <Display/>
+   </div>
+ </div>
 </template>
 
 <style scoped>
-.onlyArticle{
-  width: 50%;
-  margin: 20px auto 20px auto;
-}
+
 </style>

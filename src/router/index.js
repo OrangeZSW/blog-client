@@ -19,10 +19,16 @@ const routes = [
         path: '/All-Articles',
         name: '所有文章',
         component: () => import('../views/All-Articles.vue')
+    },
+    {
+        path: '/Article',
+        name: '文章',
+        component: () => import('../views/Article.vue')
     }
 ]
 
 const router = new VueRouter({
+    mode: 'history',
   routes
 })
 
@@ -32,8 +38,9 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
 
-
-
+router.afterEach((to, from, next) => {
+    document.documentElement.scrollTop = 0;
+})
 
 
 

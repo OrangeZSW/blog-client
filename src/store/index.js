@@ -21,6 +21,14 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    backLoginWindow() {
+        const Login = document.querySelector('.login')
+        if (!Login.contains(event.target)) {
+          Login.style.zIndex = '0'
+          Login.style.opacity = '0'
+          Login.style.right = '-400px'
+        }
+    },
     setLoginWindowStatus(state, status) {
       state.loginWindow = status;
     },

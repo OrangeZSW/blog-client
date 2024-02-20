@@ -2,7 +2,7 @@
   <div>
     <Header/>
     <div class="wrapper" @click="backLoginWindow" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
-      <Login ref="login" v-if="$store.state.loginWindow"/>
+      <Login/>
       <Center/>
     </div>
     <div @click="backLoginWindow">
@@ -17,7 +17,7 @@ import Header from "@/components/Header.vue";
 import Center from "@/components/Center.vue";
 import Login from "@/components/Login.vue";
 import Display from "@/components/Dispaly.vue";
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   components: {
@@ -28,7 +28,7 @@ export default {
   },
   name: "Home",
   computed: {
-    ...mapState(['userDto', 'isLogin']),
+    ...mapState(['userDto', 'isLogin', 'loginWindow']),
   },
   data() {
     return {
@@ -37,26 +37,7 @@ export default {
     }
   },
   methods: {
-    backLoginWindow(e) {
-      if (this.$store.state.loginWindow) {
-        try {
-          const Login = document.querySelector('.login')
-          if (!Login.contains(event.target)) {
-            Login.style.zIndex = '0'
-            Login.style.opacity = '0'
-            Login.style.right = '-400px'
-            setTimeout(() => {
-              this.$store.commit('setLoginWindowStatus', false)
-            }, 500)
-          }
-
-        } catch (e) {
-          console.log(e)
-        }
-      }
-
-
-    },
+    ...mapMutations(['backLoginWindow']),
     lookBlog() {
       //   窗口下拉
       window.screenY = 100
@@ -66,8 +47,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .wrapper {
   width: 100%;
   display: flex;

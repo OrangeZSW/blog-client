@@ -21,11 +21,16 @@ export default {
             console.log(res)
             if(res.code==='200'){
               this.setUserDto(res.data)
+              // 如果没有头像，使用默认头像
               if (res.data.avatar === null) {
                 res.data.avatar = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png'
               }
+              // 如果没有封面，使用默认封面
+              if(res.data.coverImg === null){
+                res.data.coverImg = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png'
+              }
               this.setLoginStatus(true)
-              this.$message.success('登录成功')
+              this.$message.success('登录成功', 1.5)
               this.backLoginWindow()
             }else{
               this.$message.error(res.msg)
