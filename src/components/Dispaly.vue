@@ -35,7 +35,7 @@ export default {
         ],
         articleNumber:10,
         blogNumber:1,
-        categories:2
+        tags:10
       },
     }
   }
@@ -106,13 +106,13 @@ export default {
                 <div>文章</div>
                 <div>{{ user.articleNumber }}</div>
               </router-link>
-              <router-link to="/article" class="site-data-router">
-                <div>博客</div>
+              <router-link to="/Blog" class="site-data-router">
+                <div>分类</div>
                 <div>{{ user.blogNumber }}</div>
               </router-link>
               <router-link to="/categories" class="site-data-router">
-                <div>分类</div>
-                <div>{{ user.categories }}</div>
+                <div>标签</div>
+                <div>{{ user.tags }}</div>
               </router-link>
             </div>
             <a href="https://github.com/OrangeZSW/blog-client" target="_blank">
@@ -259,11 +259,9 @@ export default {
   }
   .content{
     width: 100%;
-
   }
   .article-item{
-    height: 414px;
-    width: 100%;
+    height: auto;
     margin: 20px 5px 5px 5px;
     overflow: hidden;
     flex-direction: column;
@@ -278,7 +276,7 @@ export default {
   .a-bg{
     object-fit: cover;
     width: 100%;
-    height: 50%;
+    height: 230px;
   }
   .article-info{
     width: 100%;

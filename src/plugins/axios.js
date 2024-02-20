@@ -10,8 +10,8 @@ import axios from "axios";
 
 let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
-  // baseURL: 'http://localhost:8181',
-      baseURL: 'https://server.blog.zorange.online',
+  baseURL: 'http://localhost:8181',
+  //     baseURL: 'https://server.blog.zorange.online',
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };

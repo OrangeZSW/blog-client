@@ -6,6 +6,14 @@ export default {
   computed:{
     ...mapState(['userDto','isLogin']),
   },
+  created() {
+    this.$router.beforeEach((to, from, next) => {
+      clearInterval(this.timrGB)
+      clearInterval(this.timrC)
+      clearInterval(this.timrI)
+      next()
+    })
+  },
   data() {
     return {
       site_name: 'Orange_Blog',
@@ -31,7 +39,7 @@ export default {
       let k=0
       let flag = true
       let i = 0
-      setInterval(() => {
+      this.timrC=setInterval(() => {
         try {
           if(this.content[k]!==undefined){
             this.subTitle = this.content[k].substring(0, i)
@@ -55,15 +63,15 @@ export default {
       }, 200)
     },
     runIcon(){
-      setInterval(() => {
-        const icon = document.querySelector('.icon')
-        icon.style.transform = 'translateY(20px)'
-        icon.style.opacity = '0.2'
-        setTimeout(() => {
-          icon.style.transform = 'translateY(0px)'
-          icon.style.opacity= '1'
-        }, 1500)
-      }, 3000)
+        this.timrI=setInterval(() => {
+          const icon = document.querySelector('.icon')
+          icon.style.transform = 'translateY(20px)'
+          icon.style.opacity = '0.2'
+          setTimeout(() => {
+            icon.style.transform = 'translateY(0px)'
+            icon.style.opacity= '1'
+          }, 1500)
+        }, 3000)
     },
     lookBlog(){
       let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
@@ -79,16 +87,21 @@ export default {
   },
 //   闪烁
   mounted() {
-    setInterval(() => {
-      const site_name = document.querySelector('.guangBiao')
-      site_name.style.color = 'white'
-      setTimeout(() => {
-        site_name.style.color = 'transparent'
-      }, 1000)
-    }, 2000)
     this.getHitokoto()
-    this.runContent()
-    this.runIcon()
+     this.timrGB=setInterval(() => {
+        const site_name = document.querySelector('.guangBiao')
+        site_name.style.color = 'white'
+        setTimeout(() => {
+          site_name.style.color = 'transparent'
+        }, 1000)
+      }, 2000)
+      this.runContent()
+      this.runIcon()
+  },
+  beforeDestroy() {
+    clearInterval(this.timrGB)
+    clearInterval(this.timrC)
+    clearInterval(this.timrI)
   }
 }
 </script>

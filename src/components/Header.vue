@@ -126,10 +126,11 @@ export default {
         <v-icon class="header-icon">mdi-card-bulleted</v-icon>
         <span>文章</span>
       </div>
-      <div class="item">
-        <v-icon class="header-icon">mdi-book-account</v-icon>
-        <span>博客</span>
-      </div>
+
+        <router-link to="/Blog" class="item">
+          <v-icon class="header-icon">mdi-book-account</v-icon>
+          <span>分类</span>
+        </router-link>
       <div class="item user-avatar" style="display: flex;align-items: center" @click="moveLogin"
            @mouseover="userInfoOver">
         <v-icon class="header-icon">mdi-heart</v-icon>
@@ -187,6 +188,8 @@ export default {
   height: auto;
   filter: brightness(1);
   transition: all 0.5s ease;
+  text-decoration: none;
+  color: white;
 }
 
 .item:hover {
