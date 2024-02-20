@@ -34,7 +34,7 @@ export default {
           <div>分类</div>
           <div>{{ user.blogNumber }}</div>
         </router-link>
-        <router-link to="/categories" class="site-data-router">
+        <router-link to="/tag" class="site-data-router">
           <div>标签</div>
           <div>{{ user.tags }}</div>
         </router-link>

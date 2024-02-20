@@ -1,8 +1,9 @@
 <template>
   <div>
     <Header/>
-    <div class="wrapper" @click="backLoginWindow" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
+    <div class="wrapper" id="wrapper" @click="backLoginWindow" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
       <Login/>
+      <SideBarPhone/>
       <Center/>
     </div>
     <div @click="backLoginWindow">
@@ -18,9 +19,11 @@ import Center from "@/components/Center.vue";
 import Login from "@/components/Login.vue";
 import Display from "@/components/Dispaly.vue";
 import {mapMutations, mapState} from "vuex";
+import SideBarPhone from "@/components/SideBar-Phone.vue";
 
 export default {
   components: {
+    SideBarPhone,
     Display,
     Login,
     Header,
@@ -71,8 +74,10 @@ export default {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: -0;
+  background-color: var(--background-color);
+  z-index: var(--z-index);
   border-radius: 10px;
+  transition: all 0.5s ease;
 }
+
 </style>

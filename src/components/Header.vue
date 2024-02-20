@@ -1,6 +1,8 @@
 <script>
 
 import {mapMutations, mapState} from "vuex";
+import sideBar from "@/components/SideBar.vue";
+import sideBarPhone from "@/components/SideBar-Phone.vue";
 
 export default {
   name: "Header",
@@ -95,6 +97,13 @@ export default {
       this.$message.success('退出登录成功')
       this.setUserDto({})
       this.$router.push('/')
+    },
+    sideBarPhone(){
+      const sideBarPhone = document.querySelector('.sideBar-menu')
+      const wrapper= document.querySelector('.wrapper')
+      wrapper.style.setProperty('--background-color', 'rgba(0, 0, 0, 0.7)');
+      wrapper.style.setProperty('--z-index', '1');
+      sideBarPhone.style.right = '0'
     }
   },
   data() {
@@ -136,7 +145,7 @@ export default {
         <span>{{ isLogin ? userDto.nickname : '登录' }}</span>
         <el-avatar icon="el-icon-user-solid " class="avatar" :src=" isLogin ? userDto.avatar : site_img"/>
       </div>
-      <div class="item phone">
+      <div class="item phone"  @click="sideBarPhone">
         <i class="el-icon-s-unfold"></i>
       </div>
     </div>
@@ -148,6 +157,17 @@ export default {
 </template>
 
 <style scoped>
+.wrapper-before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -0;
+  border-radius: 10px;
+}
 .userInfo-item {
   cursor: pointer;
   width: 100%;

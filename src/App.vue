@@ -46,5 +46,8 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-
+:root{
+  --background-color: rgba(0, 0, 0, 0.3);
+  --z-index: 0;
+}
 </style>

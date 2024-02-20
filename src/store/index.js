@@ -28,6 +28,13 @@ export default new Vuex.Store({
           Login.style.opacity = '0'
           Login.style.right = '-400px'
         }
+        const sideBarPhone = document.querySelector('.sideBar-menu')
+        const wrapper = document.querySelector('.wrapper')
+        if (!sideBarPhone.contains(event.target)) {
+          sideBarPhone.style.right = '-300px'
+          wrapper.style.setProperty('--background-color', 'rgba(0, 0, 0, 0.3)');
+          wrapper.style.setProperty('--z-index', '0');
+        }
     },
     setLoginWindowStatus(state, status) {
       state.loginWindow = status;
