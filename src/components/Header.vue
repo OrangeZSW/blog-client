@@ -100,9 +100,6 @@ export default {
     },
     sideBarPhone(){
       const sideBarPhone = document.querySelector('.sideBar-menu')
-      const wrapper= document.querySelector('.wrapper')
-      wrapper.style.setProperty('--background-color', 'rgba(0, 0, 0, 0.7)');
-      wrapper.style.setProperty('--z-index', '1');
       sideBarPhone.style.right = '0'
     }
   },

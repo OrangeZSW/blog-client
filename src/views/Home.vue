@@ -3,7 +3,6 @@
     <Header/>
     <div class="wrapper" id="wrapper" @click="backLoginWindow" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
       <Login/>
-      <SideBarPhone/>
       <Center/>
     </div>
     <div @click="backLoginWindow">

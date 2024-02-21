@@ -2,13 +2,17 @@
   <v-app>
     <v-main>
       <router-view/>
+      <SideBarPhone/>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import SideBarPhone from "@/components/SideBar-Phone.vue";
+
 export default {
   name: 'App',
+  components: {SideBarPhone},
 
   data: () => ({
     //
