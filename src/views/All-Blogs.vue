@@ -10,27 +10,9 @@ export default {
   computed: {
     ...mapState(['userDto', 'isLogin','loginWindow']),
   },
-  mounted() {
-
-  },
   data() {
     return {}
   },
-  methods: {
-    backLoginWindow() {
-      if (this.loginWindow) {
-        const Login = document.querySelector('.login')
-        if (!Login.contains(event.target)) {
-          Login.style.zIndex = '0'
-          Login.style.opacity = '0'
-          Login.style.right = '-400px'
-          setTimeout(() => {
-            this.$store.commit('setLoginWindowStatus', false)
-          }, 500)
-        }
-      }
-    },
-  }
 }
 </script>
 
@@ -38,7 +20,7 @@ export default {
 
   <div>
     <Header />
-    <div @click="backLoginWindow">
+    <div>
       <PageHeader class="blog-wrapper" />
     </div>
   </div>

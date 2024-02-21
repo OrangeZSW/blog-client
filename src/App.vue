@@ -1,24 +1,26 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main >
       <router-view/>
-      <SideBarPhone/>
+      <SideBarPhone />
       <Login/>
     </v-main>
   </v-app>
 </template>
-
 <script>
 import SideBarPhone from "@/components/SideBar-Phone.vue";
 import Login from "@/components/Login.vue";
+import {mapMutations} from "vuex";
 
 export default {
   name: 'App',
   components: {Login, SideBarPhone},
-
-  data: () => ({
-    //
-  }),
+  methods:{
+    ...mapMutations(['backLoginWindow'])
+  },
+  mounted() {
+    document.addEventListener('click', this.backLoginWindow)
+  }
 };
 </script>
 
@@ -52,8 +54,18 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+body:before{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--width);
+  height: 100%;
+  content: '';
+  background-color: rgba(0,0,0,0.7);
+  transition:width 0.5s ease;
+  z-index: 2;
+}
 :root{
-  --background-color: rgba(0, 0, 0, 0.3);
-  --z-index: 0;
+  --width: 0;
 }
 </style>

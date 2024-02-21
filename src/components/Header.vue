@@ -99,8 +99,12 @@ export default {
       this.$router.push('/')
     },
     sideBarPhone(){
-      const sideBarPhone = document.querySelector('.sideBar-menu')
-      sideBarPhone.style.right = '0'
+      setTimeout(()=>{
+        const sideBarPhone = document.querySelector('.sideBar-menu')
+        const body = document.querySelector('body')
+        sideBarPhone.style.right = '0'
+        body.style.setProperty('--width', window.innerWidth -300+ 'px')
+      },100)
     }
   },
   data() {

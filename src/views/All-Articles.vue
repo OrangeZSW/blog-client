@@ -8,16 +8,13 @@ import {mapMutations} from "vuex";
 export default {
   name: "Article",
   components: {Login, ArticlesContent, PageHeader, Header},
-  methods:{
-    ...mapMutations(['backLoginWindow']),
-  }
 }
 </script>
 
 <template>
   <div>
     <Header/>
-    <div @click="backLoginWindow">
+    <div>
       <PageHeader/>
       <ArticlesContent class="onlyArticle"/>
     </div>

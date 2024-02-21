@@ -29,8 +29,9 @@ export default new Vuex.Store({
           Login.style.right = '-400px'
         }
         const sideBarPhone = document.querySelector('.sideBar-menu')
-        const wrapper = document.querySelector('.wrapper')
+        const body = document.querySelector('body')
         if (!sideBarPhone.contains(event.target)) {
+          body.style.setProperty('--width', '0')
           sideBarPhone.style.right = '-300px'
         }
     },

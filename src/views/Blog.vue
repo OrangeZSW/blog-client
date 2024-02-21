@@ -7,16 +7,13 @@ import {mapMutations} from "vuex";
 export default {
   name: "Blog",
   components: {Header, Login, PageHeader},
-  methods:{
-    ...mapMutations(['backLoginWindow'])
-  }
 }
 </script>
 
 <template>
   <div>
     <Header/>
-    <div @click="backLoginWindow">
+    <div>
       <PageHeader/>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <script>
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   name: "SideBar-Phone",
@@ -15,12 +15,12 @@ export default {
         tags: 0
       }
     }
-  }
+  },
 }
 </script>
 
 <template>
-  <div class="sideBar-menu" ref="sideBarPhone">
+  <div class="sideBar-menu">
     <el-avatar class="user-avatar" :src="isLogin ? userDto.avatar : site_img" :size="110" shape="circle" fit="fill"></el-avatar>
     <h2 style="font-size: 20px">{{ isLogin ? userDto.nickname : 'Orange'}}</h2>
     <p style="font-size: 14px;margin-top: 10px">{{ isLogin ? userDto.description : '一个前端小白' }}</p>
@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
 .sideBar-menu{
-  z-index: 3;
+  z-index: 2;
   background-color: white;
   position: fixed;
   top: 0;
@@ -61,6 +61,7 @@ export default {
   color: black;
   margin: auto;
   transition: all 0.5s ease;
+  align-items: center;
 }
 .site-data-router:hover{
   color: #4AB1F5;
@@ -83,6 +84,8 @@ export default {
    */
   table-layout: fixed;
 }
+
+
 
 
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div>
     <Header/>
-    <div class="wrapper" id="wrapper" @click="backLoginWindow" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
+    <div class="wrapper" id="wrapper" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
       <Center/>
     </div>
-    <div @click="backLoginWindow">
+    <div>
       <Display/>
     </div>
   </div>
@@ -65,6 +65,7 @@ export default {
 
 }
 
+
 .wrapper:before {
   content: '';
   position: absolute;
@@ -72,8 +73,8 @@ export default {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: var(--background-color);
-  z-index: var(--z-index);
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
   border-radius: 10px;
   transition: all 0.5s ease;
 }
