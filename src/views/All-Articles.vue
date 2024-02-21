@@ -18,7 +18,6 @@ export default {
   <div>
     <Header/>
     <div @click="backLoginWindow">
-      <Login/>
       <PageHeader/>
       <ArticlesContent class="onlyArticle"/>
     </div>

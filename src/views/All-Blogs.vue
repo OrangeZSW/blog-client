@@ -39,7 +39,6 @@ export default {
   <div>
     <Header />
     <div @click="backLoginWindow">
-      <Login />
       <PageHeader class="blog-wrapper" />
     </div>
   </div>

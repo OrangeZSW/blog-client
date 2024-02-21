@@ -3,16 +3,18 @@
     <v-main>
       <router-view/>
       <SideBarPhone/>
+      <Login/>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import SideBarPhone from "@/components/SideBar-Phone.vue";
+import Login from "@/components/Login.vue";
 
 export default {
   name: 'App',
-  components: {SideBarPhone},
+  components: {Login, SideBarPhone},
 
   data: () => ({
     //

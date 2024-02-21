@@ -19,7 +19,6 @@ export default {
  <div>
     <Header/>
    <div @click="backLoginWindow">
-     <Login/>
      <PageHeader/>
      <Display/>
    </div>
