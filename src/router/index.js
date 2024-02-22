@@ -34,6 +34,11 @@ const routes = [
         path: '/Tag',
         name: '标签',
         component: () => import('../views/Tag.vue')
+    },
+    {
+        path: '/Editor-Article',
+        name: '编辑文章',
+        component: () => import('../views/Editor-Article.vue')
     }
 ]
 

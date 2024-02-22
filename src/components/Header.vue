@@ -136,7 +136,7 @@ export default {
           <v-icon class="header-icon">mdi-card-bulleted</v-icon>
           <span>文章</span>
         </router-link>
-      <router-link to="/all-category" class="item">
+      <router-link to="/editor-article" class="item">
         <v-icon class="header-icon">mdi-book-account</v-icon>
         <span>发布文章</span>
       </router-link>
