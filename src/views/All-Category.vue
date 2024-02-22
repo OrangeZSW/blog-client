@@ -5,7 +5,7 @@ import Login from "@/components/Login.vue";
 import {mapState} from "vuex";
 
 export default {
-  name: "Blog",
+  name: "AllCategory",
   components: {Login, PageHeader, Header},
   computed: {
     ...mapState(['userDto', 'isLogin','loginWindow']),

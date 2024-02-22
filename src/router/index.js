@@ -11,9 +11,9 @@ const routes = [
   }
     ,
     {
-        path: '/All-Blogs',
+        path: '/All-Category',
         name: '所有分类',
-        component: () => import('../views/All-Blogs.vue')
+        component: () => import('../views/All-Category.vue')
     }
     ,{
         path: '/All-Articles',
@@ -26,9 +26,9 @@ const routes = [
         component: () => import('../views/Article.vue')
     },
     {
-        path: '/Blog',
+        path: '/Category',
         name: '分类',
-        component: () => import('../views/Blog.vue')
+        component: () => import('../views/Category.vue')
     },
     {
         path: '/Tag',

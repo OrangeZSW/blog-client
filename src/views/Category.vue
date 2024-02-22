@@ -5,7 +5,7 @@ import Header from "@/components/Header.vue";
 import {mapMutations} from "vuex";
 
 export default {
-  name: "Blog",
+  name: "Category",
   components: {Header, Login, PageHeader},
 }
 </script>

@@ -18,6 +18,7 @@ export default {
    <div>
      <PageHeader/>
      <Display/>
+
    </div>
  </div>
 </template>
