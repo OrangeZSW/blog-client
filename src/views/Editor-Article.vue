@@ -68,9 +68,9 @@ export default {
       })
     },
     publish() {
-      if (this.article.title === '' || this.article.category === '' || this.article.tag === '' || this.article.coverImg === '') {
+      if (this.article.title === '') {
         this.$message({
-          message: '请填写完整信息',
+          message: '请填写标题',
           type: 'warning'
         })
         return

@@ -1,35 +1,18 @@
 <script>
 export default {
   name: "Articles-Content",
+  props:{
+    articles:[]
+  },
+  mounted() {
+    console.log(this.articles[0])
+  },
   data(){
     return{
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
       user:{
         username:'Orange',
-
         description:'一个前端小白',
-        articles:[
-          {
-            title:'权限菜单',
-            bg:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/image-20231101170341911.png',
-            created_at:'2023-11-01',
-            content:'如何实现一个权限菜单'
-          },
-          {
-            title:'swagger',
-            bg:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/swagger.png',
-            created_at: '2023-11-01',
-            content:'如何使用swaggdd'
-          },
-          {
-            title: 'vue3',
-            bg: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/vue3.png',
-            created_at: '2023-11-01',
-          }
-        ],
-        articleNumber:10,
-        blogNumber:1,
-        tags:10
       },
     }
   }
@@ -38,43 +21,42 @@ export default {
 
 <template>
   <div class="articles-content" >
-    <div v-for="(article,index) in user.articles" :key="index" style="width: 100%">
-      <slot v-if="index<user.articles.length&&index%2===0">
+    <div v-for="(article,index) in articles" :key="index" style="width: 100%">
+      <slot v-if="index<articles.length&&index%2===0">
         <div class="article-item"  >
-
           <router-link to="" class="a-bg">
-            <img class="article-bg" :title="user.articles[index].title" :src="user.articles[index].bg" >
+            <img class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
           </router-link>
 
           <div class="article-info" >
-            <a class="article-title" :title="user.articles[index].title">{{ user.articles[index].title }}</a>
+            <a class="article-title" :title="articles[index].title">{{ articles[index].title }}</a>
             <div class="article-meta">
               <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
               <span style="margin-right: 4px">发表于</span>
-              <span>{{ user.articles[index].created_at }}</span>
+              <span>{{ articles[index].createdAt }}</span>
             </div>
-            <div>{{user.articles[index].content}}</div>
+            <div>{{articles[index].content}}</div>
           </div>
 
         </div>
 
 
-        <div class="article-item phone-item"  v-if="index<user.articles.length-1" >
+        <div class="article-item phone-item"  v-if="index<articles.length-1" >
 
           <div class="article-info"  >
-            <a class="article-title" :title="user.articles[index+1].title">{{ user.articles[index+1].title }}</a>
+            <a class="article-title" :title="articles[index+1].title">{{ articles[index+1].title }}</a>
             <div class="article-meta">
               <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
               <span style="margin-right: 4px">发表于</span>
-              <span>{{ user.articles[index+1].created_at }}</span>
+              <span>{{ articles[index+1].createdAt }}</span>
             </div>
-            <div>{{user.articles[index+1].content}}</div>
+            <div>{{articles[index+1].content}}</div>
           </div>
 
           <router-link to="" class="a-bg" style=" @media (max-width: 768px) {
                 display: none;
               }">
-            <img class="article-bg" :title="user.articles[index+1].title" :src="user.articles[index+1].bg" >
+            <img class="article-bg" :title="articles[index+1].title" :src="articles[index+1].coverImg" >
           </router-link>
 
         </div>

@@ -5,6 +5,9 @@ import SideBar from "@/components/SideBar.vue";
 export default {
   name: "Display",
   components: {SideBar, ArticlesContent},
+  props:{
+    articles:[]
+  },
   data(){
     return{
     }
@@ -15,7 +18,7 @@ export default {
 <template>
   <div class="display">
     <div class="content" >
-      <ArticlesContent/>
+      <ArticlesContent :articles="this.articles"/>
       <SideBar/>
     </div>
   </div>

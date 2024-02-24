@@ -97,6 +97,7 @@ export default {
       this.$message.success('退出登录成功')
       this.setUserDto({})
       this.$router.push('/')
+      window.location.reload()
     },
     sideBarPhone(){
       setTimeout(()=>{

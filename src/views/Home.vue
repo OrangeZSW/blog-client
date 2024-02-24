@@ -5,7 +5,7 @@
       <Center/>
     </div>
     <div>
-      <Display/>
+      <Display :articles="this.articles"/>
     </div>
   </div>
 
@@ -18,6 +18,7 @@ import Login from "@/components/Login.vue";
 import Display from "@/components/Dispaly.vue";
 import {mapMutations, mapState} from "vuex";
 import SideBarPhone from "@/components/SideBar-Phone.vue";
+import header from "@/components/Header.vue";
 
 export default {
   components: {
@@ -34,7 +35,8 @@ export default {
   data() {
     return {
       site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
-      login: false
+      login: false,
+      articles:[]
     }
   },
   methods: {
@@ -42,8 +44,32 @@ export default {
     lookBlog() {
       //   窗口下拉
       window.screenY = 100
+    },
+    dealArticle(){
+      this.articles.forEach((item)=>{
+        item.createdAt = item.createdAt[0]+'-'+item.createdAt[1]+'-'+item.createdAt[2]
+        if(item.coverImg === ''){
+          item.coverImg = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png'
+        }
+        axios.get(item.url).then(res=>{
+          item.content = res
+        })
+      })
     }
   },
+  mounted() {
+      if(this.isLogin){
+        axios.get('/article/userId/'+this.userDto.userId).then(res=>{
+          this.articles = res.data
+          this.dealArticle()
+        })
+      }else{
+        axios.get('/article').then(res=>{
+          this.articles = res.data
+          this.dealArticle()
+        })
+      }
+  }
 }
 </script>
 

@@ -38,6 +38,7 @@ export default {
           }).catch(err => {
         console.log(err)
       })
+      window.location.reload()
     },
     backLoginWindow(e) {
       const Login = this.$refs.loginWindow
