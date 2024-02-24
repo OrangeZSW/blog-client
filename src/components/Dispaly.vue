@@ -18,7 +18,7 @@ export default {
 <template>
   <div class="display">
     <div class="content" >
-      <ArticlesContent :articles="this.articles"/>
+      <ArticlesContent/>
       <SideBar/>
     </div>
   </div>

@@ -2,6 +2,7 @@
 
 import Vue from 'vue';
 import axios from "axios";
+import ServerIP from "@/assets/config";
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
@@ -10,7 +11,7 @@ import axios from "axios";
 
 let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
-  baseURL: 'http://localhost:8181',
+  baseURL: ServerIP,
   //     baseURL: 'https://server.blog.zorange.online',
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control

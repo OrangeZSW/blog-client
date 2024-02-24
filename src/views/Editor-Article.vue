@@ -68,6 +68,13 @@ export default {
       })
     },
     publish() {
+      if(!this.isLogin){
+        this.$message({
+          message: '请先登录',
+          type: 'error'
+        })
+        return
+      }
       if (this.article.title === '') {
         this.$message({
           message: '请填写标题',
@@ -94,7 +101,6 @@ export default {
               message: '发布成功',
               type: 'success'
             });
-            this.$router.push('/')
           }
         })
       })

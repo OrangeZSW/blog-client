@@ -1,11 +1,12 @@
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "Articles-Content",
-  props:{
-    articles:[]
+  computed:{
+    ...mapState(['articles'])
   },
   mounted() {
-    console.log(this.articles[0])
   },
   data(){
     return{

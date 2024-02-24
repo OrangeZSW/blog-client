@@ -5,7 +5,7 @@
       <Center/>
     </div>
     <div>
-      <Display :articles="this.articles"/>
+      <Display/>
     </div>
   </div>
 
@@ -30,45 +30,31 @@ export default {
   },
   name: "Home",
   computed: {
-    ...mapState(['userDto', 'isLogin', 'loginWindow']),
+    ...mapState(['userDto', 'isLogin', 'loginWindow', 'articles']),
   },
   data() {
     return {
       site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
       login: false,
-      articles:[]
     }
   },
   methods: {
-    ...mapMutations(['backLoginWindow']),
+    ...mapMutations(['backLoginWindow','dealArticle',"setArticles"]),
     lookBlog() {
       //   窗口下拉
       window.screenY = 100
     },
-    dealArticle(){
-      this.articles.forEach((item)=>{
-        item.createdAt = item.createdAt[0]+'-'+item.createdAt[1]+'-'+item.createdAt[2]
-        if(item.coverImg === ''){
-          item.coverImg = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png'
-        }
-        axios.get(item.url).then(res=>{
-          item.content = res
-        })
-      })
-    }
   },
   mounted() {
-      if(this.isLogin){
-        axios.get('/article/userId/'+this.userDto.userId).then(res=>{
-          this.articles = res.data
-          this.dealArticle()
-        })
-      }else{
-        axios.get('/article').then(res=>{
-          this.articles = res.data
-          this.dealArticle()
-        })
-      }
+        if(this.isLogin){
+          axios.get('/article/userId/'+this.userDto.userId).then(res => {
+            this.setArticles(res.data)
+          })
+        }else{
+          axios.get('/article/userId'+this.userDto.userId).then(res => {
+            this.setArticles(res.data)
+          })
+        }
   }
 }
 </script>

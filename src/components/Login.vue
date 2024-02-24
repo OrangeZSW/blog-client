@@ -1,10 +1,13 @@
 <script>
 
-import {mapMutations, mapState} from "vuex";
+import {mapGetters, mapMutations, mapState} from "vuex";
 
 export default {
   name: "login",
-  computed: {},
+  computed: {
+    ...mapState(['userDto']),
+    ...mapState([ 'isLogin', 'loginWindow','articles',]),
+  },
   data() {
     return {
       user: {
@@ -14,11 +17,10 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setUserDto', 'setLoginStatus', 'setLoginWindowStatus']),
+    ...mapMutations([ "setUserDto",'setLoginStatus', 'setLoginWindowStatus', 'setArticles',]),
     login() {
       axios.post('/user/login', this.user)
           .then(res => {
-            console.log(res)
             if(res.code==='200'){
               this.setUserDto(res.data)
               // 如果没有头像，使用默认头像
@@ -32,13 +34,15 @@ export default {
               this.setLoginStatus(true)
               this.$message.success('登录成功', 1.5)
               this.backLoginWindow()
+              axios.get('/article/userId/'+this.userDto.userId).then(res => {
+                this.setArticles(res.data)
+              })
             }else{
               this.$message.error(res.msg)
             }
           }).catch(err => {
         console.log(err)
       })
-      window.location.reload()
     },
     backLoginWindow(e) {
       const Login = this.$refs.loginWindow

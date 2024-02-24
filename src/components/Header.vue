@@ -1,8 +1,6 @@
 <script>
 
 import {mapMutations, mapState} from "vuex";
-import sideBar from "@/components/SideBar.vue";
-import sideBarPhone from "@/components/SideBar-Phone.vue";
 
 export default {
   name: "Header",
@@ -57,10 +55,10 @@ export default {
   },
   computed: {
     ...mapState(['userDto']),
-    ...mapState(['isLogin']),
+    ...mapState(['isLogin','articles']),
   },
   methods: {
-    ...mapMutations(['setLoginWindowStatus', 'setLoginStatus', "setLoginWindowStatus", "setUserDto"]),
+    ...mapMutations(['setLoginWindowStatus', 'setLoginStatus', "setLoginWindowStatus", "setUserDto",'setArticles']),
     moveLogin() {
       // 没有登录过
       this.$store.commit('setLoginWindowStatus', true)
@@ -97,7 +95,9 @@ export default {
       this.$message.success('退出登录成功')
       this.setUserDto({})
       this.$router.push('/')
-      window.location.reload()
+      axios.get('/article').then(res => {
+        this.setArticles(res.data)
+      })
     },
     sideBarPhone(){
       setTimeout(()=>{
