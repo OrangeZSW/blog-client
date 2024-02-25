@@ -98,12 +98,11 @@ export default {
     <div v-for="(article,index) in articles" :key="index" style="width: 100%">
       <slot v-if="index<articles.length&&index%2===0">
         <div class="article-item"  >
-          <router-link to="" class="a-bg">
+          <router-link :to="/article-context/+articles[index].articleId"  class="a-bg">
             <img class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
           </router-link>
-
-          <div class="article-info" >
-            <a class="article-title" :title="articles[index].title">{{ articles[index].title }}</a>
+          <div class="article-info">
+            <router-link :to="/article-context/+articles[index].articleId" class="article-title" :title="articles[index].title">{{ articles[index].title }}</router-link>
             <div class="article-meta">
               <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
               <span style="margin-right: 4px">发表于</span>
@@ -128,7 +127,7 @@ export default {
         <div class="article-item phone-item"  v-if="index<articles.length-1" >
 
           <div class="article-info"  >
-            <a class="article-title" :title="articles[index+1].title">{{ articles[index+1].title }}</a>
+            <router-link :to="/article-context/+articles[index+1].articleId" class="article-title" :title="articles[index+1].title">{{ articles[index+1].title }}</router-link>
             <div class="article-meta">
               <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
               <span style="margin-right: 4px">发表于</span>
@@ -147,7 +146,7 @@ export default {
             <div class="content">{{articles[index+1].content}}</div>
           </div>
 
-          <router-link to="" class="a-bg" style=" @media (max-width: 768px) {
+          <router-link :to="/article-context/+articles[index+1].articleId" class="a-bg" style=" @media (max-width: 768px) {
                 display: none;
               }">
             <img class="article-bg" :title="articles[index+1].title" :src="articles[index+1].coverImg" >

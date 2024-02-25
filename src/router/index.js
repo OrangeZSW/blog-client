@@ -39,7 +39,13 @@ const routes = [
         path: '/Editor-Article',
         name: '编辑文章',
         component: () => import('../views/Editor-Article.vue')
+    },
+    {
+        path: '/Article-Context/:id',
+        name: '文章内容',
+        component: () => import('../views/Article-Context.vue')
     }
+
 ]
 
 const router = new VueRouter({
