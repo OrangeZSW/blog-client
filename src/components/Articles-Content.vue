@@ -34,9 +34,19 @@ export default {
             <div class="article-meta">
               <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
               <span style="margin-right: 4px">发表于</span>
-              <span>{{ articles[index].createdAt }}</span>
+              <span>{{ articles[index].createdAt }} </span>
+              <span v-if="articles[index].category!==''">
+                |
+                <v-icon style="font-size: 1.5em" >mdi-book-variant</v-icon>
+              <span>{{ articles[index].category }}</span>
+              </span>
+              <span v-if="articles[index].tag!==''">
+                |
+                <v-icon style="font-size: 1.5em">mdi-tag</v-icon>
+              <span>{{ articles[index].tag }}</span>
+              </span>
             </div>
-            <span>{{articles[index].content}}</span>
+            <v-md-container>{{articles[index].content}}</v-md-container>
           </div>
 
         </div>
@@ -50,8 +60,18 @@ export default {
               <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
               <span style="margin-right: 4px">发表于</span>
               <span>{{ articles[index+1].createdAt }}</span>
+              <span v-if="articles[index+1].category!==''">
+                |
+                <v-icon style="font-size: 1.5em">mdi-book-variant</v-icon>
+              <span>{{ articles[index+1].category }}</span>
+              </span>
+              <span v-if="articles[index+1].tag!==''">
+                |
+                <v-icon style="font-size: 1.5em">mdi-tag</v-icon>
+              <span>{{ articles[index+1].tag }}</span>
+              </span>
             </div>
-            <span>{{articles[index+1].content}}</span>
+            <v-md-container>{{articles[index+1].content}}</v-md-container>
           </div>
 
           <router-link to="" class="a-bg" style=" @media (max-width: 768px) {
@@ -96,7 +116,7 @@ export default {
   transform: scale(1.1);
 }
 .article-info{
-  width: 58%;
+  width: 62%;
   padding: 0 40px;
 }
 
@@ -138,8 +158,7 @@ export default {
   }
   .a-bg{
     object-fit: cover;
-    width: 100%;
-    height: 230px;
+    margin: 0;
   }
   .article-info{
     width: 100%;

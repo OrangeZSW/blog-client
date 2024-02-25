@@ -8,6 +8,17 @@ import {mapMutations} from "vuex";
 export default {
   name: "Article",
   components: {Login, ArticlesContent, PageHeader, Header},
+  methods: {
+    ...mapMutations(['setArticles']),
+    load(){
+      axios.get('/article').then(res => {
+        this.setArticles(res.data)
+      })
+    }
+  },
+  mounted() {
+    this.load()
+  }
 }
 </script>
 
