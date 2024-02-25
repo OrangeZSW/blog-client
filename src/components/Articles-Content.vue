@@ -4,31 +4,59 @@ import {mapMutations, mapState} from "vuex";
 export default {
   name: "Articles-Content",
   computed:{
-    ...mapState(['articles','userDto','isLogin'])
+    ...mapState(['articles','userDto','isLogin']),
+    length(){
+      return Math.ceil(this.total/this.numberSize)
+    }
   },
   methods:{
     ...mapMutations(['setArticles']),
     load(){
       if(this.$route.path==='/'){
         if(this.isLogin){
-          axios.get('/article/userId/'+this.userDto.userId).then(res => {
-            this.setArticles(res.data)
+          axios.get('/article/userId/'+this.userDto.userId,{
+            params: {
+              Number: this.number,
+              NumberSize: this.numberSize
+            }
+          }).then(res => {
+            this.setArticles(res.data.records)
+            this.total = res.data.total
           })
         }else{
-          axios.get('/article').then(res => {
-            this.setArticles(res.data)
+          axios.get('/article', {
+            params: {
+              Number: this.number,
+              NumberSize: this.numberSize
+            }
+          }).then(res => {
+            this.setArticles(res.data.records)
+            this.total = res.data.total
           })
         }
       }else if(this.$route.path==='/all-articles'){
-        axios.get('/article').then(res => {
-          this.setArticles(res.data)
+        this.numberSize = 30
+        axios.get('/article', {
+          params: {
+            Number: this.number,
+            NumberSize: this.numberSize
+          }
+        }).then(res => {
+          this.setArticles(res.data.records)
+          this.total = res.data.total
         })
       }else if(this.$route.path==='/article'){
-        axios.get('/article/userId/'+this.userDto.userId).then(res => {
-          this.setArticles(res.data)
+        axios.get('/article/userId/'+this.userDto.userId,{
+          params: {
+            Number: this.number,
+            NumberSize: this.numberSize
+          }
+        }).then(res => {
+          this.setArticles(res.data.records)
+          this.total = res.data.total
         })
       }
-    }
+    },
   },
   watch:{
     userDto : {
@@ -46,7 +74,6 @@ export default {
       number:1,
       numberSize:10,
       total:11,
-      length:this.total/this.numberSize+1,
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
       user:{
         username:'Orange',
@@ -120,9 +147,10 @@ export default {
         </div>
       </slot>
     </div>
-    <v-pagination class="pagination"
+    <v-pagination :length="length"
+                  class="pagination"
                   v-model="number"
-
+                  @input="load"
     ></v-pagination>
   </div>
 </template>
