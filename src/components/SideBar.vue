@@ -4,7 +4,7 @@ import {mapState} from "vuex";
 export default {
   name: "SideBar",
   computed: {
-    ...mapState(['userDto', 'isLogin',"articles","category","tag"]),
+    ...mapState(['userDto', 'isLogin',"articles","category","tag","total"]),
   },
   data(){
     return{
@@ -23,15 +23,15 @@ export default {
       <div class="site-data">
         <router-link :to="isLogin ? '/article' : '/all-articles'" class="site-data-router" >
           <div>文章</div>
-          <div>{{ this.articles.length }}</div>
+          <div>{{ this.total }}</div>
         </router-link>
         <router-link to="/category" class="site-data-router">
           <div>分类</div>
-          <div>{{ category.length }}</div>
+          <div>{{ this.category.length }}</div>
         </router-link>
         <router-link to="/tag" class="site-data-router">
           <div>标签</div>
-          <div>{{tag.length}}</div>
+          <div>{{this.tag.length}}</div>
         </router-link>
       </div>
       <a href="https://github.com/OrangeZSW/blog-client" target="_blank">

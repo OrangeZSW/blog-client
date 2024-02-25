@@ -4,13 +4,19 @@ import {mapMutations, mapState} from "vuex";
 export default {
   name: "Articles-Content",
   computed:{
-    ...mapState(['articles','userDto','isLogin']),
+    ...mapState(['articles','userDto','isLogin','total']),
     length(){
       return Math.ceil(this.total/this.numberSize)
     }
   },
   methods:{
-    ...mapMutations(['setArticles']),
+    saveArticle(res){
+      this.setArticles(res.data.article.records)
+      this.setCategory(res.data.category)
+      this.setTotal(res.data.article.total)
+      this.setTag(res.data.tag)
+    },
+    ...mapMutations(['setArticles','setCategory','setTotal','setTag']),
     load(){
       if(this.$route.path==='/'){
         if(this.isLogin){
@@ -20,8 +26,7 @@ export default {
               NumberSize: this.numberSize
             }
           }).then(res => {
-            this.setArticles(res.data.records)
-            this.total = res.data.total
+            this.saveArticle(res)
           })
         }else{
           axios.get('/article', {
@@ -30,8 +35,7 @@ export default {
               NumberSize: this.numberSize
             }
           }).then(res => {
-            this.setArticles(res.data.records)
-            this.total = res.data.total
+            this.saveArticle(res)
           })
         }
       }else if(this.$route.path==='/all-articles'){
@@ -42,8 +46,7 @@ export default {
             NumberSize: this.numberSize
           }
         }).then(res => {
-          this.setArticles(res.data.records)
-          this.total = res.data.total
+          this.saveArticle(res)
         })
       }else if(this.$route.path==='/article'){
         axios.get('/article/userId/'+this.userDto.userId,{
@@ -52,8 +55,7 @@ export default {
             NumberSize: this.numberSize
           }
         }).then(res => {
-          this.setArticles(res.data.records)
-          this.total = res.data.total
+          this.saveArticle(res)
         })
       }
     },
@@ -73,7 +75,6 @@ export default {
     return{
       number:1,
       numberSize:10,
-      total:11,
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
       user:{
         username:'Orange',

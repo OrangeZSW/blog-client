@@ -10,6 +10,7 @@ export default new Vuex.Store({
     state: {
         category: [],
         tag: [],
+        total: 0,
         articles: [],
         userDto: {},
         loginWindow: false,
@@ -24,6 +25,15 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        setCategory(state, category) {
+            state.category = category
+        },
+        setTag(state, tag) {
+            state.tag = tag
+        },
+        setTotal(state, total) {
+            state.total = total
+        },
         backLoginWindow() {
             const Login = document.querySelector('.login')
             if (!Login.contains(event.target)) {
@@ -52,18 +62,10 @@ export default new Vuex.Store({
         },
         setArticles(state, articles) {
             state.articles = []
-            state.category = []
-            state.tag = []
             articles.forEach((item) => {
                 item.createdAt = item.createdAt[0] + '-' + item.createdAt[1] + '-' + item.createdAt[2]
                 if (item.coverImg === '') {
                     item.coverImg = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png'
-                }
-                if (item.category !== '' && !state.category.includes(item.category)) {
-                    state.category.push(item.category)
-                }
-                if (item.tag !== '' && !state.tag.includes(item.tag)) {
-                    state.tag.push(item.tag)
                 }
                 axios.get(item.url).then((res) => {
                     item.content = res.toString().substring(0, 200)
