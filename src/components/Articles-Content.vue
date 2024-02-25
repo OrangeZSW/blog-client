@@ -59,6 +59,14 @@ export default {
         })
       }
     },
+    changeNumber(){
+
+      window.scrollTo({
+        top: window.innerHeight, // 滚动目标位置
+        behavior: 'smooth' // 平滑滚动
+      });
+      this.load()
+    }
   },
   watch:{
     userDto : {
@@ -151,7 +159,7 @@ export default {
     <v-pagination :length="length"
                   class="pagination"
                   v-model="number"
-                  @input="load"
+                  @input="changeNumber"
     ></v-pagination>
   </div>
 </template>
@@ -181,7 +189,14 @@ export default {
   width: 25.9em;
   height: 16.8em;
   object-fit: cover;
+  overflow: hidden;
   transition: all 0.5s ease;
+}
+.a-bg{
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 0;
 }
 .article-item:hover .article-bg{
   transform: scale(1.1);
