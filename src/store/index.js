@@ -67,9 +67,10 @@ export default new Vuex.Store({
                 }
                 axios.get(item.url).then((res) => {
                     item.content = res.toString().substring(0, 200)
+                    state.articles.push(item)
                 })
             })
-            state.articles = articles
+
 
         },
     },
