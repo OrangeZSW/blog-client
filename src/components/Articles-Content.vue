@@ -46,7 +46,7 @@ export default {
               <span>{{ articles[index].tag }}</span>
               </span>
             </div>
-            <v-md-container>{{articles[index].content}}</v-md-container>
+            <div class="content">{{articles[index].content}}</div>
           </div>
 
         </div>
@@ -71,7 +71,7 @@ export default {
               <span>{{ articles[index+1].tag }}</span>
               </span>
             </div>
-            <v-md-container>{{articles[index+1].content}}</v-md-container>
+            <div class="content">{{articles[index+1].content}}</div>
           </div>
 
           <router-link to="" class="a-bg" style=" @media (max-width: 768px) {
@@ -93,6 +93,12 @@ export default {
 </template>
 
 <style scoped>
+.content{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 .pagination{
   margin: 20px auto;
 }
@@ -118,6 +124,7 @@ export default {
 .article-info{
   width: 62%;
   padding: 0 40px;
+  -webkit-box-orient: vertical;
 }
 
 .articles-content{
@@ -126,6 +133,7 @@ export default {
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
+  line-height: 2;
 }
 .article-item{
   display: flex;
@@ -147,7 +155,7 @@ export default {
   }
 
   .article-item{
-    height: auto;
+    height: 35em;
     margin: 20px 5px 5px 5px;
     overflow: hidden;
     flex-direction: column;
@@ -155,9 +163,13 @@ export default {
   .article-bg{
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
   .a-bg{
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    overflow: hidden;
     margin: 0;
   }
   .article-info{

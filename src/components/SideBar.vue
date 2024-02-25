@@ -4,16 +4,11 @@ import {mapState} from "vuex";
 export default {
   name: "SideBar",
   computed: {
-    ...mapState(['userDto', 'isLogin']),
+    ...mapState(['userDto', 'isLogin',"articles","category","tag"]),
   },
   data(){
     return{
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
-      user:{
-        articleNumber:10,
-        blogNumber:1,
-        tags:10
-      }
     }
   }
 }
@@ -28,15 +23,15 @@ export default {
       <div class="site-data">
         <router-link to="/article" class="site-data-router" >
           <div>文章</div>
-          <div>{{ user.articleNumber }}</div>
+          <div>{{ this.articles.length }}</div>
         </router-link>
         <router-link to="/category" class="site-data-router">
           <div>分类</div>
-          <div>{{ user.blogNumber }}</div>
+          <div>{{ category.length }}</div>
         </router-link>
         <router-link to="/tag" class="site-data-router">
           <div>标签</div>
-          <div>{{ user.tags }}</div>
+          <div>{{tag.length}}</div>
         </router-link>
       </div>
       <a href="https://github.com/OrangeZSW/blog-client" target="_blank">
