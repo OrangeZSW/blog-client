@@ -36,7 +36,7 @@ export default {
               <span style="margin-right: 4px">发表于</span>
               <span>{{ articles[index].createdAt }}</span>
             </div>
-            <div>{{articles[index].content}}</div>
+            <span>{{articles[index].content}}</span>
           </div>
 
         </div>
@@ -51,7 +51,7 @@ export default {
               <span style="margin-right: 4px">发表于</span>
               <span>{{ articles[index+1].createdAt }}</span>
             </div>
-            <div>{{articles[index+1].content}}</div>
+            <span>{{articles[index+1].content}}</span>
           </div>
 
           <router-link to="" class="a-bg" style=" @media (max-width: 768px) {

@@ -1,6 +1,6 @@
 <script>
 
-import {mapGetters, mapMutations, mapState} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 
 export default {
   name: "login",
@@ -17,7 +17,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([ "setUserDto",'setLoginStatus', 'setLoginWindowStatus', 'setArticles',]),
+    ...mapMutations([ "setUserDto",'setLoginStatus', 'setLoginWindowStatus','setUserDto','setArticles']),
     login() {
       axios.post('/user/login', this.user)
           .then(res => {

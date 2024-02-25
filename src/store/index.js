@@ -45,17 +45,19 @@ export default new Vuex.Store({
       state.isLogin = status;
     },
     setArticles(state, articles){
-      state.articles = articles;
-      state.articles.forEach((item)=>{
+      state.articles = []
+      articles.forEach((item)=>{
         item.createdAt = item.createdAt[0]+'-'+item.createdAt[1]+'-'+item.createdAt[2]
         if(item.coverImg === ''){
           item.coverImg = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png'
         }
-        axios.get(item.url).then(res=>{
-          item.content = res
+        axios.get(item.url).then((res)=>{
+            item.content = res.toString().substring(0,100)+'...'
+          state.articles.push(item)
         })
       })
     },
+
   },
   actions: {
   },

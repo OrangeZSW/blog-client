@@ -16,7 +16,7 @@ import Header from "@/components/Header.vue";
 import Center from "@/components/Center.vue";
 import Login from "@/components/Login.vue";
 import Display from "@/components/Dispaly.vue";
-import {mapMutations, mapState} from "vuex";
+import {mapActions, mapMutations, mapState} from "vuex";
 import SideBarPhone from "@/components/SideBar-Phone.vue";
 import header from "@/components/Header.vue";
 
@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['backLoginWindow','dealArticle',"setArticles"]),
+    ...mapMutations(['backLoginWindow','setArticles']),
     lookBlog() {
       //   窗口下拉
       window.screenY = 100
@@ -51,7 +51,7 @@ export default {
             this.setArticles(res.data)
           })
         }else{
-          axios.get('/article/userId'+this.userDto.userId).then(res => {
+          axios.get('/article').then(res => {
             this.setArticles(res.data)
           })
         }
