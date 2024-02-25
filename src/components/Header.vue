@@ -95,9 +95,6 @@ export default {
       this.$message.success('退出登录成功')
       this.setUserDto({})
       this.$router.push('/')
-      axios.get('/article').then(res => {
-        this.setArticles(res.data)
-      })
     },
     sideBarPhone(){
       setTimeout(()=>{

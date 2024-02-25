@@ -4,7 +4,6 @@ import ArticlesContent from "@/components/Articles-Content.vue";
 import Display from "@/components/Dispaly.vue";
 import Header from "@/components/Header.vue";
 import Login from "@/components/Login.vue";
-import {mapMutations} from "vuex";
 
 export default {
   name: "Article",

@@ -21,7 +21,7 @@ export default {
       <h2 style="font-size: 20px">{{ isLogin ? userDto.nickname : 'Orange'}}</h2>
       <p style="font-size: 14px;margin-top: 10px">{{ isLogin ? userDto.description : '一个前端小白' }}</p>
       <div class="site-data">
-        <router-link to="/article" class="site-data-router" >
+        <router-link :to="isLogin ? '/article' : '/all-articles'" class="site-data-router" >
           <div>文章</div>
           <div>{{ this.articles.length }}</div>
         </router-link>

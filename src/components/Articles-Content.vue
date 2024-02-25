@@ -1,15 +1,52 @@
 <script>
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   name: "Articles-Content",
   computed:{
-    ...mapState(['articles'])
+    ...mapState(['articles','userDto','isLogin'])
+  },
+  methods:{
+    ...mapMutations(['setArticles']),
+    load(){
+      if(this.$route.path==='/'){
+        if(this.isLogin){
+          axios.get('/article/userId/'+this.userDto.userId).then(res => {
+            this.setArticles(res.data)
+          })
+        }else{
+          axios.get('/article').then(res => {
+            this.setArticles(res.data)
+          })
+        }
+      }else if(this.$route.path==='/all-articles'){
+        axios.get('/article').then(res => {
+          this.setArticles(res.data)
+        })
+      }else if(this.$route.path==='/article'){
+        axios.get('/article/userId/'+this.userDto.userId).then(res => {
+          this.setArticles(res.data)
+        })
+      }
+    }
+  },
+  watch:{
+    userDto : {
+      handler:function(){
+        this.load()
+      },
+      deep:true
+    }
   },
   mounted() {
+    this.load()
   },
   data(){
     return{
+      number:1,
+      numberSize:10,
+      total:11,
+      length:this.total/this.numberSize+1,
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
       user:{
         username:'Orange',
@@ -83,12 +120,10 @@ export default {
         </div>
       </slot>
     </div>
-    <el-pagination
-        class="pagination"
-        background
-        layout=" pager, next"
-        :total="1000">
-    </el-pagination>
+    <v-pagination class="pagination"
+                  v-model="number"
+
+    ></v-pagination>
   </div>
 </template>
 
@@ -101,6 +136,7 @@ export default {
 }
 .pagination{
   margin: 20px auto;
+  transition: all 0.5s ease;
 }
 .article-meta{
   margin: 6px 0;

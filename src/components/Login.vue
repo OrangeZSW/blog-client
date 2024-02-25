@@ -34,9 +34,9 @@ export default {
               this.setLoginStatus(true)
               this.$message.success('登录成功', 1.5)
               this.backLoginWindow()
-              axios.get('/article/userId/'+this.userDto.userId).then(res => {
-                this.setArticles(res.data)
-              })
+              this.$router.push('/')
+              //强制刷新article-content
+              this.load()
             }else{
               this.$message.error(res.msg)
             }

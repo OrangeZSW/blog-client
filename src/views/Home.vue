@@ -46,15 +46,6 @@ export default {
     },
   },
   mounted() {
-        if(this.isLogin){
-          axios.get('/article/userId/'+this.userDto.userId).then(res => {
-            this.setArticles(res.data)
-          })
-        }else{
-          axios.get('/article').then(res => {
-            this.setArticles(res.data)
-          })
-        }
   }
 }
 </script>
@@ -76,8 +67,6 @@ export default {
   background-attachment: fixed; /* 让背景图像固定 */
 
 }
-
-
 .wrapper:before {
   content: '';
   position: absolute;
