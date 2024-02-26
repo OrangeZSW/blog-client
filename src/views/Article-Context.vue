@@ -1,7 +1,7 @@
 <script>
 import Header from "@/components/Header.vue";
 import PageHeader from "@/components/Page-Header.vue";
-import Codemirror from "codemirror";
+import md from "@/plugins/markdown-it";
 export default {
   name: "Article-Context",
   components: {PageHeader, Header},
@@ -18,20 +18,9 @@ export default {
     axios.get('/article/'+ArticleId).then(res => {
       axios.get(res.url).then(res => {
         this.markdown = res
+        // this.markdown = md.render(this.markdown)
       })
     })
-    new Codemirror(this.$refs.codemirrorEditor, {
-      tabSize: 2,
-      lineNumbers: true,
-      styleActiveLine: true,
-      value: this.text,
-      mode: 'markdown',
-      lineWrapping: 'wrap',
-      scrollbarStyle: 'overlay',
-      dragDrop: false,
-      // 传入的配置将会在此合并
-      ...this.codemirrorConfig,
-    });
   },
   methods:{
     handleCopyCodeSuccess(event, text, result) {
@@ -49,21 +38,23 @@ export default {
   <div>
     <PageHeader/>
       <div class="article-context">
-        <v-md-editor class="" style="padding: 50px 40px; display: flex; height: auto; max-height: none;"
-                     :value="markdown" mode="preview"
-                     left-toolbar="undo redo | tip"
-                     :include-level="[2,3]"
-                     @copy-code-success="handleCopyCodeSuccess"
-
-        ></v-md-editor>
+<!--        <div id="markdown-area" v-html="markdown"></div>-->
+        <template  >
+          <v-md-editor   style="padding: 50px 40px; display: flex; height: auto; max-height: none;"
+                         :value="markdown" mode="preview"
+                         left-toolbar="undo redo | tip"
+                         :include-level="[2,3]"
+                         @copy-code-success="handleCopyCodeSuccess"
+          ></v-md-editor>
+        </template>
       </div>
   </div>
 </div>
 </template>
 
 <style scoped>
-@import "@/assets/my.css";
 .article-context{
+  padding: 50px 40px;
   height: auto;
   width: 50%;
   margin: 40px auto 20px auto;
