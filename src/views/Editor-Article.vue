@@ -145,6 +145,7 @@ export default {
                    :disabled-menus="[]"
                    @upload-image="handleUploadImage"
                    default-show-toc="true"
+                   left-toolbar="undo redo | emoji"
       ></v-md-editor>
     </div>
   </div>

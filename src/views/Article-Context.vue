@@ -29,7 +29,9 @@ export default {
   <div>
     <PageHeader/>
       <div class="article-context">
-        <v-md-editor style="padding: 50px 40px"  :value="markdown" mode="preview"></v-md-editor>
+        <v-md-editor style="padding: 50px 40px"  :value="markdown" mode="preview"
+                     left-toolbar="undo redo | emoji"
+        ></v-md-editor>
       </div>
   </div>
 </div>
