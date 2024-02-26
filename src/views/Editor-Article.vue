@@ -140,14 +140,13 @@ export default {
         <el-button type="primary" style="margin:0 60px 0 auto" @click="publish">发布</el-button>
       </div>
     </div>
-    <div>
       <v-md-editor v-model="text"
                    :disabled-menus="[]"
                    @upload-image="handleUploadImage"
                    default-show-toc="true"
-                   left-toolbar="undo redo | emoji"
+                   :include-level="[1,2]"
+                   height="800px"
       ></v-md-editor>
-    </div>
   </div>
 </template>
 

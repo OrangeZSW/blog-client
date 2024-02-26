@@ -1,7 +1,5 @@
 import VMdEditor from '@kangc/v-md-editor/lib/codemirror-editor';
 import '@kangc/v-md-editor/lib/style/codemirror-editor.css';
-import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
-import '@kangc/v-md-editor/lib/theme/style/github.css';
 
 // highlightjs
 import hljs from 'highlight.js';
@@ -26,13 +24,36 @@ import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror/addon/scroll/simplescrollbars.css';
 // style
 import 'codemirror/lib/codemirror.css';
-import createEmojiPlugin from '@kangc/v-md-editor/lib/plugins/emoji/index';
-import '@kangc/v-md-editor/lib/plugins/emoji/emoji.css';
 
-VMdEditor.use(createEmojiPlugin());
+
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
+import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
+
+
+import { full as emoji } from 'markdown-it-emoji'
+import Prism from 'prismjs';
+
+import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index';
+VMdEditor.use(createLineNumbertPlugin());
+
+
+import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index';
+import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';
+
+VMdEditor.use(createCopyCodePlugin());
+
 
 VMdEditor.Codemirror = Codemirror;
 
-export default VMdEditor.use(githubTheme, {
-    Hljs: hljs,
+export default VMdEditor.use(vuepressTheme, {
+    Prism: Prism,
+    extend(md){
+        md.use(emoji)
+    },
+    config: {
+        toc: {
+            includeLevel: [2, 3],
+        },
+    },
 });
