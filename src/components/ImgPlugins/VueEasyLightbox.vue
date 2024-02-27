@@ -3,7 +3,7 @@ export default {
 
   name: "VueEasyLightbo",
   props: {
-    visibleRef:{
+    visible:{
       type: Boolean,
       default: false
     },
@@ -18,13 +18,25 @@ export default {
   },
   data() {
     return {
-
+      visibleRef:false,
     }
+  },
+  watch:{
+    visible:{
+      handler(){
+        this.visibleRef = true
+      },
+      deep:true
+    },
   },
   methods:{
     onHide() {
       this.visibleRef = false
     }
+  },
+  mounted() {
+    // 将图片插件的显示状态同步到当前组件的显示状态
+    document.body.style.overflow = this.visibleRef ? 'hidden' : 'auto'
   }
 }
 </script>
@@ -41,5 +53,18 @@ export default {
 </template>
 
 <style scoped>
-
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
 </style>

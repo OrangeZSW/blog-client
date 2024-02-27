@@ -67,10 +67,10 @@ export default {
           this.vueEasyLightbox.imgs.map((item, index) => {
             if (item === e.target.src) {
               this.vueEasyLightbox.index = index
-              this.vueEasyLightbox.visible = true
+              this.vueEasyLightbox.visible = !this.vueEasyLightbox.visible
+
             }
           })
-          this.vueEasyLightbox.visible = true
         }
       })
     }
@@ -79,10 +79,12 @@ export default {
 </script>
 <template>
   <div>
-    <VueEasyLightbox :visibleRef="vueEasyLightbox.visible" :imgsRef="vueEasyLightbox.imgs" :indexRef="vueEasyLightbox.index"/>
+
     <Header/>
     <div>
+
       <PageHeader :article="article"/>
+      <VueEasyLightbox :visible="vueEasyLightbox.visible" :imgsRef="vueEasyLightbox.imgs" :indexRef="vueEasyLightbox.index"/>
       <div style="
   max-width: 1200px;
   width: 100%;
@@ -95,14 +97,19 @@ export default {
   padding: 20px 15px;
   flex: 1;
 ">
+
         <div class="article-context">
+
           <!--        <div id="markdown-area" v-html="markdown"></div>-->
           <v-md-editor style=" display: flex; height: auto; max-height: none;"
                        :value="markdown" mode="preview"
                        left-toolbar="undo redo | tip"
                        :include-level="[2,3]"
                        @copy-code-success="handleCopyCodeSuccess"
-          ></v-md-editor>
+          >
+
+          </v-md-editor>
+
         </div>
         <SideBar />
       </div>
