@@ -13,12 +13,21 @@ export default {
   },
   data(){
     return{
+      createdAt:'',
+      lastUpdatedAt:'',
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
     }
   },
   mounted() {
   },
-  methods:{
+  watch:{
+    article:{
+      handler(){
+        this.createdAt = this.article.createdAt[0]+'-'+this.article.createdAt[1]+'-'+this.article.createdAt[2]
+        this.lastUpdatedAt = this.article.lastUpdatedAt[0]+'-'+this.article.lastUpdatedAt[1]+'-'+this.article.lastUpdatedAt[2]
+      },
+      deep:true
+    }
   }
 }
 </script>
@@ -31,11 +40,11 @@ export default {
       <div style="color: white;margin-top: 10px">
         <v-icon style="font-size: 1.25em;color: white;margin-right: 5px">mdi-calendar-range</v-icon>
         <span style="margin-right: 4px">发表于</span>
-        <span style="margin-right: 5px">{{this.article.createdAt[0]+'-'+this.article.createdAt[1]+'-'+this.article.createdAt[2] }}</span>
+        <span style="margin-right: 5px">{{ createdAt }}</span>
         |
         <v-icon style="color: white;font-size: 1.25em;margin-right: 5px;margin-left: 5px">mdi-update</v-icon>
         <span style="margin-right: 5px">更新于</span>
-        <span style="margin-right: 5px">{{ this.article.lastUpdatedAt[0]+'-'+this.article.lastUpdatedAt[1]+'-'+this.article.lastUpdatedAt[2] }}</span>
+        <span style="margin-right: 5px">{{ lastUpdatedAt }}</span>
       </div>
     </div>
   </div>

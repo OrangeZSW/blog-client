@@ -36,7 +36,7 @@ import Prism from 'prismjs';
 
 import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index';
 VMdEditor.use(createLineNumbertPlugin());
-
+import VueMarkdownEditor from '@kangc/v-md-editor';
 
 import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index';
 import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';

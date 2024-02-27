@@ -14,7 +14,7 @@ export default {
   },
   mounted() {
     //获取markdown教程文章
-    axios.get("https://server.blog.zorange.online/files/download/8443eecd4dd640f2b2ff4eab4007915d.md").then(res => {
+    axios.get("https://server.blog.zorange.online/files/download/fcfcaf84f5614a43b23b48df6d3b0dc8.md").then(res => {
       this.text = res
     })
   },

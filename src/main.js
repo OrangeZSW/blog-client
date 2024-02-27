@@ -14,11 +14,20 @@ import VMdEditor from "@/plugins/VMdEditor";
 
 import clipboard from 'clipboard'
 
+import VueEasyLightbox from 'vue-easy-lightbox'
+
+// 方法 1. 使用 Vue.use
+Vue.use(VueEasyLightbox)
+
+// 方法 2. 通过 Vue.component 注册
+Vue.component(VueEasyLightbox.name, VueEasyLightbox)
+
 Vue.prototype.clipboard = clipboard;
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
+
 
 Vue.use(VMdEditor);
 

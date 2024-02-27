@@ -156,17 +156,6 @@ export default {
 </template>
 
 <style scoped>
-.wrapper-before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: -0;
-  border-radius: 10px;
-}
 .userInfo-item {
   cursor: pointer;
   width: 100%;
