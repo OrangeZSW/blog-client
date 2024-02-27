@@ -8,9 +8,8 @@ export default {
     const Header = document.querySelector('.Header')
     Header.style.transform = 'translateY(+60px)'
     let lastScrollTop = 0;
-    window.addEventListener("scroll", function () {
-      let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
+    document.addEventListener("scroll", function () {
+      let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       const site_name = document.querySelector('.site_name')
       const items = document.querySelectorAll('.item')
       const header_icon = document.querySelectorAll('.header-icon')
@@ -48,17 +47,16 @@ export default {
         Header.style.backgroundColor = 'transparent'
         // console.log("到顶");
       }
-
       lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-    });
+    },true);
 
   },
   computed: {
     ...mapState(['userDto']),
-    ...mapState(['isLogin','articles']),
+    ...mapState(['isLogin', 'articles']),
   },
   methods: {
-    ...mapMutations(['setLoginWindowStatus', 'setLoginStatus', "setLoginWindowStatus", "setUserDto",'setArticles']),
+    ...mapMutations(['setLoginWindowStatus', 'setLoginStatus', "setLoginWindowStatus", "setUserDto", 'setArticles']),
     moveLogin() {
       // 没有登录过
       this.$store.commit('setLoginWindowStatus', true)
@@ -96,14 +94,14 @@ export default {
       this.setUserDto({})
       this.$router.push('/')
     },
-    sideBarPhone(){
-      setTimeout(()=>{
+    sideBarPhone() {
+      setTimeout(() => {
         const sideBarPhone = document.querySelector('.sideBar-menu')
         const body = document.querySelector('body')
         sideBarPhone.style.right = '0'
-        body.style.setProperty('--width', window.innerWidth -300+ 'px')
-      },100)
-    }
+        body.style.setProperty('--width', window.innerWidth - 300 + 'px')
+      }, 100)
+    },
   },
   data() {
     return {
@@ -126,14 +124,14 @@ export default {
       </div>
     </router-link>
     <div class="menu">
-        <router-link to="/" class="item">
-          <v-icon class="header-icon">mdi-home</v-icon>
-          <span>首页</span>
-        </router-link>
-        <router-link to="/all-articles" class="item">
-          <v-icon class="header-icon">mdi-card-bulleted</v-icon>
-          <span>文章</span>
-        </router-link>
+      <router-link to="/" class="item">
+        <v-icon class="header-icon">mdi-home</v-icon>
+        <span>首页</span>
+      </router-link>
+      <router-link to="/all-articles" class="item">
+        <v-icon class="header-icon">mdi-card-bulleted</v-icon>
+        <span>文章</span>
+      </router-link>
       <router-link to="/editor-article" class="item">
         <v-icon class="header-icon">mdi-book-account</v-icon>
         <span>发布文章</span>
@@ -144,7 +142,7 @@ export default {
         <span>{{ isLogin ? userDto.nickname : '登录' }}</span>
         <el-avatar icon="el-icon-user-solid " class="avatar" :src=" isLogin ? userDto.avatar : site_img"/>
       </div>
-      <div class="item phone"  @click="sideBarPhone">
+      <div class="item phone" @click="sideBarPhone">
         <i class="el-icon-s-unfold"></i>
       </div>
     </div>

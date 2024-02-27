@@ -24,6 +24,7 @@ export default {
   watch:{
     visible:{
       handler(){
+        document.body.style.overflow = 'auto'
         this.visibleRef = true
       },
       deep:true
@@ -31,13 +32,10 @@ export default {
   },
   methods:{
     onHide() {
+      document.body.style.overflow = 'auto'
       this.visibleRef = false
     }
   },
-  mounted() {
-    // 将图片插件的显示状态同步到当前组件的显示状态
-    document.body.style.overflow = this.visibleRef ? 'hidden' : 'auto'
-  }
 }
 </script>
 

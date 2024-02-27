@@ -78,7 +78,7 @@ export default {
 }
 </script>
 <template>
-  <div>
+  <div >
 
     <Header/>
     <div>
