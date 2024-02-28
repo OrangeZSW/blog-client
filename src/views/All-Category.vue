@@ -1,7 +1,7 @@
 <script>
-import Header from "@/components/Header.vue";
+import Header from "@/components/Global/Header.vue";
 import PageHeader from "@/components/Page-Header.vue";
-import Login from "@/components/Login.vue";
+import Login from "@/components/Global/Login.vue";
 import {mapState} from "vuex";
 
 export default {

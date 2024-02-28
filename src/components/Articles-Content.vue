@@ -60,12 +60,12 @@ export default {
       }
     },
     changeNumber(){
-
-      window.scrollTo({
-        top: window.innerHeight, // 滚动目标位置
-        behavior: 'smooth' // 平滑滚动
-      });
       this.load()
+      document.body.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      })
+
     }
   },
   watch:{
@@ -94,7 +94,7 @@ export default {
 </script>
 
 <template>
-  <div class="articles-content" >
+  <div class="articles-content"  >
     <div v-for="(article,index) in articles" :key="index" style="width: 100%">
       <slot v-if="index<articles.length&&index%2===0">
         <div class="article-item"  >

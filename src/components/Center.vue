@@ -74,14 +74,13 @@ export default {
         }, 3000)
     },
     lookBlog(){
-      let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
+      let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       // 如果当前滚动位置小于100vh，向下滚动100vh
-      if (scrollPosition < window.innerHeight) {
-        window.scrollTo({
-          top: window.innerHeight, // 滚动目标位置
-          behavior: 'smooth' // 平滑滚动
-        });
+      if (currentScrollTop < window.innerHeight) {
+        document.body.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth'
+        })
       }
     }
   },

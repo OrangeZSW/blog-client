@@ -17,7 +17,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([ "setUserDto",'setLoginStatus', 'setLoginWindowStatus','setUserDto','setArticles']),
+    ...mapMutations([ "setUserDto",'setLoginStatus', 'setLoginWindowStatus','setUserDto','setArticles','backLoginWindow']),
     login() {
       axios.post('/user/login', this.user)
           .then(res => {
@@ -52,9 +52,12 @@ export default {
       setTimeout(() => {
         this.setLoginWindowStatus(false)
       }, 500)
+    },
+    userRegister() {
+      this.backLoginWindow()
+      this.$router.push('/register')
     }
   },
-
 }
 </script>
 
@@ -71,7 +74,7 @@ export default {
       </el-form-item>
       <div>
         <el-button style="margin-top: 20px" @click="login">登录</el-button>
-        <el-button style="float: right;margin-top: 20px">注册</el-button>
+        <el-button style="float: right;margin-top: 20px" @click="userRegister">注册</el-button>
       </div>
     </el-form>
   </div>

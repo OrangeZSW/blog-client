@@ -1,5 +1,5 @@
 <script>
-import Header from "@/components/Header.vue";
+import Header from "@/components/Global/Header.vue";
 import PageHeader from "@/components/Page-Header.vue";
 import md from "@/plugins/markdown-it";
 import SideBar from "@/components/SideBar.vue";

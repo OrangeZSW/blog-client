@@ -2,8 +2,8 @@
 import PageHeader from "@/components/Page-Header.vue";
 import ArticlesContent from "@/components/Articles-Content.vue";
 import Display from "@/components/Dispaly.vue";
-import Header from "@/components/Header.vue";
-import Login from "@/components/Login.vue";
+import Header from "@/components/Global/Header.vue";
+import Login from "@/components/Global/Login.vue";
 
 export default {
   name: "Article",

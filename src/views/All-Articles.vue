@@ -1,8 +1,8 @@
 <script>
-import Header from "@/components/Header.vue";
+import Header from "@/components/Global/Header.vue";
 import PageHeader from "@/components/Page-Header.vue";
 import ArticlesContent from "@/components/Articles-Content.vue";
-import Login from "@/components/Login.vue";
+import Login from "@/components/Global/Login.vue";
 import {mapMutations} from "vuex";
 
 export default {

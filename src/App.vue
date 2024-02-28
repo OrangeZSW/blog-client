@@ -48,7 +48,7 @@ window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
 
 }
 import SideBarPhone from "@/components/SideBar-Phone.vue";
-import Login from "@/components/Login.vue";
+import Login from "@/components/Global/Login.vue";
 import {mapMutations} from "vuex";
 
 export default {

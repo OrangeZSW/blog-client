@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
+import Header from "@/components/Global/Header.vue";
 import Center from "@/components/Center.vue";
-import Login from "@/components/Login.vue";
+import Login from "@/components/Global/Login.vue";
 import Display from "@/components/Dispaly.vue";
 import {mapActions, mapMutations, mapState} from "vuex";
 import SideBarPhone from "@/components/SideBar-Phone.vue";
-import header from "@/components/Header.vue";
+import header from "@/components/Global/Header.vue";
 
 export default {
   components: {

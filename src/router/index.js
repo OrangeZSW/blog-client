@@ -44,6 +44,11 @@ const routes = [
         path: '/Article-Context/:id',
         name: '文章内容',
         component: () => import('../views/Article-Context.vue')
+    },
+    {
+        path: '/register',
+        name: '注册',
+        component: () => import('../views/Register.vue')
     }
 
 ]

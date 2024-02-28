@@ -1,6 +1,6 @@
 <script>
 
-import Header from "@/components/Header.vue";
+import Header from "@/components/Global/Header.vue";
 import PageHeader from "@/components/Page-Header.vue";
 import ServerIP from "@/assets/config";
 import {mapState} from "vuex";
