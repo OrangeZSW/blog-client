@@ -125,20 +125,20 @@ export default {
     </router-link>
     <div class="menu">
       <router-link to="/" class="item">
-        <v-icon class="header-icon">mdi-home</v-icon>
+        <v-icon class="header-icon" style="color: white">mdi-home</v-icon>
         <span>首页</span>
       </router-link>
       <router-link to="/all-articles" class="item">
-        <v-icon class="header-icon">mdi-card-bulleted</v-icon>
+        <v-icon class="header-icon" style="color: white">mdi-card-bulleted</v-icon>
         <span>文章</span>
       </router-link>
       <router-link to="/editor-article" class="item">
-        <v-icon class="header-icon">mdi-book-account</v-icon>
+        <v-icon class="header-icon" style="color: white">mdi-book-account</v-icon>
         <span>发布文章</span>
       </router-link>
       <div class="item user-avatar" style="display: flex;align-items: center" @click="moveLogin"
            @mouseover="userInfoOver">
-        <v-icon class="header-icon">mdi-heart</v-icon>
+        <v-icon class="header-icon" style="color: white">mdi-heart</v-icon>
         <span>{{ isLogin ? userDto.nickname : '登录' }}</span>
         <el-avatar icon="el-icon-user-solid " class="avatar" :src=" isLogin ? userDto.avatar : site_img"/>
       </div>

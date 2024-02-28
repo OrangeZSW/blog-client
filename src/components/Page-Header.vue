@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="page-header" :style="{'background-image': `url(${isLogin ? userDto.coverImg : (this.$route.name==='文章内容' ? this.article.coverImg : site_img )})`}">
+  <div class="page-header" :style="{'background-image': `url(${this.$route.name==='文章内容' ? this.article.coverImg : site_img })`}">
       <span v-if="this.$route.name!=='文章内容'" class="blog-title">{{this.$route.name}}</span>
     <div class="article-info" v-if="this.$route.name==='文章内容'" >
       <h2 class="article-title" >{{ this.article.title }}</h2>
