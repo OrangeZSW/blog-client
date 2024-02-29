@@ -4,10 +4,13 @@
       <router-view/>
       <SideBarPhone />
       <Login/>
+      <Footer v-if="this.$route.path!=='/register'"/>
     </v-main>
   </v-app>
 </template>
 <script>
+import Footer from "@/components/Global/Footer.vue";
+
 const debounce = (fn, delay) => {
 
   let timer = null;
@@ -53,7 +56,7 @@ import {mapMutations} from "vuex";
 
 export default {
   name: 'App',
-  components: {Login, SideBarPhone},
+  components: {Footer, Login, SideBarPhone},
   methods:{
     ...mapMutations(['backLoginWindow'])
   },
