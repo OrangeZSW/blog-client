@@ -7,14 +7,114 @@ export default {
   name: "Register",
   components: {Footer, PageHeader, Header},
   mounted() {
-    console.log(this.$route.path)
+
+  },
+  watch: {
+    user: {
+      handler: function (val) {
+        axios.get('/user/nickname',{
+          params:{
+            nickname:val.nickname
+          }
+        }).then(res=>{
+          if(res.data){
+            this.$message({
+              message: '昵称已存在',
+              type: 'warning'
+            });
+          }
+          else{
+            this.nameOk = true
+          }
+        })
+      },
+      deep: true
+    }
+
+  },
+  methods:{
+    passwordCheck(){
+    //   密码校验至少包含数字和字母
+      let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/
+      if(!reg.test(this.user.password)){
+        this.$message({
+          message: '密码至少包含数字和字母',
+          type: 'warning'
+        });
+        return false
+      }
+      return true
+    },
+    submitForm(){
+      if(this.nameOk){
+        if (!this.passwordCheck()){
+          return
+        }
+        if(this.user.password!==this.user.checkPass){
+          this.$message({
+            message: '两次密码不一致',
+            type: 'warning'
+          });
+          return
+        }
+        axios.post('/user',this.user).then(res=>{
+          if(res.data){
+            this.$message({
+              message: '注册成功',
+              type: 'success'
+            });
+            this.$router.push('/')
+          }
+          else{
+            this.$message({
+              message: '注册失败',
+              type: 'error'
+            });
+          }
+        })
+      }
+      else{
+        this.$message({
+          message: '昵称已存在',
+          type: 'warning'
+        });
+      }
+    },
+    resetForm() {
+      this.user={
+        nickname: '',
+        password: '',
+        checkPass: '',
+        email: ''
+      }
+    }
   },
   data() {
     return {
+      nameOk: false,
       welcome: ' Welcome to wallhaven. The best is about to get better!',
-      user: {}
+      user: {
+        nickname: '',
+        password: '',
+        checkPass: '',
+        email: ''
+      },
+      rules:{
+        nickname: [
+          { required: true, message: '请输入昵称', trigger: 'blur' },
+          { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 20, message: '长度在 6 到 20 个字符', trigger: 'blur' }
+        ],
+        checkPass: [
+          { required: true, message: '请再次输入密码', trigger: 'blur' },
+          { min: 6, max: 20, message: '长度在 6 到 20 个字符', trigger: 'blur' }
+        ],
+      }
     }
-  }
+  },
 }
 </script>
 
@@ -26,14 +126,14 @@ export default {
           <img width="40px;" style="margin: 5px auto 5px auto"
                src="https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png" alt="Orange's_Blog">
           <h1 style="margin: 20px auto 40px auto;font-size: 25px;font-weight: 400">Orange's_Blog用户注册</h1>
-          <el-form :model="user" ref="user" label-width="auto" style="width: 100%">
-            <el-form-item label="*昵称" prop="username">
-              <el-input v-model="user.username" placeholder="请输入昵称"></el-input>
+          <el-form :model="user" ref="user" :rules="rules"  label-width="auto" style="width: 100%">
+            <el-form-item label="昵称" prop="nickname">
+              <el-input v-model="user.nickname" placeholder="请输入昵称"></el-input>
             </el-form-item>
-            <el-form-item label="*密码" prop="password">
+            <el-form-item label="密码" prop="password">
               <el-input type="password" v-model="user.password" placeholder="请输入密码"></el-input>
             </el-form-item>
-            <el-form-item label="*确认密码" prop="checkPass">
+            <el-form-item label="确认密码" prop="checkPass">
               <el-input type="password" v-model="user.checkPass" placeholder="请再次输入密码"></el-input>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
