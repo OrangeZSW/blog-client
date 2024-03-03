@@ -16,10 +16,14 @@ export default {
     //获取markdown教程文章
     axios.get("https://server.blog.zorange.online/files/download/fcfcaf84f5614a43b23b48df6d3b0dc8.md").then(res => {
       this.text = res
+      this.Markdown = res
     })
   },
   data() {
     return {
+      toPath:'',
+      Markdown: '',
+      dialog: false,
       site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
       text: '',
       article: {
@@ -114,6 +118,45 @@ export default {
         this.$router.push('/')
       })
 
+    },
+    saveArticle() {
+      //保存text到电脑,让用户自己选择保存路径
+      // 创建 Blob 对象
+      const blob = new Blob([this.text], { type: 'text/plain' });
+      const fileName = (this.article.title === '' ? 'article' : this.article.title) + '.md'
+
+      // 创建一个隐藏的 <a> 元素
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fileName;
+
+      // 将 <a> 元素添加到页面中
+      document.body.appendChild(a);
+
+      // 触发点击事件
+      a.click();
+
+      // 清理 URL 对象，释放内存
+      URL.revokeObjectURL(a.href);
+      document.body.removeChild(a); // 移除 <a> 元素
+
+    },
+    confirmLeave() {
+      this.dialog = false
+      this.text= this.Markdown
+      this.$router.push(this.toPath)
+    },
+    cancel() {
+      this.dialog = false
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.text !== this.Markdown&& this.text !== '') {
+      this.dialog = true
+      this.toPath = to.path
+      next(false)
+    } else {
+      next()
     }
   }
 }
@@ -150,12 +193,25 @@ export default {
       </div>
     </div>
       <v-md-editor v-model="text"
+
                    :disabled-menus="[]"
                    @upload-image="handleUploadImage"
+                   @save="saveArticle"
                    default-show-toc="true"
                    :include-level="[1,2]"
                    height="800px"
       ></v-md-editor>
+    <template>
+      <v-dialog v-model="dialog" max-width="500px">
+        <v-card>
+          <v-card-title>确认放弃编辑？</v-card-title>
+          <v-card-actions>
+            <v-btn color="red darken-1" text @click="cancel">取消</v-btn>
+            <v-btn color="green darken-1" text @click="confirmLeave">确认</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </template>
   </div>
 </template>
 

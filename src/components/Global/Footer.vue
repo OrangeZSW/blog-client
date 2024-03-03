@@ -8,7 +8,7 @@ export default {
   <div class="footer"  >
     <div class="footer-info">
       <span>© 2023-2024 OrangeZSW</span>
-      <span>Powered by <a id="a"  href="https://v2.cn.vuejs.org/v2/guide/" target="_blank">vue</a></span>
+      <span>Powered by <a id="a"  href="https://v2.cn.vuejs.org/v2/guide/" target="_blank">vue</a> | 主题 <a id="a" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span>
       <span>welcome to my <img  src="https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/背景/爱心.png" alt=""> blog</span>
       <a href="https://beian.miit.gov.cn/" id="a" target="_blank">粤ICP备202305021008781号</a>
     </div>

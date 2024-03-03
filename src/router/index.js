@@ -69,6 +69,7 @@ VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
 
+
 router.afterEach((to, from, next) => {
     document.documentElement.scrollTop = 0;
 })
