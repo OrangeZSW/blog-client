@@ -22,7 +22,7 @@ export default new Vuex.Store({
         },
         getUserDto: state => {
             return state.userDto;
-        }
+        },
     },
     mutations: {
         setCategory(state, category) {
@@ -61,20 +61,37 @@ export default new Vuex.Store({
             state.articles = articles
         },
         setArticles(state, articles) {
-            state.articles = []
-            articles.forEach((item) => {
+            state.articles = [] // 清空文章列表
+
+            // 创建一个 Promise 数组，用于存放所有的 axios.get 请求
+            const promises = articles.map(item => {
+                // 处理文章的 createdAt 和 coverImg
                 item.createdAt = item.createdAt[0] + '-' + item.createdAt[1] + '-' + item.createdAt[2]
                 if (item.coverImg === '') {
                     item.coverImg = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png'
                 }
-                axios.get(item.url).then((res) => {
-                    item.content = res.toString().substring(0, 200)
-                })
-                state.articles.push(item)
-            })
 
-        },
+                // 返回一个 Promise 对象，表示 axios.get 的异步操作
+                return axios.get(item.url)
+                    .then(res => {
+                        // 设置文章内容
+                        item.content = res.toString().substring(0, 100)
+                        return item // 返回设置好内容的文章对象
+                    })
+            })
+            // 等待所有 Promise 执行完成后再更新 state.articles
+            Promise.all(promises)
+                .then(articlesWithContent => {
+                    // 将所有设置好内容的文章添加到 state.articles 中
+                    state.articles.push(...articlesWithContent)
+                })
+                .catch(error => {
+                    console.error('Error fetching article content:', error)
+                })
+        }
+
     },
-    actions: {},
+    actions: {
+    },
     modules: {}
 })

@@ -16,7 +16,7 @@ export default {
       this.setTotal(res.data.article.total)
       this.setTag(res.data.tag)
     },
-    ...mapMutations(['setArticles','setCategory','setTotal','setTag',]),
+    ...mapMutations(['setArticles','setCategory','setTotal','setTag',"setArticleContext"]),
     load(){
       if(this.$route.path==='/'){
         if(this.isLogin){
@@ -58,7 +58,6 @@ export default {
           this.saveArticle(res)
         })
       }
-
     },
     changeNumber(){
       this.load()
@@ -67,6 +66,8 @@ export default {
         behavior: 'smooth'
       })
     },
+
+
   },
   watch:{
     userDto : {
@@ -82,6 +83,7 @@ export default {
   data(){
     return{
       number:1,
+      content:[],
       numberSize:10,
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
       user:{
@@ -118,7 +120,7 @@ export default {
               <span>{{ articles[index].tag }}</span>
               </span>
             </div>
-            <div class="content">{{articles[index].content}}</div>
+            <div class="content" >{{articles[index].content}}</div>
           </div>
 
         </div>
