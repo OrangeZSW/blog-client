@@ -237,7 +237,7 @@ export default {
 }
 
 .Header {
-  z-index: 1;
+  z-index: 3;
   position: fixed;
   top: -60px;
   width: 100%;

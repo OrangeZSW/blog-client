@@ -107,7 +107,6 @@ export default {
                        :include-level="[2,3]"
                        @copy-code-success="handleCopyCodeSuccess"
           >
-
           </v-md-editor>
 
         </div>

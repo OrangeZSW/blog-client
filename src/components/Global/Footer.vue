@@ -56,4 +56,9 @@ export default {
   z-index: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
+@media (max-width: 768px) {
+  .footer-info{
+    margin: 10px 10% 10px 10%;
+  }
+}
 </style>

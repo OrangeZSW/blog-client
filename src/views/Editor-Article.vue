@@ -40,14 +40,22 @@ export default {
     },
     handleSuccess(res) {
       //复制res.data到剪切板
-      let imgUrl = res.data.toString()
-      navigator.clipboard.writeText(imgUrl)
+      if(res.code==='200'){
+        let imgUrl = res.data.toString()
+        navigator.clipboard.writeText(imgUrl)
 
-      this.$message({
-        message: '上传成功,已复制URL到剪切板',
-        type: 'success'
-      });
-      this.article.coverImg = imgUrl
+        this.$message({
+          message: '上传成功,已复制URL到剪切板',
+          type: 'success'
+        });
+        this.article.coverImg = imgUrl
+      }else{
+        this.$message({
+          message: res.msg,
+          type: 'error'
+        });
+      }
+
     },
     handleUploadImage(event, insertImage, files) {
       console.log(files)
