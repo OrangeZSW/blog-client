@@ -31,4 +31,9 @@ export default {
   width: 50%;
   margin: 20px auto 20px auto;
 }
+@media screen and (max-width: 768px) {
+  .onlyArticle{
+    width: 90%;
+  }
+}
 </style>

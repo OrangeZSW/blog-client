@@ -63,7 +63,7 @@ export default {
   height: 100vh;
   /*超过的隐藏*/
   overflow-x: hidden;
-  border-radius: 10px;
+  border-radius: 5px;
   background-attachment: fixed; /* 让背景图像固定 */
 
 }
@@ -76,7 +76,6 @@ export default {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 0;
-  border-radius: 10px;
   transition: all 0.5s ease;
 }
 

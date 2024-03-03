@@ -5,7 +5,6 @@ import md from "@/plugins/markdown-it";
 import SideBar from "@/components/SideBar.vue";
 import {mapState} from "vuex";
 import VueEasyLightbox from '@/components/ImgPlugins/VueEasyLightbox.vue'
-
 export default {
   name: "Article-Context",
   components: {SideBar, PageHeader, Header,VueEasyLightbox},
@@ -27,6 +26,8 @@ export default {
     }
   },
   mounted() {
+    //到顶部
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     this.initArticle()
     this.imgAddClickLinsener()
 
@@ -40,14 +41,18 @@ export default {
     },
     initArticle(){
       const ArticleId = this.$route.params.id
-      axios.get('/article/' + ArticleId).then(res => {
-        this.article = res
-        axios.get(res.url).then(res => {
-          this.getAllImg(res)
-          this.markdown = res
-          // this.markdown = md.render(this.markdown)
+      try {
+        axios.get('/article/' + ArticleId).then(res => {
+          this.article = res
+          axios.get(res.url).then(res => {
+            this.getAllImg(res)
+            this.markdown = res
+            // this.markdown = md.render(this.markdown)
+          })
         })
-      })
+      }catch (e){
+        console.log(e)
+      }
     },
     getAllImg(content){
       const imgRegex = /!\[.*?\]\((.*?)\)/g;

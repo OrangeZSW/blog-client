@@ -16,7 +16,7 @@ export default {
       this.setTotal(res.data.article.total)
       this.setTag(res.data.tag)
     },
-    ...mapMutations(['setArticles','setCategory','setTotal','setTag']),
+    ...mapMutations(['setArticles','setCategory','setTotal','setTag',]),
     load(){
       if(this.$route.path==='/'){
         if(this.isLogin){
@@ -58,6 +58,7 @@ export default {
           this.saveArticle(res)
         })
       }
+
     },
     changeNumber(){
       this.load()
@@ -65,8 +66,7 @@ export default {
         top: window.innerHeight,
         behavior: 'smooth'
       })
-
-    }
+    },
   },
   watch:{
     userDto : {
@@ -127,8 +127,8 @@ export default {
         <div class="article-item phone-item"  v-if="index<articles.length-1" >
 
           <div class="article-info"  >
-            <router-link :to="/article-context/+articles[index+1].articleId" class="article-title" :title="articles[index+1].title">{{ articles[index+1].title }}</router-link>
-            <div class="article-meta">
+            <router-link :to="/article-context/+articles[index+1].articleId" class="article-title" :title="articles[index+1].title">{{ articles[index+1].title }} </router-link>
+            <div class="article-meta" >
               <v-icon style="font-size: 1.5em">mdi-calendar-range</v-icon>
               <span style="margin-right: 4px">发表于</span>
               <span>{{ articles[index+1].createdAt }}</span>

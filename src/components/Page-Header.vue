@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="page-header" :style="{'background-image': `url(${this.$route.name==='文章内容' ? this.article.coverImg : site_img })`}">
+  <div class="page-header" :style="{'background-image': `url(${this.$route.name==='文章内容' ? (this.article.coverImg===''? site_img : this.article.coverImg ): site_img })`}">
       <span v-if="this.$route.name!=='文章内容'" class="blog-title">{{this.$route.name}}</span>
     <div class="article-info" v-if="this.$route.name==='文章内容'" >
       <h2 class="article-title" >{{ this.article.title }}</h2>
@@ -73,6 +73,7 @@ export default {
   z-index: 1;
 }
 .page-header{
+  position: relative; /* 添加相对定位 */
   height: 400px;
   width: 100%;
   background-size: cover;
@@ -80,19 +81,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 5px;
   flex-direction: column;
 }
-.page-header:before{
+.page-header::after{
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 400px;
+  bottom: 0;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 0;
-  border-radius: 10px;
 }
 
 </style>

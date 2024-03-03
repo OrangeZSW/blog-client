@@ -107,7 +107,7 @@ export default {
 }
 @media (max-width: 768px) {
   .sidebar{
-    display: none;
+    width: 100%;
   }
 }
 </style>
