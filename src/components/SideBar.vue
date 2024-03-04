@@ -8,8 +8,15 @@ export default {
   },
   data(){
     return{
+      announcement: '欢迎来的我的博客',
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
     }
+  },
+  methods:{
+  },
+  mounted() {
+    const announcementIcon = this.$el.querySelector('.announcement');
+    announcementIcon.classList.add("rotateShake")
   }
 }
 </script>
@@ -41,10 +48,38 @@ export default {
         </el-button>
       </a>
     </el-card>
+    <el-card class="card is-center">
+      <div style="width: 56px;float: left">
+        <v-icon style="color: red" class="announcement">mdi-bullhorn</v-icon>
+        <span style="font-size: 16px">公告</span>
+      </div>
+      <div style="font-size: 15px">{{announcement}}</div>
+    </el-card>
   </div>
 </template>
 
 <style scoped>
+@keyframes rotateShake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.announcement{
+  animation: rotateShake 0.4s ease infinite;
+}
+
 .user-info-button{
   width: 100%;
   line-height: 2.4;
@@ -108,6 +143,7 @@ export default {
 @media (max-width: 768px) {
   .sidebar{
     width: 100%;
+    padding: 0;
   }
 }
 </style>

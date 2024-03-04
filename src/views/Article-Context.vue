@@ -34,9 +34,11 @@ export default {
   },
   methods: {
     handleCopyCodeSuccess(event, text, result) {
-      this.$message({
+      this.$notify({
         message: '复制成功',
-        type: 'success'
+        type: 'success',
+        position: 'bottom-left',
+        duration: 1000
       });
     },
     initArticle(){

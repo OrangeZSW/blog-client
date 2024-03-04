@@ -4,7 +4,7 @@
       <router-view/>
       <SideBarPhone />
       <Login/>
-      <Footer v-if="this.$route.path!=='/register'&&this.$route.path!=='/editor-article'"/>
+      <Footer v-if="this.$route.path!=='/register'&&this.$route.path!=='/editor-article'&&this.$route.path!=='/userinfo'"/>
     </v-main>
   </v-app>
 </template>

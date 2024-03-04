@@ -185,6 +185,10 @@ export default {
   text-decoration: none;
   color: black;
   font-size: 1.55em;
+  transition: color 0.2s ease;
+}
+.article-title:hover{
+  color: #49B1F5;
 }
 .article-bg{
   width: 25.9em;

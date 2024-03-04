@@ -220,6 +220,18 @@ export default {
   width: 100%;
   height: 150px;
   background-color: #a29f9f;
+  position: relative;
+}
+
+.editor-article-header:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
 }
 
 .article-meta {
