@@ -45,6 +45,7 @@ export default {
   background-image: url("https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png");
   background-size: cover; /* 可根据需要调整 */
   background-position: center bottom; /* 将背景图片底部对齐 */
+  position: relative;
 }
 .footer:before {
   content: '';

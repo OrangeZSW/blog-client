@@ -22,7 +22,7 @@ export default {
           <el-tag style="font-size: 20px;font-weight: 700;margin: 10px auto auto auto">{{userDto.nickname}}</el-tag>
         </div>
         <div>
-
+          <v-icon>mdi-radiator</v-icon>
         </div>
       </div>
     </el-card>
