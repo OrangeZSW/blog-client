@@ -19,7 +19,6 @@ export default {
       site_name: 'Orange_Blog',
       subTitle:'',
       content: [],
-      self:['I LOVE YOU!','— orange']
     }
   },
   methods: {
@@ -28,7 +27,8 @@ export default {
           .then(res => {
             this.content.push(res.hitokoto)
             this.content.push('— '+res.from)
-            this.content.push(...this.self)
+            this.content.push(this.userDto.subHeading)
+            this.content.push('— '+this.userDto.nickname)
             // console.log(this.hitokoto)
           }).catch(err => {
         console.log(err)

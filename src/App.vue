@@ -89,7 +89,6 @@ html,body{
 /* 隐藏 Chrome、Safari 和 Opera 的滚动条 */
 body::-webkit-scrollbar {
   display: none;
-
 }
 
 /* 隐藏 IE、Edge 和 Firefox 的滚动条 */

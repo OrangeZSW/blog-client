@@ -75,7 +75,6 @@ export default {
             if (item === e.target.src) {
               this.vueEasyLightbox.index = index
               this.vueEasyLightbox.visible = !this.vueEasyLightbox.visible
-
             }
           })
         }
