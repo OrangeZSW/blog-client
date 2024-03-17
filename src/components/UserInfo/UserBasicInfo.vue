@@ -68,7 +68,7 @@ export default {
 <style scoped>
 .input {
   box-sizing: border-box;
-  width: 30%;
+  width: auto;
 }
 
 .content {

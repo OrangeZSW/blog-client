@@ -6,6 +6,15 @@ export default {
   computed:{
     ...mapState(['userDto','isLogin']),
   },
+  watch: {
+    isLogin: {
+      handler: function (val) {
+          this.content = []
+          this.getHitokoto()
+      },
+      immediate: true
+    }
+  },
   created() {
     this.$router.beforeEach((to, from, next) => {
       clearInterval(this.timrGB)
@@ -27,12 +36,23 @@ export default {
           .then(res => {
             this.content.push(res.hitokoto)
             this.content.push('— '+res.from)
-            this.content.push(this.userDto.subHeading)
-            this.content.push('— '+this.userDto.nickname)
+            if(this.isLogin){
+              this.content.push(this.userDto.subHeading)
+              this.content.push('— '+this.userDto.nickname)
+            }else{
+              this.content.push('欢迎来到我的博客')
+              this.content.push('— Orange')
+            }
             // console.log(this.hitokoto)
           }).catch(err => {
         console.log(err)
-        this.content.push(...this.self)
+        if(this.isLogin){
+          this.content.push(this.userDto.subHeading)
+          this.content.push('— '+this.userDto.nickname)
+        }else{
+          this.content.push('欢迎来到我的博客')
+          this.content.push('— Orange')
+        }
       })
     },
     runContent() {

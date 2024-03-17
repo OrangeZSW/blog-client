@@ -91,6 +91,7 @@ export default {
       this.setLoginWindowStatus(true)
       this.setLoginStatus(false)
       this.$message.success('退出登录成功')
+      this.setLoginStatus(false)
       this.setUserDto({})
       this.$router.push('/')
     },

@@ -104,7 +104,7 @@ export default {
           <el-button class="mt-5" @click="sendCode">发送验证码</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click='codeVerify'>{{ this.userDto.email == '' ? '绑定' : '取消绑定' }}
+          <el-button type="primary" @click='codeVerify'>{{ this.userDto.email === '' ? '绑定' : '取消绑定' }}
           </el-button>
         </el-form-item>
       </el-form>
@@ -114,8 +114,9 @@ export default {
 
 <style scoped>
 .content {
-  width: 100%;
+  width: auto;
   height: auto;
+  overflow: hidden;
 }
 
 .content:hover {
