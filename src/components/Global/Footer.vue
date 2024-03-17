@@ -1,11 +1,33 @@
 <script>
 export default {
-  name: "Footer"
+  name: "Footer",
+  data() {
+    return {
+      isShow: true,
+      ignore: ['/register', '/editor-article', '/userinfo',"/bind-email"]
+    }
+  },
+  methods: {
+    // 通过路由判断是否显示footer
+    isShowFooter() {
+      let path = this.$route.path
+      return this.ignore.every(item => {
+        return !path.includes(item)
+      })
+    }
+  },
+  mounted() {
+  },
+  watch: {
+    $route() {
+      this.isShow = this.isShowFooter()
+    }
+  }
 }
 </script>
 
 <template>
-  <div class="footer"  >
+  <div class="footer" v-if="isShow">
     <div class="footer-info">
       <span>© 2023-2024 OrangeZSW</span>
       <span>Powered by <a id="a"  href="https://v2.cn.vuejs.org/v2/guide/" target="_blank">vue</a> | 主题 <a id="a" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span>

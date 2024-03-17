@@ -92,6 +92,11 @@ export default new Vuex.Store({
 
     },
     actions: {
+        updateUserDto(context, userDto) {
+            axios.get('user/'+context.state.userDto.userId).then(res => {
+                context.commit('setUserDto', res)
+            })
+        }
     },
     modules: {}
 })

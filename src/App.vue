@@ -4,7 +4,7 @@
       <router-view/>
       <SideBarPhone />
       <Login/>
-      <Footer v-if="this.$route.path!=='/register'&&this.$route.path!=='/editor-article'&&this.$route.path!=='/userinfo'"/>
+      <Footer/>
     </v-main>
   </v-app>
 </template>
@@ -57,8 +57,13 @@ import {mapMutations} from "vuex";
 export default {
   name: 'App',
   components: {Footer, Login, SideBarPhone},
+  data() {
+    return {
+
+    }
+  },
   methods:{
-    ...mapMutations(['backLoginWindow'])
+    ...mapMutations(['backLoginWindow']),
   },
   mounted() {
     document.addEventListener('click', this.backLoginWindow)

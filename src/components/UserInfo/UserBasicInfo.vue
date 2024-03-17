@@ -1,21 +1,20 @@
 <script>
-import Header from "@/components/Global/Header.vue";
-import {mapMutations, mapState} from "vuex";
+import {mapState} from "vuex";
 
 export default {
-  name: "UserInfo",
-  components: {Header},
+  name: "UserBasicInfo",
   computed: {
     ...mapState(['userDto'])
   },
   methods: {
     updateUserInfo() {
-      axios.post('/user', this.userDto).then(res => {
+      axios.post('/user', this.user).then(res => {
         if(res.code==='200'){
           this.$message({
             message: '保存成功',
             type: 'success'
           });
+        this.$store.dispatch('updateUserDto')
         }
         else{
           this.$message({
@@ -25,32 +24,37 @@ export default {
         }
       })
     }
+  },
+  mounted() {
+    this.user = JSON.parse(JSON.stringify(this.userDto));
+  },
+  data(){
+    return {
+      user: {},
+    }
   }
 }
 </script>
 
 <template>
-  <div style="display: flex; background-image: url('https://server.blog.zorange.online/files/download/ddca66f8ff1a4143b24c9dfb87bb2888.png'); width: 100%; height: 100%; background-position: center; background-size: cover;">
-    <Header/>
+
+  <div style="display: flex;  width: 100%; height: auto; ">
     <el-card class="content">
       <div style="display: flex; justify-content: center; align-items: center;">
         <el-avatar :size="100" :src="userDto.avatar"></el-avatar>
       </div>
-      <el-form class="mt-5" label-width="120px">
+      <el-form class="mt-5" label-width="70px">
         <el-form-item label="用户名">
-          <el-input class="input"  v-model="userDto.username" ></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱">
-          <el-input class="input" v-model="userDto.email" ></el-input>
+          <el-input class="input"   v-model="user.username" ></el-input>
         </el-form-item>
         <el-form-item label="昵称">
-          <el-input class="input" v-model="userDto.nickname"></el-input>
+          <el-input class="input" v-model="user.nickname"></el-input>
         </el-form-item>
         <el-form-item label="描述">
-          <el-input class="input" v-model="userDto.description"></el-input>
+          <el-input class="input"  v-model="user.description"></el-input>
         </el-form-item>
         <el-form-item label="副标题 ">
-          <el-input class="input" v-model="userDto.subHeading"></el-input>
+          <el-input class="input"  v-model="user.subHeading"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updateUserInfo">保存</el-button>
@@ -58,6 +62,7 @@ export default {
       </el-form>
     </el-card>
   </div>
+
 </template>
 
 <style scoped>
@@ -69,7 +74,6 @@ export default {
 .content {
   width: 50%;
   background: rgba(255, 255, 255, 0.3);
-  margin: 200px 45em auto auto;
   transition: all 0.5s ease;
   display: flex;
   flex-wrap: wrap;
@@ -78,5 +82,13 @@ export default {
 
 .content:hover {
   box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.09);
+}
+@media screen and (max-width: 768px) {
+  .content {
+    width: 100%;
+  }
+  .input {
+    width: 100%;
+  }
 }
 </style>

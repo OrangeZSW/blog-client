@@ -53,7 +53,19 @@ const routes = [
     {
         path: '/userinfo',
         name: '用户信息',
-        component: () => import('../views/UserInfo.vue')
+        component: () => import('../views/Userinfo.vue'),
+        children: [
+            {
+                path:'/',
+                name:'基本信息',
+                component: () => import('../components/UserInfo/UserBasicInfo.vue')
+            },
+            {
+                path:'/bind-email',
+                name:'绑定邮箱',
+                component: () => import('../components/UserInfo/BindEmail.vue')
+            }
+        ]
     }
 
 ]
