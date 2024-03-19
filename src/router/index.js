@@ -64,6 +64,11 @@ const routes = [
                 path:'/bind-email',
                 name:'绑定邮箱',
                 component: () => import('../components/UserInfo/BindEmail.vue')
+            },
+            {
+                path: '/change-password',
+                name: '修改密码',
+                component: () => import('../components/UserInfo/ChangePassword.vue')
             }
         ]
     }

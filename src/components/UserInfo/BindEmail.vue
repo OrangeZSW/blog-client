@@ -14,6 +14,7 @@ export default {
       return reg.test(email);
     },
     sendCode() {
+      this.code = ''
       if (this.emailCheck(this.user.email)) {
         axios.get('/email/code?email=' + this.user.email).then(res => {
           if (res.code === '200') {
@@ -37,7 +38,7 @@ export default {
     },
     codeVerify() {
       if (this.emailCheck(this.user.email)) {
-        axios.get('/email/code/verify',{
+        axios.get('/email/code/verifyEmail',{
           params:{
             email:this.user.email,
             code:this.code
@@ -97,14 +98,14 @@ export default {
     <el-card class="content">
       <el-form class="mt-5" label-width="70px">
         <el-form-item label="邮箱">
-          <el-input class="input" v-model="user.email" :disabled="this.userDto.email!==''"></el-input>
+          <el-input class="input" v-model="user.email" :disabled="this.userDto.email!==''&&this.userDto.email!==null"></el-input>
         </el-form-item>
         <el-form-item label="验证码">
           <el-input class="input" v-model="code"></el-input>
           <el-button class="mt-5" @click="sendCode">发送验证码</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click='codeVerify'>{{ this.userDto.email === '' ? '绑定' : '取消绑定' }}
+          <el-button type="primary" @click='codeVerify'>{{ this.userDto.email === ''||null ? '绑定' : '取消绑定' }}
           </el-button>
         </el-form-item>
       </el-form>
