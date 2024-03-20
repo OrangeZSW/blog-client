@@ -104,18 +104,19 @@ export default {
         }
       }).then(res => {
         this.article.url = res.data
-        this.article.createdAt = new Date()
-        this.article.lastUpdatedAt = new Date()
         this.article.userId = this.userDto.userId
         axios.post('/article', this.article).then(res => {
           if(res.code === '200'){
+            this.$router.push('/article-context/'+res.data)
             this.$message({
               message: '发布成功',
               type: 'success'
             });
           }
+
         })
-        this.$router.push('/')
+
+
       })
 
     },
@@ -151,6 +152,10 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
+    if(to.path==='/article-context'){
+      next()
+      return
+    }
     if (this.text !== this.Markdown&& this.text !== '') {
       this.dialog = true
       this.toPath = to.path

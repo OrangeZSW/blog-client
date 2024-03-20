@@ -73,23 +73,25 @@ export default {
           message: '两次密码不一致',
           type: 'warning'
         });
-        return
+        return false
       }
       if (!this.passwordCheck()){
-        return
+        return false
       }
       if(this.userDto.email===""||this.userDto.email===null||this.userDto.email===undefined){
         this.$message({
           message: '请先绑定邮箱',
           type: 'warning'
         });
-        return
+        return false
       }
     },
 
     sendCode(){
       this.user.code=''
-      this.formCheck()
+      if(!this.formCheck()){
+        return
+      }
       axios.get('/email/code',{
         params:{
           email:this.userDto.email
