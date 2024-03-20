@@ -136,9 +136,6 @@ export default {
             <el-form-item label="确认密码" prop="checkPass">
               <el-input type="password" v-model="user.checkPass" placeholder="请再次输入密码"></el-input>
             </el-form-item>
-            <el-form-item label="邮箱" prop="email">
-              <el-input v-model="user.email" placeholder="请输入邮箱"></el-input>
-            </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm('user')">注册</el-button>
               <el-button @click="resetForm('user')">重置</el-button>
