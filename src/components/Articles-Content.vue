@@ -10,14 +10,19 @@ export default {
     }
   },
   methods:{
+    updateAuthor(){
+      let articleId = this.$route.params
+      console.log(articleId)
+    },
     saveArticle(res){
       this.setArticles(res.data.article.records)
       this.setCategory(res.data.category)
       this.setTotal(res.data.article.total)
       this.setTag(res.data.tag)
     },
-    ...mapMutations(['setArticles','setCategory','setTotal','setTag',"setArticleContext"]),
+    ...mapMutations(['setArticles','setCategory','setTotal','setTag',"setAuthor"]),
     load(){
+      console.log(this.$route.path)
       if(this.$route.path==='/'){
         if(this.isLogin){
           axios.get('/article/userId/'+this.userDto.userId,{
@@ -26,6 +31,7 @@ export default {
               NumberSize: this.numberSize
             }
           }).then(res => {
+            this.setAuthor(this.userDto)
             this.saveArticle(res)
           })
         }else{
@@ -35,6 +41,7 @@ export default {
               NumberSize: this.numberSize
             }
           }).then(res => {
+            this.setAuthor(this.user)
             this.saveArticle(res)
           })
         }
@@ -48,15 +55,7 @@ export default {
         }).then(res => {
           this.saveArticle(res)
         })
-      }else if(this.$route.path==='/article'){
-        axios.get('/article/userId/'+this.userDto.userId,{
-          params: {
-            Number: this.number,
-            NumberSize: this.numberSize
-          }
-        }).then(res => {
-          this.saveArticle(res)
-        })
+      }else if(this.$route.path==='/article') {
       }
     },
     changeNumber(){
@@ -66,8 +65,6 @@ export default {
         behavior: 'smooth'
       })
     },
-
-
   },
   watch:{
     userDto : {

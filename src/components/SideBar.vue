@@ -1,10 +1,11 @@
 <script>
-import {mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
+import router from "@/router";
 
 export default {
   name: "SideBar",
   computed: {
-    ...mapState(['userDto', 'isLogin',"articles","category","tag","total"]),
+    ...mapState(['userDto', 'isLogin',"articles","category","tag","total",'author']),
   },
   data(){
     return{
@@ -13,8 +14,39 @@ export default {
     }
   },
   methods:{
+    ...mapMutations(['setAuthor','setArticles','setCategory','setTotal','setTag']),
+    saveArticle(res){
+      this.setArticles(res.data.article.records)
+      this.setCategory(res.data.category)
+      this.setTotal(res.data.article.total)
+      this.setTag(res.data.tag)
+    },
+    setAuthorInfo(){
+      //首先获得文章的作者id
+      if(this.$route.path.includes("article-context")){
+        const articleId = this.$route.params.id
+        axios.get("/article/userIdByArticleId/"+articleId).then(res=>{
+          //再获得作者的信息
+          axios.get("/user/author/"+res.data).then(res=>{
+            if(res.data.avatar === null){
+              res.data.avatar = this.site_img
+            }
+            this.setAuthor(res.data)
+          })
+          axios.get("/article/userId/"+res.data,{
+            params: {
+              Number: 1,
+              NumberSize: 10
+            }
+          }).then(res => {
+            this.saveArticle(res)
+          })
+        })
+      }
+    }
   },
   mounted() {
+    this.setAuthorInfo()
     const announcementIcon = this.$el.querySelector('.announcement');
     announcementIcon.classList.add("rotateShake")
   }
@@ -24,10 +56,10 @@ export default {
 <template>
   <div class="sidebar" >
     <el-card class="card is-center" >
-      <el-avatar class="user-avatar" :src="isLogin ? userDto.avatar : site_img" :size="110" shape="circle" fit="fill"></el-avatar>
-      <h2 style="font-size: 20px">{{ isLogin ? userDto.nickname : 'Orange'}}</h2>
-      <p style="font-size: 14px;margin-top: 10px">{{ isLogin ? userDto.description : '一个前端小白' }}</p>
-      <div class="site-data">
+      <el-avatar class="user-avatar" :src="isLogin ? author.avatar : site_img" :size="110" shape="circle" fit="fill"></el-avatar>
+      <h2 style="font-size: 20px">{{ isLogin ? author.nickname : 'Orange'}}</h2>
+      <p style="font-size: 14px;margin-top: 10px">{{ isLogin ? author.description : '一个前端小白' }}</p>
+      <div class="site-data" >
         <router-link :to="isLogin ? '/article' : '/all-articles'" class="site-data-router" >
           <div>文章</div>
           <div>{{ this.total }}</div>
@@ -53,7 +85,7 @@ export default {
         <v-icon style="color: red" class="announcement">mdi-bullhorn</v-icon>
         <span style="font-size: 16px">公告</span>
       </div>
-      <div style="font-size: 15px">{{isLogin ? userDto.announcement : announcement}}</div>
+      <div style="font-size: 15px">{{isLogin ? author.announcement : announcement}}</div>
     </el-card>
   </div>
 </template>

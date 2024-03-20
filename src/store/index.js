@@ -11,6 +11,7 @@ export default new Vuex.Store({
         category: [],
         tag: [],
         total: 0,
+        author: {},
         articles: [],
         userDto: {},
         loginWindow: false,
@@ -25,6 +26,9 @@ export default new Vuex.Store({
         },
     },
     mutations: {
+        setAuthor(state,author) {
+            state.author = author
+        },
         setCategory(state, category) {
             state.category = category
         },
