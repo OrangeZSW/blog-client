@@ -48,7 +48,7 @@ export default {
         // console.log("到顶");
       }
       lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-    },true);
+    }, true);
 
   },
   computed: {
@@ -103,6 +103,14 @@ export default {
         body.style.setProperty('--width', window.innerWidth - 300 + 'px')
       }, 100)
     },
+    toEditor(){
+      if (!this.isLogin) {
+        this.$message.error("请先登录")
+        //阻止跳转
+      } else {
+        this.$router.push('/editor-article')
+      }
+    }
   },
   data() {
     return {
@@ -133,10 +141,10 @@ export default {
         <v-icon class="header-icon" style="color: white">mdi-card-bulleted</v-icon>
         <span>文章</span>
       </router-link>
-      <router-link to="/editor-article" class="item">
+      <div  @click="toEditor" class="item">
         <v-icon class="header-icon" style="color: white">mdi-book-account</v-icon>
         <span>发布文章</span>
-      </router-link>
+      </div>
       <div class="item user-avatar" style="display: flex;align-items: center" @click="moveLogin"
            @mouseover="userInfoOver">
         <v-icon class="header-icon" style="color: white">mdi-heart</v-icon>

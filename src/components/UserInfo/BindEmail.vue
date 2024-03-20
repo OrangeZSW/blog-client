@@ -13,11 +13,22 @@ export default {
       let reg = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
       return reg.test(email);
     },
+    timeDown(){
+      if(this.time>0){
+        setTimeout(()=>{
+          this.time--;
+          this.timeDown();
+        },1000)
+      }
+
+    },
     sendCode() {
       this.code = ''
       if (this.emailCheck(this.user.email)) {
         axios.get('/email/code?email=' + this.user.email).then(res => {
           if (res.code === '200') {
+            this.time=60;
+            this.timeDown();
             this.$message({
               message: '验证码已发送',
               type: 'success'
@@ -85,6 +96,7 @@ export default {
     return {
       user: {},
       code: '',
+      time: 0,
     }
   },
   mounted() {
@@ -98,11 +110,13 @@ export default {
     <el-card class="content">
       <el-form class="mt-5" label-width="70px">
         <el-form-item label="邮箱">
-          <el-input class="input" v-model="user.email" :disabled="this.userDto.email!==''&&this.userDto.email!==null"></el-input>
+          <el-input  v-model="user.email" :disabled="this.userDto.email!==''&&this.userDto.email!==null"></el-input>
         </el-form-item>
         <el-form-item label="验证码">
           <el-input class="input" v-model="code"></el-input>
-          <el-button class="mt-5" @click="sendCode">发送验证码</el-button>
+          <el-button class="mt-5" @click="sendCode"  :disabled="time!==0" >
+            {{ time=== 0 ? '发送验证码' : time + 's' }}
+          </el-button>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click='codeVerify'>{{ this.userDto.email === ''||null ? '绑定' : '取消绑定' }}

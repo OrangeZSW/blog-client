@@ -53,7 +53,7 @@ export default {
         <v-icon style="color: red" class="announcement">mdi-bullhorn</v-icon>
         <span style="font-size: 16px">公告</span>
       </div>
-      <div style="font-size: 15px">{{announcement}}</div>
+      <div style="font-size: 15px">{{isLogin ? userDto.announcement : announcement}}</div>
     </el-card>
   </div>
 </template>

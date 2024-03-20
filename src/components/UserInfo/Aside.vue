@@ -23,7 +23,7 @@ export default {
       <el-menu-item class="aside_item" index="/change-password">
         <template><v-icon>mdi-lock-reset</v-icon>修改密码</template>
       </el-menu-item>
-      <el-menu-item class="aside_item">
+      <el-menu-item  class="aside_item" index="/Custom-Settings">
         <template><v-icon>mdi-account-multiple</v-icon>自定义设置</template>
       </el-menu-item>
     </el-menu>

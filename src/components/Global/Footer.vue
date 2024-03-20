@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       isShow: true,
-      ignore: ['/register', '/editor-article', '/userinfo',"/bind-email"]
+      ignore: ['/register', '/editor-article', '/userinfo',"/bind-email","/change-password","/Custom-Settings"]
     }
   },
   methods: {

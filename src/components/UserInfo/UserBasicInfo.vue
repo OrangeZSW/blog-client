@@ -56,6 +56,9 @@ export default {
         <el-form-item label="副标题 ">
           <el-input class="input"  v-model="user.subHeading"></el-input>
         </el-form-item>
+        <el-form-item label="公告">
+          <el-input class="input"  v-model="user.announcement"></el-input>
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updateUserInfo">保存</el-button>
         </el-form-item>

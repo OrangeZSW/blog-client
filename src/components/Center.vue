@@ -127,8 +127,8 @@ export default {
 
 <template>
   <div class="site_center" >
-    <div class="site_name" style="font-size: 40px; margin-top: 37vh" >{{isLogin ? userDto.nickname+"'s_Blog" : "Oranges"+"'_Blog"}}</div>
-    <div ><span style="color: white;font-size: 20px;margin-top: 20px;height: 20px;" v-if="content" >{{subTitle}}</span>
+    <div class="site_name" style=" margin-top: 37vh" >{{isLogin ? userDto.nickname+"'s_Blog" : "Oranges"+"'_Blog"}}</div>
+    <div ><span  style="color: white;font-size: 20px;margin-top: 20px;height: 20px;" v-if="content" >{{subTitle}}</span>
       <span aria-hidden="true" style="color: white;transition: color 1s ease" class="guangBiao">  |  </span>
     </div>
     <i ref="icon" class="icon el-icon-arrow-down"  @click="lookBlog" ></i>
@@ -154,8 +154,13 @@ export default {
   width: 100%;
   color: #ffffff;
   margin: auto auto auto 0;
-  font-size: 2em;
+  font-size: 40px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 768px) {
+  .site_name {
+    font-size: 25px;
+  }
 }
 .icon{
   z-index: 2;

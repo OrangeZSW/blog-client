@@ -8,6 +8,7 @@ export default {
   },
   data(){
     return {
+      time:0,
       user:{
         newPassword:'',
         checkPassword:'',
@@ -75,18 +76,26 @@ export default {
         });
         return false
       }
-      if (!this.passwordCheck()){
+      else if (!this.passwordCheck()){
         return false
       }
-      if(this.userDto.email===""||this.userDto.email===null||this.userDto.email===undefined){
+      else if(this.userDto.email===""||this.userDto.email===null||this.userDto.email===undefined){
         this.$message({
           message: '请先绑定邮箱',
           type: 'warning'
         });
         return false
       }
+      return true
     },
-
+    timeDown(){
+      if(this.time>0){
+        setTimeout(()=>{
+          this.time--;
+          this.timeDown();
+        },1000)
+      }
+    },
     sendCode(){
       this.user.code=''
       if(!this.formCheck()){
@@ -98,6 +107,8 @@ export default {
         }
       }).then(res=>{
         if(res.code==='200'){
+          this.time=60;
+          this.timeDown();
           this.$message({
             message: '验证码已发送',
             type: 'success'
@@ -117,31 +128,42 @@ export default {
 
 <template>
 
-  <div>
-    <el-form :model="user"  :rules="rules" label-width="80px" style="width: 400px;margin: 0 auto;margin-top: 50px;">
-      <el-form-item label="原密码" >
-        <el-input type="password" v-model="userDto.password" disabled></el-input>
-      </el-form-item>
-      <el-form-item label="新密码" prop="newPassword" :show-password="true">
-        <el-input type="password" v-model="user.newPassword"></el-input>
-      </el-form-item>
-      <el-form-item label="确认密码" prop="checkPassword" show-password>
-        <el-input type="password" v-model="user.checkPassword"></el-input>
-      </el-form-item>
-      <el-form-item label="验证码" prop="code">
-        <el-input class="input" v-model="user.code"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="sendCode">发送验证码</el-button>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="changePassword">提交</el-button>
-      </el-form-item>
-    </el-form>
-  </div>
+ <div>
+   <el-card style="height: auto;width: auto;overflow: hidden">
+     <el-form :model="user"  :rules="rules" label-width="80px"  class="form">
+       <el-form-item label="原密码" >
+         <el-input type="password" v-model="userDto.password" disabled></el-input>
+       </el-form-item>
+       <el-form-item label="新密码" prop="newPassword" :show-password="true">
+         <el-input type="password" v-model="user.newPassword"></el-input>
+       </el-form-item>
+       <el-form-item label="确认密码" prop="checkPassword" show-password>
+         <el-input type="password" v-model="user.checkPassword"></el-input>
+       </el-form-item>
+       <el-form-item label="验证码" prop="code">
+         <el-input class="input" v-model="user.code"></el-input>
+       </el-form-item>
+       <el-form-item>
+         <el-button class="mt-5" @click="sendCode"  :disabled="time!==0" >
+           {{ time=== 0 ? '发送验证码' : time + 's' }}
+         </el-button>
+       </el-form-item>
+       <el-form-item>
+         <el-button type="primary" @click="changePassword">提交</el-button>
+       </el-form-item>
+     </el-form>
+   </el-card>
+ </div>
 
 </template>
 
 <style scoped>
-
+.form{
+  width: 400px  ;
+}
+@media (max-width: 768px) {
+  .form{
+    width: auto ;
+  }
+}
 </style>

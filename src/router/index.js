@@ -69,6 +69,11 @@ const routes = [
                 path: '/change-password',
                 name: '修改密码',
                 component: () => import('../components/UserInfo/ChangePassword.vue')
+            },
+            {
+                path: "/Custom-Settings",
+                name: "自定义设置",
+                component: () => import('../components/UserInfo/CustomSettings.vue')
             }
         ]
     }

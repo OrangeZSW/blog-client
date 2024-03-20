@@ -154,7 +154,6 @@ export default {
   beforeRouteLeave(to, from, next) {
     if(to.path==='/article-context'){
       next()
-      return
     }
     if (this.text !== this.Markdown&& this.text !== '') {
       this.dialog = true
