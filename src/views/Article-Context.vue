@@ -5,9 +5,10 @@ import md from "@/plugins/markdown-it";
 import SideBar from "@/components/SideBar.vue";
 import {mapState} from "vuex";
 import VueEasyLightbox from '@/components/ImgPlugins/VueEasyLightbox.vue'
+import Footer from "@/components/Global/Footer.vue";
 export default {
   name: "Article-Context",
-  components: {SideBar, PageHeader, Header,VueEasyLightbox},
+  components: {Footer, SideBar, PageHeader, Header,VueEasyLightbox},
   computed:{
     ...mapState(['userDto'])
   },
@@ -85,7 +86,6 @@ export default {
 </script>
 <template>
   <div >
-
     <Header/>
     <div>
 
@@ -106,8 +106,8 @@ export default {
 
 <!--        编辑按钮-->
         <div style="width: 100%;text-align: center;">
-          <router-link  :to="'/edit/'+article.id">
-            <el-button type="primary" icon="el-icon-edit" >编辑</el-button>
+          <router-link to="/update-article">
+            <el-button  type="primary" icon="el-icon-edit" >更新文章</el-button>
           </router-link>
         </div>
 

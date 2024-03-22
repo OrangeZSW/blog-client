@@ -4,7 +4,7 @@
       <router-view/>
       <SideBarPhone />
       <Login/>
-      <Footer/>
+      <Footer />
     </v-main>
   </v-app>
 </template>

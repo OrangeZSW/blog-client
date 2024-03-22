@@ -8,6 +8,7 @@ export default {
       isShow: true,
       ignore: ['/register', '/editor-article', '/userinfo',"/bind-email","/change-password","/Custom-Settings"],
       site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
+      articleImg:''
     }
   },
   methods: {
@@ -17,23 +18,35 @@ export default {
       return this.ignore.every(item => {
         return !path.includes(item)
       })
+    },
+    getArticleImg(){
+      if(this.$route.path.includes("article-context")){
+        let articleId = this.$route.params.id
+        this.articles.forEach(item=>{
+          if(item.articleId+'' === articleId){
+            this.articleImg = item.coverImg
+          }
+        })
+      }
     }
   },
   computed: {
-    ...mapState(['userDto', 'isLogin']),
+    ...mapState(['userDto', 'isLogin','articles']),
   },
   mounted() {
+
   },
   watch: {
     $route() {
       this.isShow = this.isShowFooter()
+      this.getArticleImg()
     }
   }
 }
 </script>
 
 <template>
-  <div class="footer" v-if="isShow" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
+  <div class="footer" v-if="isShow" :style="{'background-image': `url(  ${this.$route.path.includes('/article-context') ? articleImg : isLogin ? userDto.coverImg : site_img} )`}">
     <div class="footer-info">
       <span>© 2023-2024 OrangeZSW</span>
       <span>Powered by <a id="a"  href="https://v2.cn.vuejs.org/v2/guide/" target="_blank">vue</a> | 主题 <a id="a" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span>

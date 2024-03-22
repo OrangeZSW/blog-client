@@ -22,7 +22,6 @@ export default {
     },
     ...mapMutations(['setArticles','setCategory','setTotal','setTag',"setAuthor"]),
     load(){
-      console.log(this.$route.path)
       if(this.$route.path==='/'){
         if(this.isLogin){
           axios.get('/article/userId/'+this.userDto.userId,{

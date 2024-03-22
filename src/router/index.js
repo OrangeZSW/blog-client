@@ -5,6 +5,11 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        path: '/update-article',
+        name: '更新文章',
+        component: () => import('../views/Update-Article.vue')
+    },
+    {
         path: '/',
         name: 'Home',
         component: () => import('../views/Home.vue')
@@ -76,7 +81,13 @@ const routes = [
                 component: () => import('../components/UserInfo/CustomSettings.vue')
             }
         ]
+    },
+    {
+        path: '/*',
+        name: '404',
+        component: () => import('../views/404.vue')
     }
+
 
 ]
 
