@@ -56,19 +56,19 @@ export default {
 <template>
   <div class="sidebar" >
     <el-card class="card is-center" >
-      <el-avatar class="user-avatar" :src="isLogin ? author.avatar : site_img" :size="110" shape="circle" fit="fill"></el-avatar>
-      <h2 style="font-size: 20px">{{ isLogin ? author.nickname : 'Orange'}}</h2>
-      <p style="font-size: 14px;margin-top: 10px">{{ isLogin ? author.description : '一个前端小白' }}</p>
+      <el-avatar class="user-avatar" :src="this.$route.path==='/' ? (isLogin ? userDto.avatar : site_img) :author.avatar" :size="110" shape="circle" fit="fill"></el-avatar>
+      <h2 style="font-size: 20px">{{this.$route.path==='/' ? (isLogin ? userDto.nickname : 'Orange' ): author.nickname}}</h2>
+      <p style="font-size: 14px;margin-top: 10px">{{this.$route.path==='/' ? (isLogin ? userDto.description :'一个前端小白') : author.description}}</p>
       <div class="site-data" >
-        <router-link :to="isLogin ? '/article' : '/all-articles'" class="site-data-router" >
+        <router-link :to="this.$route.path==='/'&&!isLogin ? '/all-articles' : '/article'" class="site-data-router" >
           <div>文章</div>
           <div>{{ this.total }}</div>
         </router-link>
-        <router-link to="/category" class="site-data-router">
+        <router-link :to="this.$route.path==='/'&&!isLogin ? '/all-category' : '/category'" class="site-data-router">
           <div>分类</div>
           <div>{{ this.category.length }}</div>
         </router-link>
-        <router-link to="/tag" class="site-data-router">
+        <router-link :to="this.$route.path==='/'&&!isLogin ? '/all-tag' : '/tag'" class="site-data-router">
           <div>标签</div>
           <div>{{this.tag.length}}</div>
         </router-link>

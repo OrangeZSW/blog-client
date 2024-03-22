@@ -33,9 +33,9 @@ export default {
 </script>
 
 <template>
-  <div class="page-header" :style="{'background-image': `url(${this.$route.name==='文章内容' ? (this.article.coverImg===''? site_img : this.article.coverImg ): this.author.coverImg })`}">
+  <div class="page-header" :style="{'background-image': `url(${this.$route.name==='文章内容' ? (this.article.coverImg===''? site_img : this.article.coverImg ): (this.$route.path==='/all-articles'||this.$route.path==='/all-category' ? (isLogin ? userDto.coverImg : site_img) : author.coverImg) })`}">
 
-    <span v-if="this.$route.name!=='文章内容'" class="blog-title">{{author.nickname}}'s{{this.$route.name}}</span>
+    <span v-if="this.$route.name!=='文章内容'" class="blog-title">{{this.$route.path==='/all-articles'||this.$route.path==='/all-category' ? '' : author.nickname+"'s"}}{{this.$route.name}}</span>
 
     <div class="article-info" v-if="this.$route.name==='文章内容'" >
       <h2 class="article-title" >{{ this.article.title }}</h2>
