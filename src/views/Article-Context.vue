@@ -104,6 +104,13 @@ export default {
   flex: 1;
 ">
 
+<!--        编辑按钮-->
+        <div style="width: 100%;text-align: center;">
+          <router-link  :to="'/edit/'+article.id">
+            <el-button type="primary" icon="el-icon-edit" >编辑</el-button>
+          </router-link>
+        </div>
+
         <div class="article-context">
 
           <!--        <div id="markdown-area" v-html="markdown"></div>-->

@@ -1,10 +1,13 @@
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "Footer",
   data() {
     return {
       isShow: true,
-      ignore: ['/register', '/editor-article', '/userinfo',"/bind-email","/change-password","/Custom-Settings"]
+      ignore: ['/register', '/editor-article', '/userinfo',"/bind-email","/change-password","/Custom-Settings"],
+      site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
     }
   },
   methods: {
@@ -15,6 +18,9 @@ export default {
         return !path.includes(item)
       })
     }
+  },
+  computed: {
+    ...mapState(['userDto', 'isLogin']),
   },
   mounted() {
   },
@@ -27,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="footer" v-if="isShow">
+  <div class="footer" v-if="isShow" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
     <div class="footer-info">
       <span>© 2023-2024 OrangeZSW</span>
       <span>Powered by <a id="a"  href="https://v2.cn.vuejs.org/v2/guide/" target="_blank">vue</a> | 主题 <a id="a" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span>
@@ -64,7 +70,6 @@ export default {
   justify-content: center;
   align-items: center;
   line-height: 2;
-  background-image: url("https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png");
   background-size: cover; /* 可根据需要调整 */
   background-position: center bottom; /* 将背景图片底部对齐 */
   position: relative;

@@ -91,12 +91,11 @@ export default {
   }
 }
 </script>
-
 <template>
   <div class="articles-content"  >
     <div v-for="(article,index) in articles" :key="index" style="width: 100%">
       <slot v-if="index<articles.length&&index%2===0">
-        <div class="article-item"  >
+        <div @contextmenu="" class="article-item"  >
           <router-link :to="/article-context/+articles[index].articleId"  class="a-bg">
             <img class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
           </router-link>

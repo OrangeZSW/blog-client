@@ -38,12 +38,12 @@ export default {
 
 <template>
 
-  <div style="display: flex;  width: 100%; height: auto; ">
+  <div style="width: 100%">
     <el-card class="content">
       <div style="display: flex; justify-content: center; align-items: center;">
         <el-avatar :size="100" :src="userDto.avatar"></el-avatar>
       </div>
-      <el-form class="mt-5" label-width="70px">
+      <el-form label-position="left" size="medium" class="mt-5" label-width="70px">
         <el-form-item label="用户名">
           <el-input class="input"   v-model="user.username" ></el-input>
         </el-form-item>
@@ -57,7 +57,7 @@ export default {
           <el-input class="input"  v-model="user.subHeading"></el-input>
         </el-form-item>
         <el-form-item label="公告">
-          <el-input class="input"  v-model="user.announcement"></el-input>
+          <el-input type="textarea" size="medium" class="input" v-model="user.announcement"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updateUserInfo">保存</el-button>
@@ -71,12 +71,12 @@ export default {
 <style scoped>
 .input {
   box-sizing: border-box;
-  width: auto;
+  width: 60%;
 }
 
 .content {
   width: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  height: 100%;
   transition: all 0.5s ease;
   display: flex;
   flex-wrap: wrap;
@@ -88,7 +88,8 @@ export default {
 }
 @media screen and (max-width: 768px) {
   .content {
-    width: 100%;
+    width: auto;
+    height: auto;
   }
   .input {
     width: 100%;

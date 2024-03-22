@@ -33,8 +33,10 @@ export default {
 </script>
 
 <template>
-  <div class="page-header" :style="{'background-image': `url(${this.$route.name==='文章内容' ? (this.article.coverImg===''? site_img : this.article.coverImg ): site_img })`}">
-      <span v-if="this.$route.name!=='文章内容'" class="blog-title">{{author.nickname}}'s{{this.$route.name}}</span>
+  <div class="page-header" :style="{'background-image': `url(${this.$route.name==='文章内容' ? (this.article.coverImg===''? site_img : this.article.coverImg ): this.author.coverImg })`}">
+
+    <span v-if="this.$route.name!=='文章内容'" class="blog-title">{{author.nickname}}'s{{this.$route.name}}</span>
+
     <div class="article-info" v-if="this.$route.name==='文章内容'" >
       <h2 class="article-title" >{{ this.article.title }}</h2>
       <div style="color: white;margin-top: 10px">
@@ -47,6 +49,8 @@ export default {
         <span style="margin-right: 5px">{{ lastUpdatedAt }}</span>
       </div>
     </div>
+
+
   </div>
 </template>
 

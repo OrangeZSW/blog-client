@@ -17,7 +17,6 @@ export default {
   },
   created() {
     this.$router.beforeEach((to, from, next) => {
-      clearInterval(this.timrGB)
       clearInterval(this.timrC)
       clearInterval(this.timrI)
       next()
@@ -107,18 +106,10 @@ export default {
 //   闪烁
   mounted() {
     this.getHitokoto()
-     this.timrGB=setInterval(() => {
-        const site_name = document.querySelector('.guangBiao')
-        site_name.style.color = 'white'
-        setTimeout(() => {
-          site_name.style.color = 'transparent'
-        }, 1000)
-      }, 2000)
       this.runContent()
       this.runIcon()
   },
   beforeDestroy() {
-    clearInterval(this.timrGB)
     clearInterval(this.timrC)
     clearInterval(this.timrI)
   }
@@ -141,6 +132,18 @@ export default {
   transition: color 1s ease;
   font-size: 1.72em;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  animation: move 1.5s infinite;
+}
+@keyframes move {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 .site_center{
   position: absolute;
