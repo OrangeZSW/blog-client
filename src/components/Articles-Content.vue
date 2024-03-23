@@ -92,7 +92,7 @@ export default {
 </script>
 <template>
   <div class="articles-content"  >
-    <div v-for="(article,index) in articles" :key="index" style="width: 100%">
+    <div v-for="(article,index) in articles" :key="index" style="width: 100%;height: auto">
       <slot v-if="index<articles.length&&index%2===0">
         <div @contextmenu="" class="article-item"  >
           <router-link :to="/article-context/+articles[index].articleId"  class="a-bg">
@@ -208,7 +208,7 @@ export default {
 }
 
 .articles-content{
-  width: 74%;
+  width: auto;
   height: 100%;
   background-color: #fff;
   display: flex;

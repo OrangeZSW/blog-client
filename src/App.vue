@@ -5,6 +5,7 @@
       <SideBarPhone />
       <Login/>
       <Footer />
+      <RightSide/>
     </v-main>
   </v-app>
 </template>
@@ -53,10 +54,11 @@ window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
 import SideBarPhone from "@/components/SideBar-Phone.vue";
 import Login from "@/components/Global/Login.vue";
 import {mapMutations} from "vuex";
+import RightSide from "@/components/Global/RightSide.vue";
 
 export default {
   name: 'App',
-  components: {Footer, Login, SideBarPhone},
+  components: {RightSide, Footer, Login, SideBarPhone},
   data() {
     return {
 

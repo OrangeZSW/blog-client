@@ -40,7 +40,6 @@ export default {
   background-color: #fff;
   display: flex;
   margin: 0 auto ;
-  flex-wrap: wrap;
   overflow-x: hidden;
   padding: 40px 15px;
   flex: 1;
@@ -48,6 +47,7 @@ export default {
 @media (max-width: 768px) {
   .content{
     width: 100%;
+    flex-wrap: wrap;
   }
 }
 

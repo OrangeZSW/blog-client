@@ -184,7 +184,7 @@ export default {
         </div>
       </el-drawer>
       <!--      按钮区-->
-      <div style="margin: 70px auto auto auto">
+      <div style="margin: 70px auto auto auto;z-index: 3">
         <el-button @click="drawer = !drawer" type="primary" >查看文章信息
         </el-button>
         <el-button @click="save" type="primary">保存文章</el-button>

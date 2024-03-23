@@ -54,7 +54,7 @@ export default {
 </script>
 
 <template>
-  <div class="sidebar" >
+  <div class="sidebar" style="display: block">
     <el-card class="card is-center" >
       <el-avatar class="user-avatar" :src="this.$route.path==='/' ? (isLogin ? userDto.avatar : site_img) :author.avatar" :size="110" shape="circle" fit="fill"></el-avatar>
       <h2 style="font-size: 20px">{{this.$route.path==='/' ? (isLogin ? userDto.nickname : 'Orange' ): author.nickname}}</h2>
