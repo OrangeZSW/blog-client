@@ -15,6 +15,7 @@ export default {
       articleInfo: {},
       articleId: 0,
       articleText: '',
+      text:''
     }
   },
   methods: {
@@ -30,6 +31,7 @@ export default {
           delete this.articleInfo.createdAt
           axios.get(item.url).then(res => {
             this.articleText = res
+            this.text = res
           })
         }
       })
@@ -131,6 +133,22 @@ export default {
   mounted() {
     this.articleId = this.$route.params.id
     this.getArticle()
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.articleText !== this.text&&!to.path.includes('article-context')) {
+      this.$confirm('文章内容已经修改,是否保存?', '提示', {
+        confirmButtonText: '保存',
+        cancelButtonText: '不保存',
+        type: 'warning'
+      }).then(() => {
+        this.save()
+        next()
+      }).catch(() => {
+        next()
+      })
+    } else {
+      next()
+    }
   }
 }
 </script>
@@ -138,7 +156,7 @@ export default {
 <template>
   <div>
     <Header/>
-    <div :style="{'background-image': `url(${userDto.coverImg})`}" style="width: 100%;height: 100vh;display: flex">
+    <div class="heard" :style="{'background-image': `url(${articleInfo.coverImg})`}" >
       <!--      侧边栏-->
       <el-drawer
           :visible.sync="drawer"
@@ -190,6 +208,22 @@ export default {
 </template>
 
 <style scoped>
+.heard{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-size: cover;
+}
+.heard:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
 * {
   font-size: 20px;
 }
