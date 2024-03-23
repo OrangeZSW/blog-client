@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/update-article',
+        path: '/update-article/:id',
         name: '更新文章',
         component: () => import('../views/Update-Article.vue')
     },

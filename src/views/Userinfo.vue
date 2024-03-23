@@ -16,7 +16,7 @@ export default {
 
 <template>
 
-  <div style="background-image: url('https://server.blog.zorange.online/files/download/ddca66f8ff1a4143b24c9dfb87bb2888.png'); background-position: center; background-size: cover;">
+  <div style="background-image: url('/img/UserInfo.png'); background-position: center; background-size: cover;">
     <Header/>
     <div>
       <el-container style="height: 100vh; border: 1px solid #eee;padding-top: 60px;">

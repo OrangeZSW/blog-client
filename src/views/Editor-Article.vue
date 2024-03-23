@@ -27,7 +27,6 @@ export default {
       site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
       text: '',
       article: {
-        userId: '',
         title: '',
         category: '',
         tag: '',
@@ -59,7 +58,6 @@ export default {
           type: 'error'
         });
       }
-
     },
     handleUploadImage(event, insertImage, files) {
       console.log(files)

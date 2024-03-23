@@ -121,7 +121,7 @@ export default {
 <template>
     <div style="height: 100%;overflow: hidden;display: flex;flex-direction: column">
       <Header/>
-      <div style="width: 100%;height: 100%;background-image:url('https://server.blog.zorange.online/files/download/9002793970924906b8830237a925701b.png');display: flex;justify-content: center;align-items: center">
+      <div style="width: 100%;height: 100%;background-image:url('/img/register.png');display: flex;justify-content: center;align-items: center">
         <div class="register-info">
           <img width="40px;" style="margin: 5px auto 5px auto"
                src="https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png" alt="Orange's_Blog">

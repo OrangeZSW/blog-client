@@ -6,11 +6,12 @@ import SideBar from "@/components/SideBar.vue";
 import {mapState} from "vuex";
 import VueEasyLightbox from '@/components/ImgPlugins/VueEasyLightbox.vue'
 import Footer from "@/components/Global/Footer.vue";
+import autolink from "markdown-it/lib/rules_inline/autolink.mjs";
 export default {
   name: "Article-Context",
   components: {Footer, SideBar, PageHeader, Header,VueEasyLightbox},
   computed:{
-    ...mapState(['userDto'])
+    ...mapState(['userDto','author'])
   },
   data() {
     return {
@@ -34,6 +35,7 @@ export default {
 
   },
   methods: {
+    autolink,
     handleCopyCodeSuccess(event, text, result) {
       this.$notify({
         message: '复制成功',
@@ -105,10 +107,11 @@ export default {
 ">
 
 <!--        编辑按钮-->
-        <div style="width: 100%;text-align: center;">
-          <router-link to="/update-article">
+        <div style="width: 100%;text-align: center;" v-if="userDto.userId===author.userId">
+          <router-link :to='/update-article/+this.$route.params.id' >
             <el-button  type="primary" icon="el-icon-edit" >更新文章</el-button>
           </router-link>
+<!--          设置为私密文章-->
         </div>
 
         <div class="article-context">

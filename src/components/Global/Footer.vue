@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       isShow: true,
-      ignore: ['/register', '/editor-article', '/userinfo',"/bind-email","/change-password","/Custom-Settings"],
+      ignore: ['/register', '/editor-article', '/userinfo',"/bind-email","/change-password","/Custom-Settings",'update-article'],
       site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
       articleImg:''
     }
