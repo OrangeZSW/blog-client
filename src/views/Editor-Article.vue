@@ -21,6 +21,7 @@ export default {
   },
   data() {
     return {
+      drawer: false,
       toPath:'',
       Markdown: '',
       dialog: false,
@@ -111,10 +112,7 @@ export default {
               type: 'success'
             });
           }
-
         })
-
-
       })
 
     },
@@ -150,7 +148,7 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    if(to.path==='/article-context'){
+    if(to.path.includes('/article-context')){
       next()
     }
     if (this.text !== this.Markdown&& this.text !== '') {
@@ -165,43 +163,52 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div style="display: flex">
     <Header style="z-index: 3"/>
     <div class="editor-article-header" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
-      <div class="article-meta">
-        <span style="font-size: 20px">文章标题:</span>
-        <el-input v-model="article.title" style="margin-left: 10px;width: 150px" placeholder="请输入文章标题"
-                  value=""></el-input>
-        <span style="font-size: 20px;margin-left: 20px">文章分类:</span>
-        <el-input v-model="article.category" style="margin-left: 10px;width: 150px" placeholder="请输入文章分类"
-                  value=""></el-input>
-        <span style="font-size: 20px;margin-left: 20px">标签:</span>
-        <el-input v-model="article.tag" style="margin-left: 10px;width: 150px" placeholder="请输入文章标签"
-                  value=""></el-input>
-        <span style="font-size: 20px;margin-left: 20px">文章背景图片:</span>
-        <el-input v-model="article.coverImg" style="margin-left: 10px;width: 150px" placeholder="CoverUrl"
-                  value=""></el-input>
-        <el-upload
-            style="margin-left: 20px;"
-            class="upload-demo"
-            show-file-list
-            :action="ServerIP() + '/files/upload/img'"
-            :on-success="handleSuccess"
-        >
-          <el-button size="small" type="primary">点击上传图片</el-button>
-        </el-upload>
-
-        <el-button type="primary" style="margin:0 60px 0 auto" @click="publish">发布</el-button>
+<!--      侧边栏-->
+      <el-drawer
+          title="文章信息编辑"
+          :visible.sync="drawer"
+          size="30%"
+          direction="ltr">
+       <div style="padding: 10px 30px">
+         <span style="font-size: 20px">文章标题:</span>
+         <el-input class="mt-5 mb-5" v-model="article.title"  placeholder="请输入文章标题"
+                   value=""></el-input>
+         <span style="font-size: 20px;">文章分类:</span>
+         <el-input class="mt-5 mb-5" v-model="article.category"  placeholder="请输入文章分类"
+                   value=""></el-input>
+         <span  style="font-size: 20px;">标签:</span>
+         <el-input class="mt-5 mb-5" v-model="article.tag"  placeholder="请输入文章标签"
+                   value=""></el-input>
+         <span  style="font-size: 20px;">文章背景图片:</span>
+         <el-input class="mt-5 " v-model="article.coverImg"   placeholder="CoverUrl"
+                   value=""></el-input>
+         <el-upload
+             class="upload-demo mt-5 mb-5"
+             show-file-list
+             :action="ServerIP() + '/files/upload/img'"
+             :on-success="handleSuccess"
+         >
+           <el-button  size="small" type="primary">点击上传图片</el-button>
+         </el-upload>
+       </div>
+      </el-drawer>
+<!--      按钮区-->
+      <div style="margin: 70px auto auto auto" >
+          <el-button type="primary" @click="drawer = true">文章信息编辑</el-button>
+        <el-button type="primary"  @click="publish">发布</el-button>
       </div>
-    </div>
+    </div >
       <v-md-editor v-model="text"
-
                    :disabled-menus="[]"
                    @upload-image="handleUploadImage"
                    @save="saveArticle"
                    default-show-toc="true"
                    :include-level="[1,2]"
                    height="800px"
+                   style=" position: absolute;bottom: 0"
       ></v-md-editor>
     <template>
       <v-dialog v-model="dialog" max-width="500px">
@@ -220,31 +227,9 @@ export default {
 <style scoped>
 .editor-article-header {
   width: 100%;
-  height: 150px;
+  height: 100vh;
   background-color: #a29f9f;
-  position: relative;
-}
-
-.editor-article-header:before{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 0;
-}
-
-.article-meta {
   display: flex;
-  position: absolute;
-  top: 90px;
-  left: 40px;
-  font-weight: bold;
-  color: white;
-  width: 100%;
-  height: 50px;
-  overflow: hidden;
 }
+
 </style>
