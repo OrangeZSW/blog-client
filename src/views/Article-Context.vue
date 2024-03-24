@@ -34,6 +34,14 @@ export default {
     this.imgAddClickLinsener()
 
   },
+  watch: {
+    $route() {
+      this.initArticle()
+      this.imgAddClickLinsener()
+    //   回到顶部
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    }
+  },
   methods: {
     autolink,
     handleCopyCodeSuccess(event, text, result) {

@@ -80,6 +80,7 @@ export default {
         </el-button>
       </a>
     </el-card>
+<!--    公告-->
     <el-card class="card is-center">
       <div style="width: 56px;float: left">
         <v-icon style="color: red" class="announcement">mdi-bullhorn</v-icon>
@@ -87,10 +88,33 @@ export default {
       </div>
       <div style="font-size: 15px">{{isLogin ? author.announcement : announcement}}</div>
     </el-card>
+<!--    最新文章-->
+    <el-card class="card is-center">
+      <div class="mb-3" style="width: 100%;display: flex">
+        <v-icon>mdi-history</v-icon>
+        <span class="ml-2" style="font-size: 16px">最新文章</span>
+      </div>
+      <div class="mt-2" v-for="(article,index) of articles" v-if="index<5" style="width: 100%;height: 4.6em;display: flex">
+       <router-link :to="'/article-context/'+article.articleId">
+         <el-image style="height: 4.2em;width: 4.2em" :src="article.coverImg" />
+       </router-link>
+         <div class="ml-2" style="display: flex ;height: 100%;justify-content: center;text-align: left;flex-direction: column">
+           <router-link class="a" :to="'/article-context/'+article.articleId">{{article.title}}</router-link>
+           <span style="color: #858585">{{article.createdAt}}</span>
+         </div>
+      </div>
+    </el-card>
   </div>
 </template>
 
 <style scoped>
+.a{
+  text-decoration: none;
+  color: #5F5D5C;
+}
+.a:hover{
+  color: #4AB1F5;
+}
 @keyframes rotateShake {
   0% {
     transform: rotate(0deg);
