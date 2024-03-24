@@ -11,6 +11,7 @@ export default {
     return{
       announcement: '欢迎来的我的博客',
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
+      categoryNumber:[]
     }
   },
   methods:{
@@ -47,8 +48,6 @@ export default {
   },
   mounted() {
     this.setAuthorInfo()
-    const announcementIcon = this.$el.querySelector('.announcement');
-    announcementIcon.classList.add("rotateShake")
   }
 }
 </script>
@@ -104,10 +103,47 @@ export default {
          </div>
       </div>
     </el-card>
+<!--    分类-->
+    <el-card v-if="category.length!==0&&!this.$route.path.includes('context')" class="card is-center" >
+      <div class="mb-5" style="display: flex">
+        <v-icon>mdi-format-list-bulleted</v-icon>
+        <span class="ml-2" style="font-size: 16px">分类</span>
+      </div>
+      <router-link to="/category" class="a">
+        <div v-for="(item,index) of category" class="category" style="margin: 5px 0;width: 100%;display: flex">
+          <span>{{item}}</span>
+          <span style="margin: 0 5px 0 auto">{{categoryNumber[index]}}</span>
+        </div>
+      </router-link>
+    </el-card>
+<!--    标签-->
+    <el-card v-if="tag.length!==0&&!this.$route.path.includes('context')" class="card is-center">
+      <div class="mb-5" style="display: flex">
+        <v-icon>mdi-tag-heart-outline</v-icon>
+        <span class="ml-2" style="font-size: 16px">标签</span>
+      </div>
+      <div style="display: flex;flex-wrap: wrap">
+        <router-link v-for="item of tag" to="/tag" class="a"  >
+          <span style="font-size: 20px;margin: 5px 5px;display: flex">{{item}}</span>
+        </router-link>
+      </div>
+
+    </el-card>
   </div>
 </template>
 
 <style scoped>
+.category{
+  color: #858585;
+  padding: 5px 10px;
+  margin-right: 5px;
+  transition: all 1s ease;
+}
+.category:hover{
+  padding: 5px 20px;
+  background-color: #4AB1F5;
+
+}
 .a{
   text-decoration: none;
   color: #5F5D5C;
