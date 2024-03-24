@@ -11,7 +11,7 @@ export default {
     return{
       announcement: '欢迎来的我的博客',
       site_img:'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
-      categoryNumber:[]
+      categoryNumber:[],
     }
   },
   methods:{
@@ -44,7 +44,7 @@ export default {
           })
         })
       }
-    }
+    },
   },
   mounted() {
     this.setAuthorInfo()
@@ -54,6 +54,7 @@ export default {
 
 <template>
   <div class="sidebar" style="display: block">
+<!--    用户信息-->
     <el-card class="card is-center" >
       <el-avatar class="user-avatar" :src="this.$route.path==='/' ? (isLogin ? userDto.avatar : site_img) :author.avatar" :size="110" shape="circle" fit="fill"></el-avatar>
       <h2 style="font-size: 20px">{{this.$route.path==='/' ? (isLogin ? userDto.nickname : 'Orange' ): author.nickname}}</h2>
@@ -88,7 +89,7 @@ export default {
       <div style="font-size: 15px">{{isLogin ? author.announcement : announcement}}</div>
     </el-card>
 <!--    最新文章-->
-    <el-card class="card is-center">
+    <el-card class="card is-center " >
       <div class="mb-3" style="width: 100%;display: flex">
         <v-icon>mdi-history</v-icon>
         <span class="ml-2" style="font-size: 16px">最新文章</span>
@@ -127,8 +128,18 @@ export default {
           <span style="font-size: 20px;margin: 5px 5px;display: flex">{{item}}</span>
         </router-link>
       </div>
-
     </el-card>
+<!--    归档-->
+    <div class="card is-center " style="border-radius: 5px;box-shadow:0 3px 8px 6px rgba(7,17,27,0.05);padding: 15px 0 " >
+      <div class="mb-5  ml-5 " style="display: flex;">
+        <v-icon>mdi-calendar-month</v-icon>
+        <span style="font-size: 16px">归档</span>
+      </div>
+      <v-date-picker
+
+      >
+      </v-date-picker>
+    </div>
   </div>
 </template>
 
@@ -225,7 +236,6 @@ export default {
   width: 26%;
   padding-left: 15px;
   position: relative;
-  flex-shrink: 0;
 
 }
 .card:hover{
