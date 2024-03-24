@@ -130,7 +130,7 @@ export default {
       </div>
     </el-card>
 <!--    归档-->
-    <div class="card is-center " style="border-radius: 5px;box-shadow:0 3px 8px 6px rgba(7,17,27,0.05);padding: 15px 0 " >
+    <div v-if="!this.$route.path.includes('context')  " class="card is-center " style="border-radius: 5px;box-shadow:0 3px 8px 6px rgba(7,17,27,0.05);padding: 15px 0 " >
       <div class="mb-5  ml-5 " style="display: flex;">
         <v-icon>mdi-calendar-month</v-icon>
         <span style="font-size: 16px">归档</span>
