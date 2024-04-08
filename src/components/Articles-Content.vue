@@ -15,9 +15,9 @@ export default {
       console.log(articleId)
     },
     saveArticle(res){
-      this.setArticles(res.data.article.records)
+      this.setArticles(res.data.articles.records)
       this.setCategory(res.data.category)
-      this.setTotal(res.data.article.total)
+      this.setTotal(res.data.articles.total)
       this.setTag(res.data.tag)
     },
     ...mapMutations(['setArticles','setCategory','setTotal','setTag',"setAuthor"]),
@@ -96,7 +96,8 @@ export default {
       <slot v-if="index<articles.length&&index%2===0">
         <div @contextmenu="" class="article-item"  >
           <router-link :to="/article-context/+articles[index].articleId"  class="a-bg">
-            <img class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
+            <el-image  fit="cover" lazy  class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
+            </el-image>
           </router-link>
           <div class="article-info">
             <router-link :to="/article-context/+articles[index].articleId" class="article-title" :title="articles[index].title">{{ articles[index].title }}</router-link>
@@ -117,7 +118,6 @@ export default {
             </div>
             <div class="content" >{{articles[index].content}}</div>
           </div>
-
         </div>
 
 
@@ -146,7 +146,8 @@ export default {
           <router-link :to="/article-context/+articles[index+1].articleId" class="a-bg" style=" @media (max-width: 768px) {
                 display: none;
               }">
-            <img class="article-bg" :title="articles[index+1].title" :src="articles[index+1].coverImg" >
+            <el-image fit="cover" lazy class="article-bg" :title="articles[index+1].title" :src="articles[index+1].coverImg" >
+            </el-image>
           </router-link>
 
         </div>

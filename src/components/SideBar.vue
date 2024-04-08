@@ -17,9 +17,9 @@ export default {
   methods:{
     ...mapMutations(['setAuthor','setArticles','setCategory','setTotal','setTag']),
     saveArticle(res){
-      this.setArticles(res.data.article.records)
+      this.setArticles(res.data.articles.records)
       this.setCategory(res.data.category)
-      this.setTotal(res.data.article.total)
+      this.setTotal(res.data.articles.total)
       this.setTag(res.data.tag)
     },
     setAuthorInfo(){
