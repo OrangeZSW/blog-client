@@ -6,6 +6,7 @@
       <Login/>
       <Footer />
       <RightSide/>
+      <Search/>
     </v-main>
   </v-app>
 </template>
@@ -55,10 +56,11 @@ import SideBarPhone from "@/components/SideBar-Phone.vue";
 import Login from "@/components/Global/Login.vue";
 import {mapMutations} from "vuex";
 import RightSide from "@/components/Global/RightSide.vue";
+import Search from "@/components/Global/Search.vue";
 
 export default {
   name: 'App',
-  components: {RightSide, Footer, Login, SideBarPhone},
+  components: {Search, RightSide, Footer, Login, SideBarPhone},
   data() {
     return {
 

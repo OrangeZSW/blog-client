@@ -1,9 +1,11 @@
 <script>
 
 import {mapMutations, mapState} from "vuex";
+import Search from "@/components/Global/Search.vue";
 
 export default {
   name: "Header",
+  components: {Search},
   mounted() {
     const Header = document.querySelector('.Header')
     Header.style.transform = 'translateY(+60px)'
@@ -56,7 +58,7 @@ export default {
     ...mapState(['isLogin', 'articles']),
   },
   methods: {
-    ...mapMutations(['setLoginWindowStatus', 'setLoginStatus', "setLoginWindowStatus", "setUserDto", 'setArticles']),
+    ...mapMutations(['setLoginWindowStatus', 'setLoginStatus', "setLoginWindowStatus", "setUserDto", 'setArticles',"setSearch"]),
     moveLogin() {
       // 没有登录过
       this.$store.commit('setLoginWindowStatus', true)
@@ -133,27 +135,38 @@ export default {
       </div>
     </router-link>
     <div class="menu">
+
+      <div class="item" @click="setSearch(true)">
+        <v-icon class="header-icon" style="color: white">mdi-magnify</v-icon>
+        <span>搜索</span>
+      </div>
+
       <router-link to="/" class="item">
         <v-icon class="header-icon" style="color: white">mdi-home</v-icon>
         <span>首页</span>
       </router-link>
+
       <router-link to="/all-articles" class="item">
         <v-icon class="header-icon" style="color: white">mdi-card-bulleted</v-icon>
         <span>文章</span>
       </router-link>
+
       <div  @click="toEditor" class="item">
         <v-icon class="header-icon" style="color: white">mdi-book-account</v-icon>
         <span>发布文章</span>
       </div>
+
       <div class="item user-avatar" style="display: flex;align-items: center" @click="moveLogin"
            @mouseover="userInfoOver">
         <v-icon class="header-icon" style="color: white">mdi-heart</v-icon>
         <span>{{ isLogin ? userDto.nickname : '登录' }}</span>
         <el-avatar icon="el-icon-user-solid " class="avatar" :src=" isLogin ? userDto.avatar : site_img"/>
       </div>
+
       <div class="item phone" @click="sideBarPhone">
         <i class="el-icon-s-unfold"></i>
       </div>
+
     </div>
     <div class="userInfo-leave" ref="userInfo" v-if="isLogin" @mouseleave="userInfoLeave">
       <div class="userInfo-item" style="margin-top:10px" @click="()=>{this.$router.push('/userinfo')}">个人信息</div>

@@ -10,10 +10,6 @@ export default {
     }
   },
   methods:{
-    updateAuthor(){
-      let articleId = this.$route.params
-      console.log(articleId)
-    },
     saveArticle(res){
       this.setArticles(res.data.articles.records)
       this.setCategory(res.data.category)

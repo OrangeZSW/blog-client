@@ -16,16 +16,17 @@ export default new Vuex.Store({
         userDto: {},
         loginWindow: false,
         isLogin: false,
+        search: false,
     },
     getters: {
-        getLoginWindowStatus: state => {
-            return state.loginWindow;
-        },
         getUserDto: state => {
             return state.userDto;
         },
     },
     mutations: {
+        setSearch(state, search) {
+            state.search = search
+        },
         setAuthor(state,author) {
             state.author = author
         },

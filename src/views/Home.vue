@@ -1,15 +1,3 @@
-<template>
-  <div>
-    <Header/>
-    <div class="wrapper" id="wrapper" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
-      <Center/>
-    </div>
-    <div>
-      <Display/>
-    </div>
-  </div>
-
-</template>
 
 <script>
 import Header from "@/components/Global/Header.vue";
@@ -18,7 +6,6 @@ import Login from "@/components/Global/Login.vue";
 import Display from "@/components/Dispaly.vue";
 import {mapActions, mapMutations, mapState} from "vuex";
 import SideBarPhone from "@/components/SideBar-Phone.vue";
-import header from "@/components/Global/Header.vue";
 
 export default {
   components: {
@@ -49,6 +36,20 @@ export default {
   }
 }
 </script>
+
+
+<template>
+  <div>
+    <Header/>
+    <div class="wrapper" id="wrapper" :style="{'background-image': `url(${isLogin ? userDto.coverImg : site_img})`}">
+      <Center/>
+    </div>
+    <div>
+      <Display/>
+    </div>
+  </div>
+
+</template>
 
 <style scoped>
 .wrapper {
