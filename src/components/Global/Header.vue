@@ -140,6 +140,9 @@ export default {
         <v-icon class="header-icon" style="color: white">mdi-magnify</v-icon>
         <span>搜索</span>
       </div>
+      <div class="item phone" @click="setSearch(true)">
+        <v-icon class="header-icon" style="color: white">mdi-magnify</v-icon>
+      </div>
 
       <router-link to="/" class="item">
         <v-icon class="header-icon" style="color: white">mdi-home</v-icon>
@@ -213,7 +216,7 @@ export default {
 
 .item {
   position: relative;
-  margin: auto auto auto 14px;
+  margin: auto auto auto 10px;
   height: auto;
   filter: brightness(1);
   transition: all 0.5s ease;
@@ -318,6 +321,10 @@ export default {
 
   .phone {
     display: block;
+  }
+  .site_img{
+    margin: auto 6px auto 10px;
+
   }
 }
 

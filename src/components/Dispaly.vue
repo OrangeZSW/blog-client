@@ -40,7 +40,6 @@ export default {
   background-color: #fff;
   display: flex;
   margin: 0 auto ;
-  overflow-x: hidden;
   padding: 40px 15px;
   flex: 1;
 }

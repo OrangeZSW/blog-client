@@ -5,6 +5,7 @@ export default {
   name: "Articles-Content",
   computed:{
     ...mapState(['articles','userDto','isLogin','total']),
+    ...mapState('moment',['searchKey','isSearch']),
     length(){
       return Math.ceil(this.total/this.numberSize)
     }
@@ -17,6 +18,7 @@ export default {
       this.setTag(res.data.tag)
     },
     ...mapMutations(['setArticles','setCategory','setTotal','setTag',"setAuthor"]),
+    ...mapMutations('moment',['setSearchKey']),
     load(){
       if(this.$route.path==='/'){
         if(this.isLogin){
@@ -60,11 +62,52 @@ export default {
         behavior: 'smooth'
       })
     },
+    searchArticle(id){
+      axios.post('/article/search',{
+        userId:id,
+        title: this.searchKey.title,
+        category: this.searchKey.category,
+        tag: this.searchKey.tag,
+        number: this.number,
+        numberSize: this.numberSize
+      }).then(res => {
+          // 转圈效果
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+
+        setTimeout(() => {
+          loading.close();
+          this.$notify({
+            title: '搜索成功',
+            message: '搜索到'+res.data.articles.total+'篇文章',
+            type: 'success',
+            position: 'top-left',
+            duration: 2000
+          })
+          this.saveArticle(res)
+        }, 1000);
+
+      })
+    },
+    searchSetting(){
+      this.setSearchKey(this.key)
+      let id=this.$route.path==='/' ? ( this.isLogin ? this.userDto.userId : '') : ''
+      this.searchArticle(id)
+    }
   },
   watch:{
     userDto : {
       handler:function(){
         this.load()
+      },
+      deep:true
+    },
+    isSearch:{
+      handler:function(){
+        this.searchArticle("")
       },
       deep:true
     }
@@ -82,17 +125,43 @@ export default {
         username:'Orange',
         description:'一个前端小白',
       },
+      key:{
+        category:'',
+        tag:'',
+        title:'',
+      }
     }
   }
 }
 </script>
 <template>
   <div class="articles-content"  >
+
+
+    <!--    搜索-->
+    <div style="display: flex;margin: auto auto auto auto">
+      <el-input class="mr-2" placeholder="标题" v-model="key.title"></el-input>
+      <el-input class="mr-2" placeholder="分类" v-model="key.category"></el-input>
+      <el-input class="mr-2" placeholder="标签" v-model="key.tag" ></el-input>
+      <el-button class="mr-2" type="primary" style="width: 150px" @click="searchSetting">搜索</el-button>
+    </div>
+
+
+<!--    当搜索到文章为0时-->
+    <div class="mt-4" v-if="articles.length===0" style="width: 100%;height: 50vh;display: flex;justify-content: center;align-items: center">
+      <h1>
+        没有搜索到相关文章
+      </h1>
+      <el-image style="width: 100%;height: 100%" src="https://server.blog.zorange.online/files/download/130010d2f1cf42c5a6d46949bfc01c44.png" fit="cover"></el-image>
+    </div>
+
+
+
     <div v-for="(article,index) in articles" :key="index" style="width: 100%;height: auto">
       <slot v-if="index<articles.length&&index%2===0">
         <div @contextmenu="" class="article-item"  >
           <router-link :to="/article-context/+articles[index].articleId"  class="a-bg">
-            <el-image  fit="cover" lazy  class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
+            <el-image  fit="cover"  class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
             </el-image>
           </router-link>
           <div class="article-info">
@@ -142,7 +211,7 @@ export default {
           <router-link :to="/article-context/+articles[index+1].articleId" class="a-bg" style=" @media (max-width: 768px) {
                 display: none;
               }">
-            <el-image fit="cover" lazy class="article-bg" :title="articles[index+1].title" :src="articles[index+1].coverImg" >
+            <el-image fit="cover" class="article-bg" :title="articles[index+1].title" :src="articles[index+1].coverImg" >
             </el-image>
           </router-link>
 

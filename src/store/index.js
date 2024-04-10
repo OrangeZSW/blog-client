@@ -1,12 +1,30 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import moment from './moment'
 import createPersistedState from "vuex-persistedstate"
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    plugins: [createPersistedState()],
+    // 持久化存储
+    plugins: [
+        // 把vuex的数据存储到sessionStorage
+        createPersistedState({
+            storage: window.sessionStorage,
+            reducer(val) {
+                return {
+                    // 只存储state中的userData
+                    userDto: val.userDto,
+                    isLogin: val.isLogin,
+                    author: val.author,
+                    articles: val.articles,
+                    category: val.category,
+                    tag: val.tag,
+                    total: val.total,
+                }
+            }
+        }),
+    ],
     state: {
         category: [],
         tag: [],
@@ -103,5 +121,7 @@ export default new Vuex.Store({
             })
         }
     },
-    modules: {}
+    modules: {
+        moment,
+    }
 })
