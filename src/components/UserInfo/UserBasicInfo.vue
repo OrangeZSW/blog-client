@@ -9,27 +9,37 @@ export default {
   methods: {
     updateUserInfo() {
       axios.post('/user', this.user).then(res => {
-        if(res.code==='200'){
+        if (res.code === '200') {
           this.$message({
             message: '保存成功',
             type: 'success'
           });
-        this.$store.dispatch('updateUserDto')
-        }
-        else{
+          this.$store.dispatch('updateUserDto')
+        } else {
           this.$message({
             message: res.msg,
             type: 'warning'
           });
         }
       })
+    },
+    getAllProfession() {
+      axios.get('/dict',{
+        params: {
+          type: 'profession'
+        }
+      }).then(res => {
+        this.profession = res
+      })
     }
   },
   mounted() {
+    this.getAllProfession()
     this.user = JSON.parse(JSON.stringify(this.userDto));
   },
-  data(){
+  data() {
     return {
+      profession: [],
       user: {},
     }
   }
@@ -38,6 +48,7 @@ export default {
 
 <template>
 
+
   <div style="width: 100%">
     <el-card class="content">
       <div style="display: flex; justify-content: center; align-items: center;">
@@ -45,19 +56,31 @@ export default {
       </div>
       <el-form label-position="left" size="medium" class="mt-5" label-width="70px">
         <el-form-item label="用户名">
-          <el-input class="input"   v-model="user.username" ></el-input>
+          <el-input class="input" v-model="user.username"></el-input>
         </el-form-item>
         <el-form-item label="昵称">
           <el-input class="input" v-model="user.nickname"></el-input>
         </el-form-item>
         <el-form-item label="描述">
-          <el-input class="input"  v-model="user.description"></el-input>
+          <el-input class="input" v-model="user.description"></el-input>
         </el-form-item>
         <el-form-item label="副标题 ">
-          <el-input class="input"  v-model="user.subHeading"></el-input>
+          <el-input class="input" v-model="user.subHeading"></el-input>
         </el-form-item>
         <el-form-item label="公告">
-          <el-input type="textarea" size="medium" class="input" v-model="user.announcement"></el-input>
+          <el-input  type="textarea" size="medium" class="input" v-model="user.announcement"></el-input>
+        </el-form-item>
+        <el-form-item label="职业">
+
+          <el-select v-model="user.profession" placeholder="请选择职业">
+            <el-option
+              v-for="item in profession"
+              :key="item.value"
+              :label="item.name"
+              :value="item.value">
+            </el-option>
+          </el-select>
+
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updateUserInfo">保存</el-button>
@@ -86,11 +109,13 @@ export default {
 .content:hover {
   box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.09);
 }
+
 @media screen and (max-width: 768px) {
   .content {
     width: auto;
     height: auto;
   }
+
   .input {
     width: 100%;
   }

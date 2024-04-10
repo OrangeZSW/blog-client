@@ -143,7 +143,7 @@ export default {
       <el-input class="mr-2" placeholder="标题" v-model="key.title"></el-input>
       <el-input class="mr-2" placeholder="分类" v-model="key.category"></el-input>
       <el-input class="mr-2" placeholder="标签" v-model="key.tag" ></el-input>
-      <el-button class="mr-2" type="primary" style="width: 150px" @click="searchSetting">搜索</el-button>
+      <el-button class="mr-2" type="primary" style="width: 150px" @click="searchSetting" >搜索</el-button>
     </div>
 
 

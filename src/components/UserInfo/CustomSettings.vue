@@ -81,6 +81,7 @@ export default {
         <el-image
             class="mt-5"
             style="width: 150px; height: 100px"
+            lazy
             :src="user.coverImg"
             fit="cover">
         </el-image>
