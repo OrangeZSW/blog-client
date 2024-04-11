@@ -95,6 +95,10 @@ export default {
       let id=this.$route.path==='/' ? ( this.isLogin ? this.userDto.userId : '') : ''
       this.searchArticle(id)
     },
+    reSet(){
+      this.key={}
+      this.searchSetting()
+    }
   },
   watch:{
     userDto : {
@@ -139,11 +143,12 @@ export default {
 
 
     <!--    搜索-->
-    <div style="display: flex;margin: auto auto auto auto">
-      <el-input class="mr-2" placeholder="标题" v-model="key.title"></el-input>
-      <el-input class="mr-2" placeholder="分类" v-model="key.category"></el-input>
-      <el-input class="mr-2" placeholder="标签" v-model="key.tag" ></el-input>
-      <el-button class="mr-2" type="primary" style="width: 150px" @click="searchSetting"  >搜索</el-button>
+    <div style="display: flex;margin: auto auto auto auto;flex-wrap: wrap;justify-content: center;align-items: center">
+      <el-input  class="mr-2 mt-2 phone-input"  placeholder="标题" v-model="key.title"></el-input>
+      <el-input class="mr-2 mt-2 phone-input" placeholder="分类" v-model="key.category"></el-input>
+      <el-input class="mr-2 mt-2 phone-input"  placeholder="标签" v-model="key.tag" ></el-input>
+      <el-button class="mr-2 mt-2"  type="primary" style="width: 150px" @click="searchSetting"  >搜索</el-button>
+      <el-button class="mr-2 mt-2" type="primary" style="width: 150px" @click="reSet"  >重置</el-button>
     </div>
 
 
@@ -226,6 +231,9 @@ export default {
 </template>
 
 <style scoped>
+.phone-input{
+  width: 19%;
+}
 .content{
   overflow: hidden;
   display: -webkit-box;
@@ -295,6 +303,9 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .phone-input{
+    width: 60%;
+  }
   .articles-content{
     width: 100%;
   }
