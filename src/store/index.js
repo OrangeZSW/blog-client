@@ -84,7 +84,7 @@ export default new Vuex.Store({
             state.articles = articles
         },
         setArticles(state, articles) {
-            state.articles = [] // 清空文章列表
+
 
             // 创建一个 Promise 数组，用于存放所有的 axios.get 请求
             const promises = articles.map(item => {
@@ -106,6 +106,7 @@ export default new Vuex.Store({
             Promise.all(promises)
                 .then(articlesWithContent => {
                     // 将所有设置好内容的文章添加到 state.articles 中
+                    state.articles = [] // 清空文章列表
                     state.articles.push(...articlesWithContent)
                 })
                 .catch(error => {

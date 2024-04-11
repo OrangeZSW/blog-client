@@ -24,12 +24,12 @@ export default {
       })
     },
     getAllProfession() {
-      axios.get('/dict',{
+      axios.get('/dict/type',{
         params: {
           type: 'profession'
         }
       }).then(res => {
-        this.profession = res
+        this.profession = res.data
       })
     }
   },

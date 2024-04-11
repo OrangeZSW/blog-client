@@ -9,6 +9,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       announcement: '欢迎来的我的博客',
       site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
       categoryNumber: [],
@@ -56,24 +57,35 @@ export default {
         }
       }).then(res=>{
         this.recommendedArticle = res.data
+        this.loading = false
       })
     }
   },
   mounted() {
-    this.getRecommendedArticle()
-    this.setAuthorInfo()
+    setTimeout(() => {
+      this.getRecommendedArticle()
+      this.setAuthorInfo()
+      this.loading = false
+    }, 1000)
   },
   watch: {
     $route() {
+      this.loading = true
       this.setAuthorInfo()
       this.getRecommendedArticle()
+    },
+    isLogin() {
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 800)
     }
   }
 }
 </script>
 
 <template>
-  <div class="sidebar" style="display: block;">
+  <div v-loading="loading" class="sidebar" style="display: block;">
     <!--    用户信息-->
     <el-card class="card is-center">
       <el-avatar class="user-avatar"
@@ -106,7 +118,7 @@ export default {
     </el-card>
 
     <!--    公告-->
-    <el-card class="card is-center">
+    <el-card v-loading="loading" class="card is-center">
       <div style="width: 56px;float: left">
         <v-icon style="color: red" class="announcement">mdi-bullhorn</v-icon>
         <span style="font-size: 16px">公告</span>
@@ -115,7 +127,7 @@ export default {
     </el-card>
 
     <!--    最新文章-->
-    <div style=" position: sticky; ;top: 20px;z-index: 1;">
+    <div v-loading="loading" style=" position: sticky; ;top: 20px;z-index: 1;">
       <el-card class="card is-center ">
         <div class="mb-3" style="width: 100%;display: flex">
           <v-icon>mdi-history</v-icon>
@@ -135,7 +147,7 @@ export default {
       </el-card>
 
       <!--    推荐-->
-      <el-card class="card is-center">
+      <el-card v-loading="loading" class="card is-center">
       <div class="mb-5" style="display: flex">
         <v-icon>mdi-balloon</v-icon>
         <span class="ml-2" style="font-size: 16px;color: #00C4B6">推荐文章</span>
@@ -158,7 +170,7 @@ export default {
       </el-card>
 
       <!--    分类-->
-      <el-card v-if="category.length!==0&&!this.$route.path.includes('context')" class="card is-center">
+      <el-card v-loading="loading" v-if="category.length!==0&&!this.$route.path.includes('context')" class="card is-center">
         <div class="mb-5" style="display: flex">
           <v-icon>mdi-format-list-bulleted</v-icon>
           <span class="ml-2" style="font-size: 16px">分类</span>
@@ -171,7 +183,7 @@ export default {
         </router-link>
       </el-card>
       <!--    标签-->
-      <el-card v-if="tag.length!==0&&!this.$route.path.includes('context')" class="card is-center">
+      <el-card v-loading="loading" v-if="tag.length!==0&&!this.$route.path.includes('context')" class="card is-center">
         <div class="mb-5" style="display: flex">
 
           <v-icon>mdi-tag-heart-outline</v-icon>
@@ -184,7 +196,7 @@ export default {
         </div>
       </el-card>
       <!--    归档-->
-      <div v-if="!this.$route.path.includes('context')  " class="card is-center "
+      <div  v-if="!this.$route.path.includes('context')  " class="card is-center "
            style="border-radius: 5px;box-shadow:0 3px 8px 6px rgba(7,17,27,0.05);padding: 15px 0 ">
         <div class="mb-5  ml-5 " style="display: flex;">
           <v-icon>mdi-calendar-month</v-icon>

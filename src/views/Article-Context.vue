@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       vueEasyLightbox: {
         visible: false,
         imgs: [],
@@ -46,6 +47,8 @@ export default {
   },
   watch: {
     $route() {
+      //  加载动画
+      this.loading = true
       this.initArticle()
       this.imgAddClickLinsener()
       this.getRecommendedArticle()
@@ -61,7 +64,7 @@ export default {
         }
       }).then(res => {
         this.recommendedArticle = res.data
-        console.log(this.recommendedArticle)
+        this.loading = false
       })
     },
     init() {
@@ -154,7 +157,7 @@ export default {
           <!--          设置为私密文章-->
         </div>
 
-        <div class="article-context">
+        <div class="article-context" v-loading="loading">
 
           <!--        <div id="markdown-area" v-html="markdown"></div>-->
           <div style="overflow: hidden" class="text">

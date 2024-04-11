@@ -16,10 +16,14 @@ export default {
       this.setCategory(res.data.category)
       this.setTotal(res.data.articles.total)
       this.setTag(res.data.tag)
+      setTimeout(()=>{
+        this.loading=false
+      },800)
     },
     ...mapMutations(['setArticles','setCategory','setTotal','setTag',"setAuthor"]),
     ...mapMutations('moment',['setSearchKey']),
     load(){
+      this.loading = true
       if(this.$route.path==='/'){
         if(this.isLogin){
           axios.get('/article/userId/'+this.userDto.userId,{
@@ -63,6 +67,7 @@ export default {
       })
     },
     searchArticle(id){
+      this.loading=true
       axios.post('/article/search',{
         userId:id,
         title: this.searchKey.title,
@@ -71,24 +76,13 @@ export default {
         number: this.number,
         numberSize: this.numberSize
       }).then(res => {
-          // 转圈效果
-        const loading = this.$loading({
-          lock: true,
-          text: 'Loading',
-          background: 'rgba(0, 0, 0, 0.7)'
+        this.saveArticle(res)
+        this.$notify({
+          title: '搜索成功',
+          message: '搜索到'+res.data.articles.total+'篇文章',
+          type: 'success',
+          position: 'top-left',
         });
-
-        setTimeout(() => {
-          loading.close();
-          this.$notify({
-            title: '搜索成功',
-            message: '搜索到'+res.data.articles.total+'篇文章',
-            type: 'success',
-            position: 'top-left',
-            duration: 2000
-          })
-          this.saveArticle(res)
-        }, 1000);
 
       })
     },
@@ -96,7 +90,7 @@ export default {
       this.setSearchKey(this.key)
       let id=this.$route.path==='/' ? ( this.isLogin ? this.userDto.userId : '') : ''
       this.searchArticle(id)
-    }
+    },
   },
   watch:{
     userDto : {
@@ -110,6 +104,9 @@ export default {
         this.searchArticle("")
       },
       deep:true
+    },
+    $router(){
+      this.loading=true
     }
   },
   mounted() {
@@ -117,6 +114,7 @@ export default {
   },
   data(){
     return{
+      fullscreenLoading: false,
       number:1,
       content:[],
       numberSize:10,
@@ -129,13 +127,14 @@ export default {
         category:'',
         tag:'',
         title:'',
-      }
+      },
+      loading:true,
     }
   }
 }
 </script>
 <template>
-  <div class="articles-content"  >
+  <div class="articles-content "  >
 
 
     <!--    搜索-->
@@ -143,25 +142,25 @@ export default {
       <el-input class="mr-2" placeholder="标题" v-model="key.title"></el-input>
       <el-input class="mr-2" placeholder="分类" v-model="key.category"></el-input>
       <el-input class="mr-2" placeholder="标签" v-model="key.tag" ></el-input>
-      <el-button class="mr-2" type="primary" style="width: 150px" @click="searchSetting" >搜索</el-button>
+      <el-button class="mr-2" type="primary" style="width: 150px" @click="searchSetting"  >搜索</el-button>
     </div>
 
 
-<!--    当搜索到文章为0时-->
-    <div class="mt-4" v-if="articles.length===0" style="width: 100%;height: 50vh;display: flex;justify-content: center;align-items: center">
+    <!--    当搜索到文章为0时-->
+    <div v-loading="loading" class="mt-4" v-if="articles.length===0" style="width: 100%;height: 50vh;display: flex;justify-content: center;align-items: center">
+      <el-skeleton />
       <h1>
         没有搜索到相关文章
       </h1>
       <el-image style="width: 100%;height: 100%" src="https://server.blog.zorange.online/files/download/130010d2f1cf42c5a6d46949bfc01c44.png" fit="cover"></el-image>
     </div>
 
+    <div v-loading="loading"  v-for="(article,index) in articles" :key="index" style="width: 100%;height: auto">
 
-
-    <div v-for="(article,index) in articles" :key="index" style="width: 100%;height: auto">
       <slot v-if="index<articles.length&&index%2===0">
         <div @contextmenu="" class="article-item"  >
           <router-link :to="/article-context/+articles[index].articleId"  class="a-bg">
-            <el-image  fit="cover"  class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
+            <el-image lazy  fit="cover"  class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
             </el-image>
           </router-link>
           <div class="article-info">
@@ -211,7 +210,7 @@ export default {
           <router-link :to="/article-context/+articles[index+1].articleId" class="a-bg" style=" @media (max-width: 768px) {
                 display: none;
               }">
-            <el-image fit="cover" class="article-bg" :title="articles[index+1].title" :src="articles[index+1].coverImg" >
+            <el-image lazy fit="cover" class="article-bg" :title="articles[index+1].title" :src="articles[index+1].coverImg" >
             </el-image>
           </router-link>
 

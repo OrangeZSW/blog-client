@@ -22,9 +22,10 @@ export default {
       this.setSearchKey(this.searchParams)
       this.setSearch(false)
 
-      setTimeout(()=>{
-        this.setIsSearch(!this.isSearch)
-      },1000)
+      // setTimeout(()=>{
+      //   this.setIsSearch(!this.isSearch)
+      // },1000)
+      this.setIsSearch(!this.isSearch)
       router.push({path: '/all-articles'})
 
     }
