@@ -57,6 +57,10 @@ export default {
           this.saveArticle(res)
         })
       }else if(this.$route.path==='/article') {
+        setTimeout(()=>{
+          this.loading=false
+        },800)
+
       }
     },
     changeNumber(){
@@ -105,9 +109,6 @@ export default {
       },
       deep:true
     },
-    $router(){
-      this.loading=true
-    }
   },
   mounted() {
     this.load()
@@ -155,10 +156,9 @@ export default {
       <el-image style="width: 100%;height: 100%" src="https://server.blog.zorange.online/files/download/130010d2f1cf42c5a6d46949bfc01c44.png" fit="cover"></el-image>
     </div>
 
-    <div v-loading="loading"  v-for="(article,index) in articles" :key="index" style="width: 100%;height: auto">
-
+    <div  v-for="(article,index) in articles" :key="index" style="width: 100%;height: auto">
       <slot v-if="index<articles.length&&index%2===0">
-        <div @contextmenu="" class="article-item"  >
+        <div v-loading="loading" @contextmenu="" class="article-item"  >
           <router-link :to="/article-context/+articles[index].articleId"  class="a-bg">
             <el-image lazy  fit="cover"  class="article-bg" :title="articles[index].title" :src="articles[index].coverImg" >
             </el-image>
@@ -185,8 +185,8 @@ export default {
         </div>
 
 
-        <div class="article-item phone-item"  v-if="index<articles.length-1" >
-
+        <div v-loading="loading"  class="article-item phone-item"  v-if="index<articles.length-1" >
+          <el-skeleton />
           <div class="article-info"  >
             <router-link :to="/article-context/+articles[index+1].articleId" class="article-title" :title="articles[index+1].title">{{ articles[index+1].title }} </router-link>
             <div class="article-meta" >

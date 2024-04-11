@@ -1,5 +1,6 @@
 <script>
 import {mapState} from "vuex";
+import ServerIP from "@/assets/config";
 
 export default {
   name: "UserBasicInfo",
@@ -7,6 +8,9 @@ export default {
     ...mapState(['userDto'])
   },
   methods: {
+    ServerIP() {
+      return ServerIP
+    },
     updateUserInfo() {
       axios.post('/user', this.user).then(res => {
         if (res.code === '200') {
@@ -31,6 +35,23 @@ export default {
       }).then(res => {
         this.profession = res.data
       })
+    },
+    handleSuccess(res){
+      //复制res.data到剪切板
+      if (res.code === '200') {
+        this.user.avatar=res.data.toString()
+        this.updateUserInfo()
+
+        this.$message({
+          message: '上传成功,保存',
+          type: 'success'
+        });
+      } else {
+        this.$message({
+          message: res.msg,
+          type: 'error'
+        });
+      }
     }
   },
   mounted() {
@@ -52,7 +73,13 @@ export default {
   <div style="width: 100%">
     <el-card class="content">
       <div style="display: flex; justify-content: center; align-items: center;">
-        <el-avatar :size="100" :src="userDto.avatar"></el-avatar>
+        <el-upload
+            class="avatar-uploader"
+            :on-success="handleSuccess"
+            :action="ServerIP() + '/files/upload/img'">
+          <el-avatar :size="100" v-if="userDto.avatar" :src="userDto.avatar" class="avatar">
+          </el-avatar>
+        </el-upload>
       </div>
       <el-form label-position="left" size="medium" class="mt-5" label-width="70px">
         <el-form-item label="用户名">

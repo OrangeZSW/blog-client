@@ -131,7 +131,7 @@ export default {
       <el-card class="card is-center ">
         <div class="mb-3" style="width: 100%;display: flex">
           <v-icon>mdi-history</v-icon>
-          <span class="ml-2" style="font-size: 16px">最新文章</span>
+          <span class="ml-2" style="font-size: 16px;color: blue">最新文章</span>
         </div>
         <div class="mt-2" v-for="(article,index) of articles" v-if="index<5"
              style="width: 100%;height: 4.6em;display: flex">
@@ -164,34 +164,40 @@ export default {
             <el-image class="new-article" lazy fit="cover" style="height: 4.2em;width: 4.2em;float: right" :src="article.coverImg"/>
           </router-link>
         </div>
-
-
-
       </el-card>
+
 
       <!--    分类-->
-      <el-card v-loading="loading" v-if="category.length!==0&&!this.$route.path.includes('context')" class="card is-center">
+      <el-card style="max-height: 230px;padding-bottom: 10px"  v-loading="loading" v-if="category.length!==0&&!this.$route.path.includes('context')" class="card is-center">
         <div class="mb-5" style="display: flex">
           <v-icon>mdi-format-list-bulleted</v-icon>
-          <span class="ml-2" style="font-size: 16px">分类</span>
+          <span class="ml-2" style="font-size: 16px;color: #7BC549">分类</span>
+          <span class="ml-2">{{category.length}}</span>
         </div>
-        <router-link to="/category" class="a">
-          <div v-for="(item,index) of category" class="category" style="margin: 5px 0;width: 100%;display: flex">
-            <span>{{ item }}</span>
-            <span style="margin: 0 5px 0 auto">{{ categoryNumber[index] }}</span>
+
+          <div style="overflow: auto;max-height: 150px;">
+            <router-link style=""  to="/category" class="a">
+              <div v-for="(item,index) of category" class="category" style="margin: 5px 0;width: 100%;display: flex">
+                <span>{{ item }}</span>
+                <span style="margin: 0 5px 0 auto">{{ categoryNumber[index] }}</span>
+              </div>
+            </router-link>
           </div>
-        </router-link>
+
       </el-card>
+
+
       <!--    标签-->
-      <el-card v-loading="loading" v-if="tag.length!==0&&!this.$route.path.includes('context')" class="card is-center">
+      <el-card style="max-height: 200px;" v-loading="loading" v-if="tag.length!==0&&!this.$route.path.includes('context')" class="card is-center">
         <div class="mb-5" style="display: flex">
 
           <v-icon>mdi-tag-heart-outline</v-icon>
-          <span class="ml-2" style="font-size: 16px">标签</span>
+          <span class="ml-2" style="font-size: 16px;color: #FF8E67">标签</span>
+          <span  class="ml-2">{{tag.length}}</span>
         </div>
-        <div style="display: flex;flex-wrap: wrap">
+        <div style="display: flex;flex-wrap: wrap;overflow: auto;max-height: 130px">
           <router-link v-for="item of tag" to="/tag" class="a">
-            <span style="font-size: 20px;margin: 5px 5px;display: flex">{{ item }}</span>
+            <span style="font-size: 15px;margin: 5px 5px;display: flex">{{ item }}</span>
           </router-link>
         </div>
       </el-card>

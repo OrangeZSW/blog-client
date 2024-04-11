@@ -65,16 +65,6 @@ export default {
   <el-card style="height: auto;width: auto;overflow: hidden">
 <!--    头像、博客背景图片-->
     <el-form label-position="top" label-width="100px" >
-      <el-form-item label="修改头像">
-        <el-input v-model="userDto.avatar" placeholder="请输入头像地址"></el-input>
-<!--        预览-->
-        <el-image
-            class="mt-5"
-            style="width: 150px; height: 100px"
-            :src="userDto.avatar"
-            fit="cover">
-        </el-image>
-      </el-form-item>
       <el-form-item label="修改背景">
         <el-input v-model="user.coverImg" placeholder="请输入博客背景图片地址"></el-input>
 <!--        预览-->

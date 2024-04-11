@@ -13,14 +13,17 @@ export default {
     ...mapState(['userDto', 'isLogin'])
   },
   mounted() {
+    this.loading=true
     //获取markdown教程文章
     axios.get("https://server.blog.zorange.online/files/download/fcfcaf84f5614a43b23b48df6d3b0dc8.md").then(res => {
       this.text = res
       this.Markdown = res
+      this.loading=false
     })
   },
   data() {
     return {
+      loading:true,
       drawer: false,
       toPath:'',
       Markdown: '',
@@ -200,8 +203,9 @@ export default {
           <el-button type="primary" @click="drawer = true">文章信息编辑</el-button>
         <el-button type="primary"  @click="publish">发布</el-button>
       </div>
-    </div >
+    </div  >
       <v-md-editor v-model="text"
+                   v-loading="loading"
                    :disabled-menus="[]"
                    @upload-image="handleUploadImage"
                    @save="saveArticle"
