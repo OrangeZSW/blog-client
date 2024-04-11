@@ -106,6 +106,9 @@ export default {
   filter: contrast(1.2);
   transition: all 1s ease;
 }
+.login:hover{
+  background-color: #5F5D5C;
+}
 
 @media (min-width: 768px) {
   .login {

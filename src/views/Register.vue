@@ -7,7 +7,7 @@ export default {
   name: "Register",
   components: {Footer, PageHeader, Header},
   mounted() {
-
+    this.resetForm()
   },
   watch: {
     user: {
@@ -121,8 +121,8 @@ export default {
 <template>
     <div style="height: 100%;overflow: hidden;display: flex;flex-direction: column">
       <Header/>
-      <div style="width: 100%;height: 100%;background-image:url('/img/register.png');display: flex;justify-content: center;align-items: center">
-        <div class="register-info">
+      <div class="register-card" style="background-image:url('/img/register.png');">
+        <div class="register-info" >
           <img width="40px;" style="margin: 5px auto 5px auto"
                src="https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png" alt="Orange's_Blog">
           <h1 style="margin: 20px auto 40px auto;font-size: 25px;font-weight: 400">Orange's_Blog用户注册</h1>
@@ -147,6 +147,11 @@ export default {
 </template>
 
 <style scoped>
+.register-card{
+  width: 100%;height: 100%;
+  display: flex;justify-content: center;
+  align-items: center;
+}
 .register-info {
   overflow: hidden;
   background-color: white;
@@ -160,11 +165,14 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  opacity: 0.7;
+  position: absolute;
+  right: 15%;
 
 }
-
 .register-info:hover {
-  box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.09);
+  box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.4);
+  opacity: 1;
 }
 
 @media (max-width: 768px) {

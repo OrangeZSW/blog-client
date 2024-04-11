@@ -10,12 +10,11 @@ import autolink from "markdown-it/lib/rules_inline/autolink.mjs";
 import ServerIP from "../assets/config";
 
 
-
 export default {
   name: "Article-Context",
-  components: {Footer, SideBar, PageHeader, Header,VueEasyLightbox},
-  computed:{
-    ...mapState(['userDto','author'])
+  components: {Footer, SideBar, PageHeader, Header, VueEasyLightbox},
+  computed: {
+    ...mapState(['userDto', 'author'])
   },
   data() {
     return {
@@ -23,9 +22,10 @@ export default {
         visible: false,
         imgs: [],
         index: 0,
-        Valine:""
+        Valine: ""
       },
-      article:{},
+      recommendedArticle: {},
+      article: {},
       markdown: `# Hello World
       ## This is a markdown editor
       **Enjoy yourself!**
@@ -33,7 +33,8 @@ export default {
     }
   },
   mounted() {
-    import('valine').then(res=>{
+    this.getRecommendedArticle()
+    import('valine').then(res => {
       this.Valine = res.default;
       this.init()
     })
@@ -47,12 +48,23 @@ export default {
     $route() {
       this.initArticle()
       this.imgAddClickLinsener()
-    //   回到顶部
+      this.getRecommendedArticle()
+      //   回到顶部
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
   },
   methods: {
-    init(){
+    getRecommendedArticle() {
+      axios.get('/article/recommendation', {
+        params: {
+          userId: this.isLogin ? this.userDto.userId : "",
+        }
+      }).then(res => {
+        this.recommendedArticle = res.data
+        console.log(this.recommendedArticle)
+      })
+    },
+    init() {
       new this.Valine({
         el: '#vcomments',
         appId: 'PyMWNYy32JGT1RvycbTfElvq-gzGzoHsz',
@@ -72,7 +84,7 @@ export default {
         duration: 1000
       });
     },
-    initArticle(){
+    initArticle() {
       const ArticleId = this.$route.params.id
       try {
         axios.get('/article/' + ArticleId).then(res => {
@@ -83,11 +95,11 @@ export default {
             // this.markdown = md.render(this.markdown)
           })
         })
-      }catch (e){
+      } catch (e) {
         console.log(e)
       }
     },
-    getAllImg(content){
+    getAllImg(content) {
       const imgRegex = /!\[.*?\]\((.*?)\)/g;
       let match;
       const imgList = [];
@@ -98,8 +110,8 @@ export default {
       }
       this.vueEasyLightbox.imgs = imgList
     },
-    imgAddClickLinsener(){
-      const articleContext = document.querySelector('.article-context')
+    imgAddClickLinsener() {
+      const articleContext = document.querySelector('.text')
       articleContext.addEventListener('click', (e) => {
         if (e.target.tagName === 'IMG') {
           this.vueEasyLightbox.imgs.map((item, index) => {
@@ -115,12 +127,13 @@ export default {
 }
 </script>
 <template>
-  <div >
+  <div>
     <Header/>
     <div>
 
       <PageHeader :article="article"/>
-      <VueEasyLightbox :visible="vueEasyLightbox.visible" :imgsRef="vueEasyLightbox.imgs" :indexRef="vueEasyLightbox.index"/>
+      <VueEasyLightbox :visible="vueEasyLightbox.visible" :imgsRef="vueEasyLightbox.imgs"
+                       :indexRef="vueEasyLightbox.index"/>
       <div style="
   max-width: 1200px;
   width: 100%;
@@ -133,42 +146,46 @@ export default {
   flex: 1;
 ">
 
-<!--        编辑按钮-->
+        <!--        编辑按钮-->
         <div style="width: 100%;text-align: center;" v-if="userDto.userId===author.userId">
-          <router-link :to='/update-article/+this.$route.params.id' >
-            <el-button  type="primary" icon="el-icon-edit" >更新文章</el-button>
+          <router-link :to='/update-article/+this.$route.params.id'>
+            <el-button type="primary" icon="el-icon-edit">更新文章</el-button>
           </router-link>
-<!--          设置为私密文章-->
+          <!--          设置为私密文章-->
         </div>
 
         <div class="article-context">
 
           <!--        <div id="markdown-area" v-html="markdown"></div>-->
-          <v-md-editor style=" display: flex; height: auto; max-height: none;"
-                       :value="markdown" mode="preview"
-                       left-toolbar="undo redo | tip"
-                       :include-level="[2,3]"
-                       @copy-code-success="handleCopyCodeSuccess"
-          >
-          </v-md-editor>
+          <div style="overflow: hidden" class="text">
+            <v-md-editor style=" display: flex; height: auto; max-height: none;"
+                         :value="markdown" mode="preview"
+                         left-toolbar="undo redo | tip"
+                         :include-level="[2,3]"
+                         @copy-code-success="handleCopyCodeSuccess"
+            >
+            </v-md-editor>
+          </div>
 
-<!--          文章信息-->
+          <!--          文章信息-->
           <el-card class="card">
-<!--            标题-->
+            <!--            标题-->
             <div class="mb-2 test-color">
               文章作者:
               <span style="text-decoration: underline;color: #858585">
-              {{author.nickname}}
+              {{ author.nickname }}
             </span>
             </div>
-<!--            链接-->
+            <!--            链接-->
             <div class="mb-2 test-color">
               文章链接:
-              <span class="mb-2" >
-                <el-link :underline="true" :href="article.url" target="_blank">{{ ServerIP() + '' + this.$route.path }}</el-link>
+              <span class="mb-2">
+                <el-link :underline="true" :href="article.url" target="_blank">{{
+                    ServerIP() + '' + this.$route.path
+                  }}</el-link>
               </span>
             </div>
-<!--            版权声明-->
+            <!--            版权声明-->
             <div class="mb-2 test-color">
               版权声明:
               <span style="color: #858585">
@@ -182,60 +199,120 @@ export default {
 
           </el-card>
 
-<!--          分享-->
+          <!--          分享-->
           <div class="share">
-            <el-link :underline="false"><v-icon class="we-chat mr-2">mdi-wechat</v-icon></el-link>
+            <el-link :underline="false">
+              <v-icon class="we-chat mr-2">mdi-wechat</v-icon>
+            </el-link>
             <v-icon class="qq-chat">mdi-qqchat</v-icon>
           </div>
 
-<!--          智能推荐-->
+          <!--          智能推荐-->
+          <div style="display: flex;padding: 10px 50px;">
+            <div class="recommend-card" v-for="(item,index) in recommendedArticle" :key="index">
+              <router-link :to="'/article-context/'+item.articleId">
+                <el-image lazy fit="cover" :src="item.coverImg" class="recommend-img">
+                </el-image>
+              </router-link>
+              <!--              标题-->
+              <div style=" position: absolute;bottom: 20%;left: 30%;width: 100%;color: #ECF5FF; padding: 10px;z-index: 2 ">
+                <div>
+                  推荐
+                </div>
+                <div>
+                  {{ item.title}}
+                </div>
+              </div>
 
-<!--          评论-->
+            </div>
+          </div>
+
+          <!--          评论-->
           <div style="margin: 20px 20px;" id="vcomments"></div>
 
         </div>
-        <SideBar />
+        <SideBar/>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.qq-chat{
-  color:#56B6E7;
+.recommend-img {
+  height: 100%;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.recommend-img:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  transition: all 0.5s ease;
+}
+
+.recommend-img:hover {
+  transform: scale(1.1);
+}
+
+.recommend-card {
+  position: relative;
+  object-fit: cover;
+  background-size: cover;
+  overflow: hidden;
+  height: 13em;
+  width: 50%;
+  border: 1px solid #f0f0f0;
+}
+
+.qq-chat {
+  color: #56B6E7;
   border-radius: 5px;
 }
+
 .qq-chat:hover {
   color: white;
   background-color: #56B6E7;
 }
-.we-chat{
+
+.we-chat {
   color: #7BC549;
   border-radius: 5px;
 }
-.we-chat:hover{
+
+.we-chat:hover {
   color: white;
   background-color: #7BC549;
 }
-.share{
+
+.share {
   width: auto;
   text-align: right;
   margin: 10px 20px;
 }
+
 .test-color {
   color: #49B1F5;
   font-weight: bold;
 }
-.card{
+
+.card {
   border: 1px;
   margin: 10px 20px;
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
 }
+
 .card:hover {
   box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.09);
 }
+
 .article-context {
   height: auto;
   width: 72%;
@@ -247,6 +324,7 @@ export default {
 .article-context:hover {
   box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.09);
 }
+
 @media (max-width: 768px) {
   .article-context {
     width: 100%;

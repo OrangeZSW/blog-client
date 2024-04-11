@@ -48,9 +48,26 @@ export default {
         })
       }
     },
+    //获取推荐文章
+    getRecommendedArticle() {
+      axios.get('/article/recommendation',{
+        params:{
+          userId: this.isLogin ? this.userDto.userId : "",
+        }
+      }).then(res=>{
+        this.recommendedArticle = res.data
+      })
+    }
   },
   mounted() {
+    this.getRecommendedArticle()
     this.setAuthorInfo()
+  },
+  watch: {
+    $route() {
+      this.setAuthorInfo()
+      this.getRecommendedArticle()
+    }
   }
 }
 </script>
@@ -121,10 +138,22 @@ export default {
       <el-card class="card is-center">
       <div class="mb-5" style="display: flex">
         <v-icon>mdi-balloon</v-icon>
-        <span class="ml-2" style="font-size: 16px">推荐</span>
+        <span class="ml-2" style="font-size: 16px;color: #00C4B6">推荐文章</span>
       </div>
+        <div class="mt-2" v-for="(article,index) of recommendedArticle" v-if="index<5"
+             style="width: 100%;height: 4.6em;display: flex">
 
-        <span>Vue</span>
+         <div style="align-items: center;justify-content: center;width: 100%;">
+            <router-link class="a" :to="'/article-context/'+article.articleId">{{ article.title }}</router-link>
+            <div style="color: #858585">{{ article.createdAt[0]+'-'+article.createdAt[1]+'-'+article.createdAt[2] }}</div>
+
+         </div>
+          <router-link :to="'/article-context/'+article.articleId">
+            <el-image class="new-article" lazy fit="cover" style="height: 4.2em;width: 4.2em;float: right" :src="article.coverImg"/>
+          </router-link>
+        </div>
+
+
 
       </el-card>
 
