@@ -33,6 +33,7 @@ export default {
               }
               this.setLoginStatus(true)
               this.$message.success('登录成功', 1.5)
+              localStorage.setItem('token', res.data.token)
               this.backLoginWindow()
               this.$router.push('/')
               //强制刷新article-content

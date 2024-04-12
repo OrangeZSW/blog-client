@@ -21,7 +21,9 @@ const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
   function(config) {
+    config.headers['Content-Type'] = 'application/json;charset=utf-8';
     // Do something before request is sent
+    config.headers['token'] = localStorage.getItem("token");
     return config;
   },
   function(error) {

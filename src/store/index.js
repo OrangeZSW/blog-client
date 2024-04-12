@@ -70,6 +70,7 @@ export default new Vuex.Store({
                 body.style.setProperty('--width', '0')
                 sideBarPhone.style.right = '-300px'
             }
+
         },
         setLoginWindowStatus(state, status) {
             state.loginWindow = status;

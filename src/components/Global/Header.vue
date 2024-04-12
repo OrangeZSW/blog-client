@@ -7,6 +7,9 @@ export default {
   name: "Header",
   components: {Search},
   mounted() {
+    document.addEventListener('click', this.handleClickOutside);
+
+
     const Header = document.querySelector('.Header')
     Header.style.transform = 'translateY(+60px)'
     let lastScrollTop = 0;
@@ -112,6 +115,13 @@ export default {
       } else {
         this.$router.push('/editor-article')
       }
+    },
+    handleClickOutside(){
+        const userInfo = document.querySelector('.userInfo-leave');
+        if (!userInfo?.contains(event.target)) {
+          this.userInfoLeave();
+        }
+
     }
   },
   data() {
@@ -171,7 +181,7 @@ export default {
       </div>
 
     </div>
-    <div class="userInfo-leave" ref="userInfo" v-if="isLogin" @mouseleave="userInfoLeave">
+    <div class="userInfo-leave" ref="userInfo" v-show="isLogin" @mouseleave="userInfoLeave" @click="handleClickOutside">
       <div class="userInfo-item" style="margin-top:10px" @click="()=>{this.$router.push('/userinfo')}">个人信息</div>
       <div class="userInfo-item" style="margin-bottom: 10px" @click="logOut">退出登录</div>
     </div>

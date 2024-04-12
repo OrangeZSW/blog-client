@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import $message from 'element-ui'
 
 Vue.use(VueRouter)
 
@@ -105,6 +106,27 @@ VueRouter.prototype.push = function push(location) {
 
 router.afterEach((to, from, next) => {
     document.documentElement.scrollTop = 0;
+})
+
+router.beforeEach((to, from, next) => {
+    const token=localStorage.getItem('token')===null ? '' : localStorage.getItem('token')
+    if(to.path==='/userinfo'){
+        axios.get('user/checkToken',{
+            params:{
+                //sessionStorage.getItem('token')
+                token: token
+            }
+        }).then(res => {
+            if (res.code === "200") {
+                next()
+            } else {
+                alert(res.msg)
+                next('/')
+            }
+        })
+    }else {
+        next()
+    }
 })
 
 

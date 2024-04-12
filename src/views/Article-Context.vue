@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      articleId: this.$route.params.id,
       loading: true,
       vueEasyLightbox: {
         visible: false,
@@ -34,16 +35,11 @@ export default {
     }
   },
   mounted() {
-    this.getRecommendedArticle()
-    import('valine').then(res => {
-      this.Valine = res.default;
-      this.init()
-    })
+    this.initValine()
     //到顶部
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     this.initArticle()
     this.imgAddClickLinsener()
-
   },
   watch: {
     $route() {
@@ -54,7 +50,8 @@ export default {
       this.getRecommendedArticle()
       //   回到顶部
       document.body.scrollTop = document.documentElement.scrollTop = 0;
-    }
+      this.initValine();
+    },
   },
   methods: {
     getRecommendedArticle() {
@@ -67,13 +64,22 @@ export default {
         this.loading = false
       })
     },
-    init() {
-      new this.Valine({
-        el: '#vcomments',
-        appId: 'PyMWNYy32JGT1RvycbTfElvq-gzGzoHsz',
-        appKey: 'nLujNbR2S07rHQ2UlgSiryFQ',
-        visitor: true
-      })
+    initValine() {
+      if (this.Valine) {
+        // 如果Valine实例已存在，先销毁
+        this.Valine = null;
+      }
+      // 重新导入Valine并初始化
+      import('valine').then(res => {
+        this.Valine = res.default;
+        new this.Valine({
+          el: '#vcomments',
+          appId: 'PyMWNYy32JGT1RvycbTfElvq-gzGzoHsz',
+          appKey: 'nLujNbR2S07rHQ2UlgSiryFQ',
+          path: this.$route.params.id,
+          visitor: true
+        });
+      });
     },
     ServerIP() {
       return ServerIP
@@ -93,6 +99,7 @@ export default {
         axios.get('/article/' + ArticleId).then(res => {
           this.article = res
           axios.get(res.url).then(res => {
+            this.loading=false
             this.getAllImg(res)
             this.markdown = res
             // this.markdown = md.render(this.markdown)
