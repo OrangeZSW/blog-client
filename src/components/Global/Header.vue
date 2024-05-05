@@ -117,8 +117,8 @@ export default {
       }
     },
     handleClickOutside(){
-        const userInfo = document.querySelector('.userInfo-leave');
-        if (!userInfo?.contains(event.target)) {
+        const userAvatar = document.querySelector('.user-avatar');
+        if (!userAvatar?.contains(event.target)) {
           this.userInfoLeave();
         }
 

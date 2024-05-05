@@ -128,6 +128,22 @@ export default {
         }
       })
       this.$router.push('/article-context/'+this.articleId)
+    },
+    deleteArticle(){
+      axios.get('/article/delete/'+this.articleId).then(res=>{
+        if(res.code === '200'){
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          });
+        }else {
+          this.$message({
+            message: res.msg,
+            type: 'error'
+          });
+        }
+        this.$router.push('/')
+      })
     }
   },
   mounted() {
@@ -188,6 +204,8 @@ export default {
         <el-button @click="drawer = !drawer" type="primary" >查看文章信息
         </el-button>
         <el-button @click="save" type="primary">保存文章</el-button>
+<!--        删除文章-->
+        <el-button @click="deleteArticle" type="danger">删除文章</el-button>
       </div>
 
       <!--      编辑和预览区-->

@@ -69,7 +69,7 @@ export default {
       files.forEach(file => {
         const formData = new FormData()
         formData.append('file', file)
-        axios.post('/files/upload/img', formData, {
+        axios.post('/files/upload/img', formData,{
           headers: {
             'Content-Type': 'multipart/form-data'
           }

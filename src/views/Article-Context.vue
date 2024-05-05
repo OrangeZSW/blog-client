@@ -40,6 +40,7 @@ export default {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     this.initArticle()
     this.imgAddClickLinsener()
+    this.getRecommendedArticle()
   },
   watch: {
     $route() {
@@ -77,7 +78,8 @@ export default {
           appId: 'PyMWNYy32JGT1RvycbTfElvq-gzGzoHsz',
           appKey: 'nLujNbR2S07rHQ2UlgSiryFQ',
           path: this.$route.params.id,
-          visitor: true
+          visitor: true,
+          avatar: '',
         });
       });
     },
@@ -218,7 +220,7 @@ export default {
           </div>
 
           <!--          智能推荐-->
-          <div style="display: flex;padding: 10px 50px;">
+          <div v-loading="loading" style="display: flex;padding: 10px 50px;">
             <div class="recommend-card" v-for="(item,index) in recommendedArticle" :key="index">
               <router-link :to="'/article-context/'+item.articleId">
                 <el-image lazy fit="cover" :src="item.coverImg" class="recommend-img">
