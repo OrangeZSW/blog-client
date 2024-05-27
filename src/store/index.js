@@ -92,7 +92,7 @@ export default new Vuex.Store({
                 // 处理文章的 createdAt 和 coverImg
                 item.createdAt = item.createdAt[0] + '-' + item.createdAt[1] + '-' + item.createdAt[2]
                 if (item.coverImg === '') {
-                    item.coverImg = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png'
+                    item.coverImg = 'https://server.blog.zorange.online/files/download/428565553df343e6afb6b6b694e85432.png'
                 }
 
                 // 返回一个 Promise 对象，表示 axios.get 的异步操作

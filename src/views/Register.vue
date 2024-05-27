@@ -124,7 +124,7 @@ export default {
       <div class="register-card" style="background-image:url('/img/register.png');">
         <div class="register-info" >
           <img width="40px;" style="margin: 5px auto 5px auto"
-               src="https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png" alt="Orange's_Blog">
+               src="https://server.blog.zorange.online/files/download/8dab8d9ad1c5489e9d49f7d1b05656bf.png" alt="Orange's_Blog">
           <h1 style="margin: 20px auto 40px auto;font-size: 25px;font-weight: 400">Orange's_Blog用户注册</h1>
           <el-form :model="user" ref="user" :rules="rules"  label-width="auto" style="width: 100%">
             <el-form-item label="昵称" prop="nickname">

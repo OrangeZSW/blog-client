@@ -7,7 +7,7 @@ export default {
     return {
       isShow: true,
       ignore: ['/register', '/editor-article', '/userinfo',"/bind-email","/change-password","/Custom-Settings",'update-article'],
-      site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png',
+      site_img: 'https://server.blog.zorange.online/files/download/428565553df343e6afb6b6b694e85432.png',
       articleImg:''
     }
   },

@@ -126,7 +126,7 @@ export default {
   },
   data() {
     return {
-      site_img: 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png',
+      site_img: 'https://server.blog.zorange.online/files/download/8dab8d9ad1c5489e9d49f7d1b05656bf.png',
       site_name: 'Orange_Blog',
       username: '登录',
       // 后缀

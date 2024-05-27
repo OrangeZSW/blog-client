@@ -25,11 +25,11 @@ export default {
               this.setUserDto(res.data)
               // 如果没有头像，使用默认头像
               if (res.data.avatar === null) {
-                res.data.avatar = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/blog_img/logo.png'
+                res.data.avatar = 'https://server.blog.zorange.online/files/download/8dab8d9ad1c5489e9d49f7d1b05656bf.png'
               }
               // 如果没有封面，使用默认封面
               if(res.data.coverImg === null){
-                res.data.coverImg = 'https://cdn.jsdelivr.net/gh/OrangeZSW/blog_img/202305021008781.png'
+                res.data.coverImg = 'https://server.blog.zorange.online/files/download/428565553df343e6afb6b6b694e85432.png'
               }
               this.setLoginStatus(true)
               this.$message.success('登录成功', 1.5)
